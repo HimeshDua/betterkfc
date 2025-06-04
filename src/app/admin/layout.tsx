@@ -1,4 +1,4 @@
-import '../../globals.css';
+import '../globals.css';
 import {ReactNode} from 'react';
 import {Inter} from 'next/font/google';
 import Header from '@/components/Header';
