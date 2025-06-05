@@ -45,7 +45,7 @@ export default function CartModal({open, onClose, items}: CartModalProps) {
               Your cart is empty.
             </p>
           ) : (
-            items.map((item: any, idx: number) => (
+            items.map((item: Product, idx: number) => (
               <>
                 <div key={idx} className="flex justify-between items-center">
                   <div className="flex items-center gap-2">

@@ -1,5 +1,6 @@
 import {Card, CardContent, CardFooter, CardHeader} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
+import Image from 'next/image';
 
 export default function ProductCard({
   name,
@@ -18,7 +19,7 @@ export default function ProductCard({
         {name}
       </CardHeader>
       <CardContent>
-        <img
+        <Image
           src={
             'https://www.kfcpakistan.com/images/08873930-3f62-11f0-87c6-c7cd48868ce1-Webbanner_desktop_image-2025-06-02033113.jpg'
           }
