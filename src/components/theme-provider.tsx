@@ -7,11 +7,11 @@ export function ThemeProvider({
   children,
   ...props
 }: ComponentProps<typeof NextThemesProvider>) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    if (!mounted) {
-      setMounted(true);
-    }
-  }, []);
+  // const [mounted, setMounted] = useState(false);
+  // useEffect(() => {
+  //   if (!mounted) {
+  //     setMounted(true);
+  //   }
+  // }, []);
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
