@@ -162,15 +162,12 @@ interface Product {
   price: number;
   image: string;
   category: string;
-}
-
-interface CartItem extends Product {
-  quantity: number;
+  quantity?: number;
 }
 
 export default function MenuPage() {
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
   // State to manage the active category for filtering
   const [activeCategory, setActiveCategory] = useState('all');
 
@@ -188,7 +185,7 @@ export default function MenuPage() {
       const existingItem = prev.find((i) => i.id === item.id);
       if (existingItem) {
         return prev.map((i) =>
-          i.id === item.id ? {...i, quantity: i.quantity + 1} : i
+          i.id === item.id ? {...i, quantity: (i.quantity ?? 0) + 1} : i
         );
       } else {
         return [...prev, {...item, quantity: 1}];

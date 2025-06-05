@@ -15,21 +15,18 @@ interface Product {
   price: number;
   image: string;
   category: string;
-}
-
-interface CartItem extends Product {
-  quantity: number;
+  quantity?: number;
 }
 
 interface CartModalProps {
   open: boolean;
   onClose: () => void;
-  items: CartItem[];
+  items: Product[];
 }
 
 export default function CartModal({open, onClose, items}: CartModalProps) {
   const total = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item.price * (item.quantity ?? 1),
     0
   );
   return (
@@ -54,7 +51,7 @@ export default function CartModal({open, onClose, items}: CartModalProps) {
                       x{item.quantity}
                     </span>
                   </div>
-                  <span>PKR {item.price * item.quantity}</span>
+                  <span>PKR {item.price * (item.quantity ?? 1)}</span>
                 </div>
                 <Separator />
               </>
