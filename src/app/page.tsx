@@ -168,9 +168,9 @@ export default function Home() {
                 alt={banner.heading}
                 layout="fill"
                 objectFit="cover"
-                priority // Load the first image with high priority
+                priority
               />
-              <div className="absolute inset-0 bg-black/50" />{' '}
+              <div className="absolute inset-0 bg-black/50" />
               {/* Dark overlay */}
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
                 <h1 className="text-4xl md:text-7xl font-extrabold leading-tight drop-shadow-2xl">
@@ -283,8 +283,6 @@ export default function Home() {
           Discover Our Full Menu
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6">
-          {' '}
-          {/* Adjusted grid for more flexibility */}
           {categories.map((category) => (
             <Link key={category.name} href={category.link}>
               <div className="group relative overflow-hidden rounded-xl shadow-md cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white border border-gray-200">
@@ -330,10 +328,10 @@ export default function Home() {
               Our Story, Our Legacy
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-8">
-              For over 80 years, KFC has been serving up Colonel Sanders' secret
-              recipe chicken, made with 11 herbs and spices. It's a taste that's
-              loved around the world, and a legacy built on passion, quality,
-              and a commitment to flavor.
+              For over 80 years, KFC has been serving up Colonel Sanders&apos;
+              secret recipe chicken, made with 11 herbs and spices. It&apos;s a
+              taste that&apos; loved around the world, and a legacy built on
+              passion, quality, and a commitment to flavor.
             </p>
             <Link href="/about">
               <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl rounded-full shadow-lg transition-transform transform hover:scale-105">
@@ -351,8 +349,8 @@ export default function Home() {
             Find Your Nearest KFC
           </h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Ready for some Finger Lickin' Goodness? Find a KFC restaurant near
-            you for dine-in, drive-thru, or delivery.
+            Ready for some Finger Lickin&apos; Goodness? Find a KFC restaurant
+            near you for dine-in, drive-thru, or delivery.
           </p>
           <Link href="/locations">
             <Button className="bg-red-600 hover:bg-red-700 text-white px-10 py-5 text-xl rounded-full shadow-lg transition-transform transform hover:scale-105">
@@ -380,7 +378,7 @@ export default function Home() {
       <section className="bg-red-800 py-16 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Join Our Colonel's Club!
+            Join Our Colonel&apos;s Club!
           </h2>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
             Sign up for exclusive offers, news, and more delivered straight to

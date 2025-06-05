@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import {Button} from '@/components/ui/button';
-import {Icons} from './icons'; // Assuming Icons is correctly defined elsewhere
+// import { Icons } from './icons';
 import {useState} from 'react';
-import CartModal from '@/components/CartModal'; // Assuming CartModal is correctly defined
+import CartModal from '@/components/CartModal';
 import {EyeClosed, MenuIcon, ShoppingCart, User} from 'lucide-react';
 import Image from 'next/image';
 

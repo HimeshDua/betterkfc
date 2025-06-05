@@ -2,9 +2,8 @@
 
 import ProductCard from '@/components/ProductCard';
 import CartModal from '@/components/CartModal';
-import {useState, useMemo} from 'react'; // useMemo for optimizing filtered products
+import {useState, useMemo} from 'react';
 
-// Extended products data with categories
 const products = [
   // Buckets
   {
@@ -147,7 +146,6 @@ const products = [
   }
 ];
 
-// Define your categories for display and filtering
 const categories = [
   {id: 'all', name: 'All Products'},
   {id: 'buckets', name: 'Buckets'},
@@ -158,9 +156,21 @@ const categories = [
   {id: 'drinks', name: 'Drinks'}
 ];
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+}
+
+interface CartItem extends Product {
+  quantity: number;
+}
+
 export default function MenuPage() {
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   // State to manage the active category for filtering
   const [activeCategory, setActiveCategory] = useState('all');
 
@@ -171,9 +181,9 @@ export default function MenuPage() {
       return products;
     }
     return products.filter((item) => item.category === activeCategory);
-  }, [activeCategory, products]); // Depend on activeCategory and products data
+  }, [activeCategory]);
 
-  function addToCart(item: any) {
+  function addToCart(item: Product) {
     setCartItems((prev) => {
       const existingItem = prev.find((i) => i.id === item.id);
       if (existingItem) {
@@ -190,7 +200,6 @@ export default function MenuPage() {
   return (
     <>
       <div className="container mx-auto py-8 px-4 flex flex-col lg:flex-row gap-8">
-        {/* Category Navigation (Sidebar) */}
         <div className="w-full lg:w-1/4 bg-white p-6 rounded-lg shadow-lg flex-shrink-0">
           <h2 className="text-2xl font-bold mb-6 text-gray-800">
             Menu Categories

@@ -4,12 +4,12 @@ import {Button} from '@/components/ui/button';
 export default function ProductCard({
   name,
   price,
-  image,
+  // image,
   onAdd
 }: {
   name: string;
   price: number;
-  image: string;
+  // image: string;
   onAdd: () => void;
 }) {
   return (

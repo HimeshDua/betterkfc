@@ -1,4 +1,3 @@
-// pages/about.js (or app/about/page.js for Next.js 13+)
 'use client';
 
 import Image from 'next/image';
@@ -8,7 +7,6 @@ import {Button} from '@/components/ui/button';
 export default function AboutPage() {
   return (
     <>
-      {/* Hero Banner for About Us */}
       <section
         className="relative w-full h-[40vh] md:h-[55vh] bg-cover bg-center"
         style={{backgroundImage: "url('/images/about-hero-banner.jpg')"}}
@@ -19,18 +17,17 @@ export default function AboutPage() {
               Our Story
             </h1>
             <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md">
-              The Finger Lickin' Good legacy of Colonel Sanders.
+              The Finger Lickin&apos; Good legacy of Colonel Sanders.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Colonel Sanders Story Section */}
       <section className="container mx-auto py-16 px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
             <Image
-              src="/images/colonel-sanders-young.jpg" // Placeholder for a younger Colonel image
+              src="/images/colonel-sanders-young.jpg"
               alt="Young Colonel Sanders"
               width={600}
               height={400}
@@ -60,7 +57,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Commitment to Quality Section */}
       <section className="bg-red-50 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
@@ -75,8 +71,8 @@ export default function AboutPage() {
                 At KFC, we believe in real food, prepared by real cooks. Our
                 chicken is hand-breaded and freshly prepared in our kitchens
                 throughout the day, ensuring that unique taste you love. We use
-                only the finest ingredients to deliver that Finger Lickin' Good
-                flavor in every single bite.
+                only the finest ingredients to deliver that Finger Lickin&apos;
+                Good flavor in every single bite.
               </p>
               <Link href="/menu">
                 <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md">
@@ -86,7 +82,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="/images/fresh-chicken-prep.jpg" // Placeholder for food prep image
+                src="/images/fresh-chicken-prep.jpg"
                 alt="Fresh chicken preparation"
                 layout="fill"
                 objectFit="cover"
@@ -104,7 +100,7 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-xl">
             <Image
-              src="/images/kfc-community.jpg" // Placeholder for community image
+              src="/images/kfc-community.jpg"
               alt="KFC Community Involvement"
               layout="fill"
               objectFit="cover"
@@ -120,7 +116,7 @@ export default function AboutPage() {
               partnerships, we strive to make a positive impact, support local
               causes, and contribute to a better future.
             </p>
-            {/* Optional: Link to a CSR or community page */}
+
             <Link href="/community">
               <Button
                 variant="outline"
@@ -133,7 +129,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Careers Section (Optional, but common on About pages) */}
       <section className="bg-gray-100 py-16 text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
@@ -141,7 +136,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
             Passionate about food and people? Explore career opportunities at
-            KFC and become part of our Finger Lickin' Good family.
+            KFC and become part of our Finger Lickin&apos; Good family.
           </p>
           <Link href="/careers">
             <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl rounded-full shadow-lg transition-transform transform hover:scale-105">

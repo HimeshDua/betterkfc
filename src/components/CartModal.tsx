@@ -9,20 +9,29 @@ import {
 import {Button} from '@/components/ui/button';
 import {Separator} from './ui/separator';
 
-export default function CartModal({
-  open,
-  onClose,
-  items
-}: {
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+}
+
+interface CartItem extends Product {
+  quantity: number;
+}
+
+interface CartModalProps {
   open: boolean;
   onClose: () => void;
-  items: any[];
-}) {
+  items: CartItem[];
+}
+
+export default function CartModal({open, onClose, items}: CartModalProps) {
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const sameItems = items.reduce((count, item) => count + item.name, 0);
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-lg">
