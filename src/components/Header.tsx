@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import {Button} from '@/components/ui/button';
-// import { Icons } from './icons';
 import {useState} from 'react';
 import CartModal from '@/components/CartModal';
 import {EyeClosed, MenuIcon, ShoppingCart, User} from 'lucide-react';
@@ -16,17 +15,14 @@ export default function Header() {
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center py-3 px-4 md:px-6">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          {/* Using a custom KFC logo image for authenticity */}
+        <Link href="/">
           <Image
-            src="/images/kfc-logo.svg" // Replace with your KFC logo SVG/PNG
+            src={'/images/logo.svg'}
             alt="KFC Logo"
-            width={70} // Adjust size as needed
-            height={40} // Adjust size as needed
+            width={70}
+            height={40}
             priority
           />
-          {/* <h1 className="text-2xl font-bold text-red-600 hidden md:block">KFC</h1> {/* Optional text if logo is just icon */}
         </Link>
 
         {/* Desktop Navigation */}

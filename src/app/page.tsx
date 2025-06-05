@@ -1,9 +1,9 @@
-'use client'; // This directive is necessary for client-side components in Next.js 13+ app directory
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import {Button} from '@/components/ui/button'; // Assuming this is your custom Button component
-import Slider from 'react-slick';
+import {Card} from '@/components/ui/card';
 
 // For a real-world KFC.com clone, you'd use a dedicated slider library
 // like 'react-slick' or 'swiper' for the hero section.
@@ -12,31 +12,16 @@ import Slider from 'react-slick';
 // import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
-  // --- Data for sections (refined to match common KFC.com elements) ---
-
-  const heroBanners = [
-    {
-      id: 1,
-      heading: "Finger Lickin' Good!",
-      subheading: 'Experience the original recipe chicken, freshly prepared.',
-      image: '/images/hero-banner-1.jpg', // Placeholder image
-      primaryLink: '/menu',
-      primaryBtnText: 'Order Now',
-      secondaryLink: '/about',
-      secondaryBtnText: 'Learn More'
-    },
-    {
-      id: 2,
-      heading: 'New Deals Every Week!',
-      subheading: "Don't miss out on our latest promotions and combos.",
-      image: '/images/hero-banner-2.jpg', // Placeholder image
-      primaryLink: '/deals',
-      primaryBtnText: 'View Deals',
-      secondaryLink: '/menu',
-      secondaryBtnText: 'Explore Menu'
-    }
-    // Add more banner objects for a slider
-  ];
+  const heroBanners = {
+    id: 1,
+    heading: "Finger Lickin' Good!",
+    subheading: 'Experience the original recipe chicken, freshly prepared.',
+    image: '/images/hero-banner.jpg',
+    primaryLink: '/menu',
+    primaryBtnText: 'Order Now',
+    secondaryLink: '/about',
+    secondaryBtnText: 'Learn More'
+  };
 
   const featuredOffers = [
     {
@@ -141,63 +126,49 @@ export default function Home() {
     }
   ];
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    fade: true, // For a smoother fade transition
-    cssEase: 'ease-in-out',
-    arrows: false // You can set this to true if you want navigation arrows
-  };
-
   return (
     <>
       <section className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden bg-gray-900">
-        <Slider {...sliderSettings}>
-          {heroBanners.map((banner) => (
-            <div
-              key={banner.id}
-              className="relative h-[70vh] md:h-[85vh] w-full"
-            >
-              <Image
-                src={banner.image}
-                alt={banner.heading}
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/50" />
-              {/* Dark overlay */}
-              <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-                <h1 className="text-4xl md:text-7xl font-extrabold leading-tight drop-shadow-2xl">
-                  {banner.heading}
-                </h1>
-                <p className="mt-4 text-lg md:text-2xl max-w-3xl mx-auto drop-shadow-lg">
-                  {banner.subheading}
-                </p>
-                <div className="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                  <Link href={banner.primaryLink}>
-                    <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl rounded-full shadow-xl transition-transform transform hover:scale-105">
-                      {banner.primaryBtnText}
-                    </Button>
-                  </Link>
-                  <Link href={banner.secondaryLink}>
-                    <Button
-                      variant="outline"
-                      className="px-8 py-4 text-xl border-2 border-white text-white hover:bg-white hover:text-red-600 rounded-full shadow-xl transition-transform transform hover:scale-105"
-                    >
-                      {banner.secondaryBtnText}
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+        <div
+          key={heroBanners.id}
+          className="relative h-[70vh] md:h-[85vh] w-full"
+        >
+          <Image
+            src={heroBanners.image}
+            alt={heroBanners.heading}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+            <h1 className="text-4xl md:text-7xl font-extrabold leading-tight drop-shadow-2xl">
+              {heroBanners.heading}
+            </h1>
+            <p className="mt-4 text-lg md:text-2xl max-w-3xl mx-auto drop-shadow-lg">
+              {heroBanners.subheading}
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+              <Button size="lg" variant="destructive" asChild>
+                <Link
+                  href={heroBanners.primaryLink}
+                  aria-label={heroBanners.primaryBtnText}
+                >
+                  {heroBanners.primaryBtnText}
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link
+                  href={heroBanners.secondaryLink}
+                  aria-label={heroBanners.secondaryBtnText}
+                >
+                  {heroBanners.secondaryBtnText}
+                </Link>
+              </Button>
             </div>
-          ))}
-        </Slider>
+          </div>
+        </div>
       </section>
       {/* Featured Offers / Latest Deals Section */}
       <section className="container mx-auto py-16 px-4">
@@ -206,37 +177,38 @@ export default function Home() {
         </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {featuredOffers.map((offer) => (
-            <div
+            <Card
               key={offer.id}
-              className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white border border-gray-200"
+              className="overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
             >
-              <div className="relative w-full h-56 overflow-hidden">
+              <div className="relative w-full h-56">
                 <Image
                   src={offer.image}
                   alt={offer.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  priority={offer.id === 1}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                 />
               </div>
-              <div className="p-6 text-center">
+              <div className="p-6 text-center flex-1 flex flex-col">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-2">
                   {offer.title}
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-6">
+                <p className="text-gray-700 leading-relaxed mb-6 flex-1">
                   {offer.description}
                 </p>
-                <Link href={offer.link}>
-                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-full text-lg font-semibold shadow-md">
-                    {offer.buttonText}
-                  </Button>
-                </Link>
+                <Button
+                  asChild
+                  className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-full text-lg font-semibold shadow-md"
+                >
+                  <Link href={offer.link}>{offer.buttonText}</Link>
+                </Button>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </section>
-      ---
       {/* Popular Items Section (often combined with "Most Loved") */}
       <section className="bg-gradient-to-br from-red-700 to-red-900 py-16">
         <div className="container mx-auto px-4">
@@ -276,7 +248,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      ---
       {/* Explore Categories Section */}
       <section className="container mx-auto py-16 px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800">
@@ -310,7 +281,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-      ---
       {/* About Us / Our Story Section (Common on brand websites) */}
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12">
@@ -341,7 +311,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      ---
       {/* Find a Store Section - More prominent as on kfc.com */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4 text-center">
@@ -373,7 +342,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-      ---
       {/* Newsletter / Stay Connected Section */}
       <section className="bg-red-800 py-16 text-white">
         <div className="container mx-auto px-4 text-center">
