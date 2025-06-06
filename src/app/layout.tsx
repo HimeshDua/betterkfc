@@ -17,11 +17,9 @@ export default function RootLayout({children}: {children: ReactNode}) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <div className="flex flex-col min-h-screen">
+          <div className="min-h-screen w-full bg-background">
             <Header />
-            <main className="flex-1 container mx-auto px-4 py-6">
-              {children}
-            </main>
+            <main className="mx-auto px-4 py-6">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>

@@ -74,7 +74,10 @@ export default function AboutPage() {
                 only the finest ingredients to deliver that Finger Lickin&apos;
                 Good flavor in every single bite.
               </p>
-              <Link href="/menu">
+              <Link
+                href="/menu"
+                aria-label="See our menu and discover our freshly prepared chicken"
+              >
                 <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md">
                   Taste the Quality
                 </Button>
@@ -117,7 +120,10 @@ export default function AboutPage() {
               causes, and contribute to a better future.
             </p>
 
-            <Link href="/community">
+            <Link
+              href="/community"
+              aria-label="Learn about KFC's community initiatives and how we make a difference"
+            >
               <Button
                 variant="outline"
                 className="px-8 py-3 rounded-full text-lg font-semibold border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200"
@@ -138,7 +144,10 @@ export default function AboutPage() {
             Passionate about food and people? Explore career opportunities at
             KFC and become part of our Finger Lickin&apos; Good family.
           </p>
-          <Link href="/careers">
+          <Link
+            href="/careers"
+            aria-label="Explore career opportunities at KFC and join our team"
+          >
             <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl rounded-full shadow-lg transition-transform transform hover:scale-105">
               Explore Careers
             </Button>
