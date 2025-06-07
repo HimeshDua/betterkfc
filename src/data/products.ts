@@ -48,19 +48,19 @@ export const products = [
       'Crispy zinger strips rolled into a golden paratha with a fusion of Imli ki chutney and Mint Mayo with fresh onions.'
   },
   {
-    id: 'rice-&-spice',
+    id: 'rice-n-spice',
     name: 'Rice & Spice',
     price: 390,
-    image: '/images/products/rice-&-spice.png',
+    image: '/images/products/rice-n-spice.png',
     category: 'everyday-value',
     description:
       "Add some spice to your rice with KFC's Rice and Spice! With lovely pieces of chicken in spicy rice and it'll make for a lovely meal!"
   },
   {
-    id: 'krunch-burger-+-drink',
+    id: 'krunch-burger-drink',
     name: 'Krunch Burger + Drink',
     price: 410,
-    image: '/images/products/krunch-burger-+-drink.png',
+    image: '/images/products/krunch-burger-drink.png',
     category: 'everyday-value',
     description:
       'Enjoy a crispy crunchy chicken fillet on a bed of lettuce with a soft bun, topped with the signature sauce. Served with a drink.'
@@ -93,10 +93,10 @@ export const products = [
       'Enjoy a crispy crunchy chicken fillet on a bed of lettuce with a soft bun, topped with the signature sauce. Served with fries and drink.'
   },
   {
-    id: 'chicken-&-chips',
+    id: 'chicken-n-chips',
     name: 'Chicken & Chips',
     price: 620,
-    image: '/images/products/chicken-&-chips.png',
+    image: '/images/products/chicken-n-chips.png',
     category: 'everyday-value',
     description:
       '2 Pieces hot and crispy chicken, dinner roll, regular fries, and dip sauce.'
