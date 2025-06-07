@@ -567,99 +567,89 @@ export default function MenuPage() {
       grouped[product.category].push(product);
     });
     return grouped;
-  }, [products]);
+  }, []);
 
-  function addToCart(item: Product) {
+  const addToCart = (item: Product) => {
     setCartItems((prev) => {
       const existingItem = prev.find((i) => i.id === item.id);
       if (existingItem) {
         return prev.map((i) =>
           i.id === item.id ? {...i, quantity: (i.quantity ?? 0) + 1} : i
         );
-      } else {
-        return [...prev, {...item, quantity: 1}];
       }
+      return [...prev, {...item, quantity: 1}];
     });
-  }
+  };
 
-  function updateItemQuantity(itemId: string, newQuantity: number) {
-    setCartItems((prev) => {
-      return prev
+  const updateItemQuantity = (itemId: string, newQuantity: number) => {
+    setCartItems((prev) =>
+      prev
         .map((i) =>
           i.id === itemId
             ? {...i, quantity: newQuantity > 0 ? newQuantity : 0}
             : i
         )
-        .filter((i) => (i.quantity ?? 0) > 0); // Remove items with quantity 0
-    });
-  }
-
-  function removeFromCart(id: string) {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  }
-
-  const totalCartItems = useMemo(() => {
-    return cartItems.reduce((total, item) => total + (item.quantity ?? 0), 0);
-  }, [cartItems]);
-
-  const totalCartPrice = useMemo(() => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * (item.quantity ?? 0),
-      0
+        .filter((i) => (i.quantity ?? 0) > 0)
     );
-  }, [cartItems]);
+  };
+
+  const removeFromCart = (id: string) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const totalCartItems = useMemo(
+    () => cartItems.reduce((total, item) => total + (item.quantity ?? 0), 0),
+    [cartItems]
+  );
+
+  const totalCartPrice = useMemo(
+    () =>
+      cartItems.reduce(
+        (total, item) => total + item.price * (item.quantity ?? 0),
+        0
+      ),
+    [cartItems]
+  );
 
   return (
-    <div className="container mx-auto py-8 px-4 flex flex-col lg:flex-row gap-8 bg-background">
-      <div className="flex-1 lg:w-3/4">
-        {' '}
-        {/* Adjust width for the new right bucket */}
+    <main className="container mx-auto py-8 px-4 flex flex-col lg:flex-row gap-8 bg-background">
+      <section className="flex-1 lg:w-3/4">
         {categories.map((category) => {
-          // Skip 'All Products' category for individual sections if you only want to group other categories
-          if (category.id === 'all') {
-            return null;
-          }
-
-          const productsInSection = groupedProducts[category.id];
-
-          if (!productsInSection || productsInSection.length === 0) {
-            return null; // Don't render section if no products
-          }
+          if (category.id === 'all') return null;
+          const items = groupedProducts[category.id];
+          if (!items || items.length === 0) return null;
 
           return (
             <section key={category.id} id={category.id} className="mb-12 pt-4">
-              {' '}
-              {/* Added pt-4 for scroll offset */}
               <h2 className="text-3xl font-bold mb-6 text-foreground">
                 {category.name}
               </h2>
               <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-                {' '}
-                {/* Adjusted grid for space */}
-                {productsInSection.map((item) => (
-                  <ProductCardMenu
-                    key={item.id}
-                    id={item.id}
-                    name={item.name}
-                    price={item.price}
-                    image={item.image}
-                    description={item.description}
-                    onAdd={() => addToCart(item)}
-                  />
+                {items.map((item) => (
+                  <article key={item.id}>
+                    <ProductCardMenu
+                      id={item.id}
+                      name={item.name}
+                      price={item.price}
+                      image={item.image}
+                      description={item.description}
+                      onAdd={() => addToCart(item)}
+                    />
+                  </article>
                 ))}
               </div>
             </section>
           );
         })}
-        {Object.values(groupedProducts).every((arr) => arr.length === 0) && (
-          <div className="text-center py-10 text-muted-foreground text-xl">
-            No products available in the menu.
-          </div>
-        )}
-      </div>
 
-      {/* Right-side Bucket (Cart) Section */}
-      <div className="w-full lg:w-1/4 flex-shrink-0">
+        {Object.values(groupedProducts).every((arr) => arr.length === 0) && (
+          <p className="text-center py-10 text-muted-foreground text-xl">
+            No products available in the menu.
+          </p>
+        )}
+      </section>
+
+      <aside className="w-full lg:w-1/4 flex-shrink-0">
         <div className="lg:sticky lg:top-[120px] bg-card p-4 lg:p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-4 text-foreground">
             Your Bucket
@@ -691,6 +681,7 @@ export default function MenuPage() {
                       onClick={() =>
                         updateItemQuantity(item.id, (item.quantity ?? 0) - 1)
                       }
+                      aria-label="Decrease quantity"
                     >
                       -
                     </Button>
@@ -700,6 +691,7 @@ export default function MenuPage() {
                       onClick={() =>
                         updateItemQuantity(item.id, (item.quantity ?? 0) + 1)
                       }
+                      aria-label="Increase quantity"
                     >
                       +
                     </Button>
@@ -707,13 +699,15 @@ export default function MenuPage() {
                       variant="destructive"
                       size="sm"
                       onClick={() => removeFromCart(item.id)}
+                      aria-label="Remove item"
                     >
                       Remove
                     </Button>
                   </div>
                 </div>
               ))}
-              <div className="pt-4 border-t-2 border-dashed border-border">
+
+              <footer className="pt-4 border-t-2 border-dashed border-border">
                 <div className="flex justify-between text-lg font-bold text-foreground">
                   <span>Total Items:</span>
                   <span>{totalCartItems}</span>
@@ -725,11 +719,11 @@ export default function MenuPage() {
                 <Button className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
                   Proceed to Checkout
                 </Button>
-              </div>
+              </footer>
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </aside>
+    </main>
   );
 }
