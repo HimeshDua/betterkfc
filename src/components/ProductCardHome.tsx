@@ -10,7 +10,6 @@ type ProductCardProps = {
   description?: string;
   price?: string;
   buttonLink: string;
-  buttonText: string;
   priority?: boolean;
 };
 
@@ -21,7 +20,6 @@ export default function ProductCardHome({
   description,
   price,
   buttonLink,
-  buttonText,
   priority = false
 }: ProductCardProps) {
   return (
@@ -51,7 +49,7 @@ export default function ProductCardHome({
         )}
         {price && <p className="text-lg text-start font-bold  mb-4">{price}</p>}
         <Button asChild className="mt-auto w-full">
-          <Link href={buttonLink}>{buttonText}</Link>
+          <Link href={buttonLink}>+ Add To Bucket</Link>
         </Button>
       </CardContent>
     </Card>

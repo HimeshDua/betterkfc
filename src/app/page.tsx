@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-// import ProductCardHome from '@/components/ProductCardHome';
+import ProductCardHome from '@/components/ProductCardHome';
 import ProductCardCircle from '@/components/ProductCardCircle';
 
 export default function Home() {
@@ -88,28 +88,32 @@ export default function Home() {
         <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
         <div className="justify-center grid sm:grid-cols-2 lg:grid-cols-4">
           {featuredOffers.map((offer) => (
-            <ProductCardCircle image={offer.image} name={offer.name} />
+            <ProductCardCircle
+              key={offer.id}
+              image={offer.image}
+              name={offer.name}
+            />
           ))}
         </div>
       </section>
 
-      {/* Reusing the same data and ProductCard component for the second "Deals and Combos" section */}
       <section className="container mx-auto py-16 px-4">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
-          More Delicious Deals!
+        <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
+          More Delicious Deals
         </h2>
+        <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
+
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* {featuredOffers.map((offer) => (
+          {featuredOffers.map((offer) => (
             <ProductCardHome
               key={offer.id}
-              imageSrc={offer.image || '/images/card/burger.jpg'} // Fallback image
-              imageAlt={offer.title}
-              title={offer.title}
+              imageSrc={offer.image || '/images/card/burger.jpg'}
+              imageAlt={offer.name}
+              title={offer.name}
               description={offer.description}
-              buttonLink={offer.link}
-              buttonText={offer.buttonText}
+              buttonLink={offer.image}
             />
-          ))} */}
+          ))}
         </div>
       </section>
 
