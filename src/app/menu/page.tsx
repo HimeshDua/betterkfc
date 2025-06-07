@@ -228,10 +228,10 @@ const products = [
     description: '5 Chicken pieces, large fries and 2 regular soft drinks.'
   },
   {
-    id: 'xtream-duo-box',
-    name: 'Xtream Duo Box',
+    id: 'xtreme-duo-box',
+    name: 'Xtreme Duo Box',
     price: 1560,
-    image: '/images/products/xtream-duo-box.png',
+    image: '/images/products/xtreme-duo-box.png',
     category: 'signature',
     description:
       '2 Zinger burgers, 2 chicken pieces, large fries and 2 regular soft drinks.'
