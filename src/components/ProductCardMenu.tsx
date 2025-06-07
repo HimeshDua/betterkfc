@@ -1,17 +1,18 @@
-// components/ProductCardMenu.jsx (or .tsx)
 import {Card, CardContent, CardFooter} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import Image from 'next/image';
 import {Heart} from 'lucide-react';
 
-// Adjust ProductCardProps to match the `Product` interface from MenuPage
-type ProductCardProps = {
+type ProductData = {
   id: string;
   name: string;
   price: number;
   image: string;
   description?: string;
-  onAdd: (product: any) => void;
+};
+
+type ProductCardProps = ProductData & {
+  onAdd: (product: ProductData) => void;
   priority?: boolean;
 };
 
@@ -27,8 +28,8 @@ export default function ProductCardMenu({
   const formattedPrice = `Rs. ${price.toLocaleString()}`;
 
   return (
-    <Card className="relative p-2 pb-7">
-      <Heart className="absolute right-4 hover:text-primary/50 duration-100 z-5" />
+    <Card className="relative p-2 pb-7 group">
+      <Heart className="absolute right-4 top-4 hover:text-primary/50 transition-colors duration-150 z-10" />
       <div className="relative w-full h-48 sm:h-56 overflow-hidden">
         <Image
           src={image}
@@ -47,10 +48,11 @@ export default function ProductCardMenu({
             {description}
           </p>
         )}
-        <span className="text-base text-start font-semibold ">
+        <span className="text-base text-start font-semibold">
           {formattedPrice}
         </span>
       </CardContent>
+
       <CardFooter className="flex justify-center items-end absolute -bottom-5 left-0 w-full pb-3">
         <Button
           className="rounded-lg"
