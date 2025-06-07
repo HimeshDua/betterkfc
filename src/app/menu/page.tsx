@@ -13,7 +13,7 @@ const products = [
     id: 'ramen-wings',
     name: 'Ramen Wings',
     price: 1800,
-    image: '/images/products/ramen.png',
+    image: '/images/products/ramen-wings.png',
     category: 'promotion'
   },
   {
@@ -63,122 +63,381 @@ const products = [
     category: 'everyday-value',
     description: 'A bigger Zinger, 2 Hot Wings, Fries & Drink.'
   },
-  // Individual Chicken
   {
-    id: 'original-recipe-2pc',
-    name: '2 Pc Original Recipe',
-    price: 650,
-    image: '/images/products/original-recipe-2pc.png',
-    category: 'individual-chicken'
+    id: 'boneless-strips',
+    name: 'Boneless Strips',
+    price: 440,
+    image: '/images/products/boneless-strips.png',
+    category: 'everyday-value'
   },
   {
-    id: 'hot-wings-6pc',
-    name: '6 Pc Hot Wings',
-    price: 450,
-    image: '/images/products/wings-6pc.png',
-    category: 'individual-chicken'
+    id: 'twister',
+    name: 'Twister',
+    price: 440,
+    image: '/images/products/twister.png',
+    category: 'everyday-value'
   },
   {
-    id: 'chicken-strips-3pc',
-    name: '3 Pc Chicken Strips',
-    price: 400,
-    image: '/images/products/strips-3pc.png',
-    category: 'individual-chicken'
+    id: 'krunch-combo',
+    name: 'Krunch Combo',
+    price: 590,
+    image: '/images/products/krunch-combo.png',
+    category: 'everyday-value'
   },
-  // Sandwiches (Burgers)
   {
-    id: 'zinger',
+    id: 'chicken-&-chips',
+    name: 'Chicken & Chips',
+    price: 620,
+    image: '/images/products/chicken-&-chips.png',
+    category: 'everyday-value'
+  },
+  {
+    id: 'krunch-chicken-combo',
+    name: 'Krunch Chicken Combo',
+    price: 590,
+    image: '/images/products/krunch-chicken-combo.png',
+    category: 'everyday-value'
+  },
+  {
+    id: '3-pcs-chicken',
+    name: '3 Pcs Chicken',
+    price: 690,
+    image: '/images/products/3-pcs-chicken.png',
+    category: 'everyday-value'
+  },
+  {
+    id: 'twister',
+    name: 'Twister Combo',
+    price: 710,
+    image: '/images/products/twister-combo.png',
+    category: 'everyday-value'
+  },
+  // Ala-Carte-&-Combos
+  {
+    id: 'zinger-burger',
     name: 'Zinger Burger',
-    price: 550,
-    image: '/images/products/zinger.png',
-    category: 'sandwiches'
+    price: 600,
+    image: '/images/products/zinger-burger.png',
+    category: 'ala-cc'
   },
   {
-    id: 'boxmaster',
-    name: 'Boxmaster',
-    price: 700,
-    image: '/images/products/boxmaster.png',
-    category: 'sandwiches'
+    id: 'zinger-stacker',
+    name: 'Zinger Stacker',
+    price: 660,
+    image: '/images/products/zinger-stacker.png',
+    category: 'ala-cc'
   },
   {
     id: 'kentucky-burger',
     name: 'Kentucky Burger',
-    price: 650,
+    price: 660,
     image: '/images/products/kentucky-burger.png',
-    category: 'sandwiches'
+    category: 'ala-cc'
   },
   {
-    id: 'twister',
-    name: 'Twister Wrap',
-    price: 480,
-    image: '/images/products/twister.png',
-    category: 'sandwiches'
-  },
-  // Sides
-  {
-    id: 'fries',
-    name: 'French Fries (Large)',
-    price: 220,
-    image: '/images/products/fries.png',
-    category: 'sides'
+    id: 'mighty-zinger',
+    name: 'Mighty Zinger',
+    price: 770,
+    image: '/images/products/mighty-zinger.png',
+    category: 'ala-cc'
   },
   {
-    id: 'rice',
-    name: 'Rice & Spice',
-    price: 500,
-    image: '/images/products/rice.png',
-    category: 'sides'
+    id: 'zinger-combo',
+    name: 'Zinger Combo',
+    price: 910,
+    image: '/images/products/zinger-combo.png',
+    category: 'ala-cc'
+  },
+  {
+    id: 'zinger-stacker-combo',
+    name: 'Zinger Stacker Combo',
+    price: 950,
+    image: '/images/products/zinger-stacker-combo.png',
+    category: 'ala-cc'
+  },
+  {
+    id: 'mighty-zinger-combo',
+    name: 'Migty Zinger Combo',
+    price: 1050,
+    image: '/images/products/mighty-zinger-combo.png',
+    category: 'ala-cc'
+  },
+  // Signature-Boxes
+  {
+    id: 'crispy-box',
+    name: 'Crispy Box',
+    price: 710,
+    image: '/images/products/crispy-box.png',
+    category: 'signature'
+  },
+  {
+    id: 'boneless-box',
+    name: 'Boneless Box',
+    price: 710,
+    image: '/images/products/boneless-box.png',
+    category: 'signature'
+  },
+  {
+    id: 'wow-box',
+    name: 'Wow Box',
+    price: 1050,
+    image: '/images/products/wow-box.png',
+    category: 'signature'
+  },
+  {
+    id: 'crispy-duo-box',
+    name: 'Crispy Duo Box',
+    price: 1350,
+    image: '/images/products/crispy-duo-box.png',
+    category: 'signature'
+  },
+  {
+    id: 'xtream-duo-box',
+    name: 'Xtream Duo Box',
+    price: 1560,
+    image: '/images/products/xtream-duo-box.png',
+    category: 'signature'
+  },
+  // Sharing
+  {
+    id: 'value-bucket',
+    name: 'Value Bucket',
+    price: 2050,
+    image: '/images/products/value-bucket.png',
+    category: 'sharing'
+  },
+  {
+    id: 'family-festival-1',
+    name: 'Family Festival 1',
+    price: 2190,
+    image: '/images/products/family-festival-1.png',
+    category: 'sharing'
+  },
+  {
+    id: 'family-festival-2',
+    name: 'Family Festival 2',
+    price: 2390,
+    image: '/images/products/family-festival-2.png',
+    category: 'sharing'
+  },
+  {
+    id: 'family-festival-3',
+    name: 'Family Festival 3',
+    price: 2590,
+    image: '/images/products/family-festival-3.png',
+    category: 'sharing'
+  },
+  // Snacks-&-Beverages
+  {
+    id: 'dinner-roll',
+    name: 'Dinner Roll',
+    price: 50,
+    image: '/images/products/dinner-roll.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'mayo-dip',
+    name: 'Mayo Dip',
+    price: 50,
+    image: '/images/products/mayo-dip.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'vietnamese-dip',
+    name: 'Vietnamese Dip',
+    price: 50,
+    image: '/images/products/vietnamese-dip.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'mineral-water-500ml',
+    name: 'Mineral Water 500ml',
+    price: 90,
+    image: '/images/products/mineral-water-500ml.png',
+    category: 's-n-b'
   },
   {
     id: 'coleslaw',
     name: 'Coleslaw',
-    price: 120,
-    image: '/images/products/coleslaw.png',
-    category: 'sides'
-  },
-  {
-    id: 'corn',
-    name: 'Corn on the Cob',
-    price: 180,
-    image: '/images/products/corn.png',
-    category: 'sides'
-  },
-  // Desserts
-  {
-    id: 'icecream',
-    name: 'Soft Serve Ice Cream',
     price: 150,
-    image: '/images/products/icecream.png',
-    category: 'desserts'
+    image: '/images/products/coleslaw.png',
+    category: 's-n-b'
   },
   {
-    id: 'chocolate-lava-cake',
-    name: 'Chocolate Lava Cake',
-    price: 280,
-    image: '/images/products/lava-cake.png',
-    category: 'desserts'
-  },
-  // Drinks
-  {
-    id: 'pepsi',
-    name: 'Pepsi (Regular)',
-    price: 100,
-    image: '/images/products/pepsi.png',
-    category: 'drinks'
+    id: 'pepsi-regular',
+    name: 'Pepsi Regular',
+    price: 180,
+    image: '/images/products/pepsi-regular.png',
+    category: 's-n-b'
   },
   {
-    id: '7up',
-    name: '7 Up (Regular)',
-    price: 100,
-    image: '/images/products/7up.png',
-    category: 'drinks'
+    id: '7up-regular',
+    name: '7UP Regular',
+    price: 180,
+    image: '/images/products/pepsi-regular.png',
+    category: 's-n-b'
   },
   {
-    id: 'mirinda',
-    name: 'Mirinda (Regular)',
-    price: 100,
-    image: '/images/products/mirinda.png',
-    category: 'drinks'
+    id: 'mountain-dew-regular',
+    name: 'Mountain Dew Regular',
+    price: 180,
+    image: '/images/products/mountain-dew-regular.png',
+    category: 's-n-b'
+  },
+  {
+    id: '1.5-ltr-drink',
+    name: '1.5 Ltr Drink',
+    price: 250,
+    image: '/images/products/1.5-ltr-drink.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'corn-on-the-cob',
+    name: 'Corn On the Cob',
+    price: 290,
+    image: '/images/products/corn-on-the-cob.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'one-piece-chicken',
+    name: 'One Piece Chicken',
+    price: 320,
+    image: '/images/products/one-piece-chicken.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'fries',
+    name: 'Fries',
+    price: 340,
+    image: '/images/products/fries.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'masala-fries',
+    name: 'Masala Fries',
+    price: 360,
+    image: '/images/products/masala-fries.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'fries-bucket',
+    name: 'Fries Bucket',
+    price: 470,
+    image: '/images/products/fries-bucket.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'hot-shots',
+    name: 'Hot Shots',
+    price: 480,
+    image: '/images/products/hot-shots.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'masala-fries-bucket',
+    name: 'Masala Fries Bucket',
+    price: 490,
+    image: '/images/products/masala-fries-bucket.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'chicky-meal-1',
+    name: 'Chicky Meal 1',
+    price: 550,
+    image: '/images/products/chicky-meal-1.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'chicky-meal-2',
+    name: 'Chicky Meal 2',
+    price: 550,
+    image: '/images/products/chicky-meal-2.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'plain-nuggets',
+    name: 'Plain Nuggets',
+    price: 580,
+    image: '/images/products/plain-nuggets.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'spicy-nuggets',
+    name: 'Spicy Nuggets',
+    price: 580,
+    image: '/images/products/spicy-nuggets.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'buffalo-wings',
+    name: 'Buffalo Wings',
+    price: 640,
+    image: '/images/products/buffalo-wings.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'thai-sweet-chili-wings',
+    name: 'Thai Sweet Chili Wings',
+    price: 640,
+    image: '/images/products/thai-sweet-chili-wings.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'tangy-masala-wings',
+    name: 'Tangy Masala Wings',
+    price: 640,
+    image: '/images/products/tangy-masala-wings.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'salsa-sprinkle-wings',
+    name: 'Salsa Sprinkle Wings',
+    price: 640,
+    image: '/images/products/salsa-sprinkle-wings.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'cheesy-chicken-loaded-fries',
+    name: 'Cheesy Chicken Loaded Fries',
+    price: 650,
+    image: '/images/products/cheesy-chicken-loaded-fries.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'snack-bucket',
+    name: 'Snack Bucket',
+    price: 650,
+    image: '/images/products/snack-bucket.png',
+    category: 's-n-b'
+  },
+  {
+    id: 'hot-wings-bucket',
+    name: 'Hot Wings Bucket',
+    price: 670,
+    image: '/images/products/hot-wings-bucket.png',
+    category: 's-n-b'
+  },
+  // Midnight (Start at 12 am)
+  {
+    id: 'midnight-deal-1',
+    name: 'Midnight Deal 1',
+    price: 520,
+    image: '/images/products/midnight-deal-1.png',
+    category: 'mid'
+  },
+  {
+    id: 'midnight-deal-2',
+    name: 'Midnight Deal 2',
+    price: 610,
+    image: '/images/products/midnight-deal-2.png',
+    category: 'mid'
+  },
+  {
+    id: 'midnight-deal-3',
+    name: 'Midnight Deal 3',
+    price: 710,
+    image: '/images/products/midnight-deal-3.png',
+    category: 'mid'
   }
 ];
 
@@ -186,13 +445,11 @@ const categories = [
   {id: 'all', name: 'All Products'},
   {id: 'promotion', name: 'Promotion'},
   {id: 'everyday-value', name: 'Everyday Value'},
-  {id: 'buckets', name: 'Buckets'},
-  {id: 'deals-combos', name: 'Deals & Combos'},
-  {id: 'individual-chicken', name: 'Individual Chicken'},
-  {id: 'sandwiches', name: 'Burgers & Wraps'},
-  {id: 'sides', name: 'Sides'},
-  {id: 'desserts', name: 'Desserts'},
-  {id: 'drinks', name: 'Drinks'}
+  {id: 'ala-cc', name: 'Ala-Carte-&-Combos'},
+  {id: 'signature', name: 'Signature'},
+  {id: 'sharing', name: 'Sharing'},
+  {id: 's-n-b', name: 'Snacks-&-Beverages'},
+  {id: 'mid', name: 'Midnight (Start at 12 am)'}
 ];
 
 interface Product {
