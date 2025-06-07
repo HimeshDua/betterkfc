@@ -1,12 +1,8 @@
 'use client';
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useMemo} from 'react';
 import {Button} from '@/components/ui/button';
-import {cn} from '@/lib/utils';
-import ProductCardMenu from '@/components/ProductCardMenu'; // Assuming this component exists
-import CartModal from '@/components/CartModal'; // Assuming this component exists
-import Image from 'next/image';
+import ProductCardMenu from '@/components/ProductCardMenu';
 
-// Define your product data with descriptions
 const products = [
   // Promotion
   {
