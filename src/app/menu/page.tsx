@@ -8,58 +8,59 @@ import {cn} from '@/lib/utils'; // Assuming you have shadcn's cn utility for con
 
 // --- Product Data --- (Keep your product data as is, ensure image paths are correct)
 const products = [
-  // Buckets
+  // Promotion
   {
-    id: 'chicken-bucket-6pc',
-    name: '6 Pc Chicken Bucket',
+    id: 'ramen-wings',
+    name: 'Ramen Wings',
     price: 1800,
-    image: '/images/products/bucket-6pc.jpg',
-    category: 'buckets'
+    image: '/images/products/ramen.png',
+    category: 'promotion'
   },
   {
-    id: 'chicken-bucket-12pc',
-    name: '12 Pc Chicken Bucket',
+    id: '3rilling',
+    name: '3rilling',
     price: 3500,
-    image: '/images/products/bucket-12pc.jpg',
-    category: 'buckets'
+    image: '/images/products/3rilling.png',
+    category: 'promotion'
   },
+  // Everyday value
   {
-    id: 'family-fill-up',
-    name: 'Family Fill Up',
+    id: 'krunch-burger',
+    name: 'Krunch Burger',
     price: 2200,
-    image: '/images/products/family-fill-up.jpg',
-    category: 'buckets'
+    image: '/images/products/krunch-burger.png',
+    category: 'everyday-value'
   },
   {
-    id: 'zingers-only-bucket',
-    name: 'Zingers Only Bucket',
-    price: 2500,
-    image: '/images/products/zinger-bucket.jpg',
-    category: 'buckets'
+    id: 'garlic-mayo-zingeratha',
+    name: 'Garlic Mayo Zingeratha',
+    price: 390,
+    image: '/images/products/garlic-mayo-zingeratha.png',
+    category: 'everyday-value'
   },
   // Deals & Combos
   {
-    id: 'zinger-combo',
-    name: 'Zinger Combo',
-    price: 750,
-    image: '/images/products/zinger-combo.jpg',
-    category: 'deals-combos',
+    id: 'zingeratha',
+    name: 'Zingeratha',
+    price: 390,
+    image: '/images/products/zingeratha.png',
+    category: 'everyday-value',
     description: 'Our iconic Zinger Burger, crispy fries & a drink.'
   },
   {
-    id: 'crispy-duo-box',
+    id: 'rice-&-spice',
     name: 'Crispy Duo Box',
-    price: 1200,
-    image: '/images/products/crispy-duo-box.jpg',
-    category: 'deals-combos',
+    price: 390,
+    image: '/images/products/rice-&-spice.png',
+    category: 'everyday-value',
     description: '2 Crispy Chicken Pieces, 1 Zinger Burger, Fries & Drink.'
   },
   {
-    id: 'mighty-zinger-box',
-    name: 'Mighty Zinger Box',
-    price: 990,
-    image: '/images/products/mighty-zinger-box.jpg',
-    category: 'deals-combos',
+    id: 'krunch-burger-+-drink',
+    name: 'Krunch Burger + Drink',
+    price: 410,
+    image: '/images/products/krunch-burger-+-drink.png',
+    category: 'everyday-value',
     description: 'A bigger Zinger, 2 Hot Wings, Fries & Drink.'
   },
   // Individual Chicken
@@ -67,21 +68,21 @@ const products = [
     id: 'original-recipe-2pc',
     name: '2 Pc Original Recipe',
     price: 650,
-    image: '/images/products/original-recipe-2pc.jpg',
+    image: '/images/products/original-recipe-2pc.png',
     category: 'individual-chicken'
   },
   {
     id: 'hot-wings-6pc',
     name: '6 Pc Hot Wings',
     price: 450,
-    image: '/images/products/wings-6pc.jpg',
+    image: '/images/products/wings-6pc.png',
     category: 'individual-chicken'
   },
   {
     id: 'chicken-strips-3pc',
     name: '3 Pc Chicken Strips',
     price: 400,
-    image: '/images/products/strips-3pc.jpg',
+    image: '/images/products/strips-3pc.png',
     category: 'individual-chicken'
   },
   // Sandwiches (Burgers)
@@ -89,28 +90,28 @@ const products = [
     id: 'zinger',
     name: 'Zinger Burger',
     price: 550,
-    image: '/images/products/zinger.jpg',
+    image: '/images/products/zinger.png',
     category: 'sandwiches'
   },
   {
     id: 'boxmaster',
     name: 'Boxmaster',
     price: 700,
-    image: '/images/products/boxmaster.jpg',
+    image: '/images/products/boxmaster.png',
     category: 'sandwiches'
   },
   {
     id: 'kentucky-burger',
     name: 'Kentucky Burger',
     price: 650,
-    image: '/images/products/kentucky-burger.jpg',
+    image: '/images/products/kentucky-burger.png',
     category: 'sandwiches'
   },
   {
     id: 'twister',
     name: 'Twister Wrap',
     price: 480,
-    image: '/images/products/twister.jpg',
+    image: '/images/products/twister.png',
     category: 'sandwiches'
   },
   // Sides
@@ -118,28 +119,28 @@ const products = [
     id: 'fries',
     name: 'French Fries (Large)',
     price: 220,
-    image: '/images/products/fries.jpg',
+    image: '/images/products/fries.png',
     category: 'sides'
   },
   {
     id: 'rice',
     name: 'Rice & Spice',
     price: 500,
-    image: '/images/products/rice.jpg',
+    image: '/images/products/rice.png',
     category: 'sides'
   },
   {
     id: 'coleslaw',
     name: 'Coleslaw',
     price: 120,
-    image: '/images/products/coleslaw.jpg',
+    image: '/images/products/coleslaw.png',
     category: 'sides'
   },
   {
     id: 'corn',
     name: 'Corn on the Cob',
     price: 180,
-    image: '/images/products/corn.jpg',
+    image: '/images/products/corn.png',
     category: 'sides'
   },
   // Desserts
@@ -147,14 +148,14 @@ const products = [
     id: 'icecream',
     name: 'Soft Serve Ice Cream',
     price: 150,
-    image: '/images/products/icecream.jpg',
+    image: '/images/products/icecream.png',
     category: 'desserts'
   },
   {
     id: 'chocolate-lava-cake',
     name: 'Chocolate Lava Cake',
     price: 280,
-    image: '/images/products/lava-cake.jpg',
+    image: '/images/products/lava-cake.png',
     category: 'desserts'
   },
   // Drinks
@@ -162,27 +163,29 @@ const products = [
     id: 'pepsi',
     name: 'Pepsi (Regular)',
     price: 100,
-    image: '/images/products/pepsi.jpg',
+    image: '/images/products/pepsi.png',
     category: 'drinks'
   },
   {
     id: '7up',
     name: '7 Up (Regular)',
     price: 100,
-    image: '/images/products/7up.jpg',
+    image: '/images/products/7up.png',
     category: 'drinks'
   },
   {
     id: 'mirinda',
     name: 'Mirinda (Regular)',
     price: 100,
-    image: '/images/products/mirinda.jpg',
+    image: '/images/products/mirinda.png',
     category: 'drinks'
   }
 ];
 
 const categories = [
   {id: 'all', name: 'All Products'},
+  {id: 'promotion', name: 'Promotion'},
+  {id: 'everyday-value', name: 'Everyday Value'},
   {id: 'buckets', name: 'Buckets'},
   {id: 'deals-combos', name: 'Deals & Combos'},
   {id: 'individual-chicken', name: 'Individual Chicken'},
@@ -273,7 +276,7 @@ export default function MenuPage() {
               'Menu Items'}
           </h2>
           {filteredProducts.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
               {filteredProducts.map((item) => (
                 <ProductCardMenu
                   key={item.id}
