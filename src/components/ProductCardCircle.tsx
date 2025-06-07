@@ -9,21 +9,25 @@ type ProductData = {
 
 export default function ProductCardCircle({name, image}: ProductData) {
   return (
-    <Link href="/menu" prefetch>
-      <Card className="flex flex-col items-center justify-center rounded-tr-full rounded-tl-full  rounded-bl-full w-56 h-56 p-0 overflow-hidden">
-        <div className="relative w-32 h-32 rounded-full overflow-hidden">
+    <Link
+      className="rounded-t-full rounded-bl-full h-64 w-64"
+      href="/menu"
+      prefetch
+    >
+      <Card className="flex flex-col items-center justify-start gap-0 rounded-t-full rounded-bl-full h-64 w-64">
+        <div className="flex items-center justify-center w-52 h-52 mt-4 mb-2 relative">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-cover"
-            sizes="128px"
-            priority={true}
+            className="object-cover rounded-full"
+            sizes="208px"
+            priority
           />
         </div>
-        <span className="mt-2 text-center text-sm font-semibold line-clamp-1 px-2">
+        <span className="text-center text-base font-semibold px-2">
           {name}
-          <div className="w-[5rem] h-1 bg-red-600 mb-8 mt-1"></div>
+          <div className="w-16 h-1 bg-red-600 rounded-full mt-1" />
         </span>
       </Card>
     </Link>
