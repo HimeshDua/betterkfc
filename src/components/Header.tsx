@@ -8,12 +8,14 @@ import {MenuIcon, ShoppingCart, X} from 'lucide-react'; // Using X for close ico
 import Image from 'next/image'; // Import Image component
 import {useTheme} from 'next-themes';
 import {cn} from '@/lib/utils';
+import {usePathname} from 'next/navigation';
 
 export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems] = useState([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const {setTheme} = useTheme();
+  const path = usePathname();
 
   const categories = [
     {id: 'all', name: 'All Products'},
@@ -126,20 +128,22 @@ export default function Header() {
             )}
           </Button>
         </div>
-        <nav className="container mx-auto flex justify-start overflow-x-auto no-scrollbar">
-          {categories.map((category) => (
-            <a
-              key={category.id}
-              href={`#${category.id}`}
-              className={cn(
-                'flex-shrink-0 px-4 py-3 rounded-none border-b-2 text-base font-medium transition-colors duration-200',
-                'hover:text-primary-foreground hover:border-primary-foreground'
-              )}
-            >
-              {category.name}
-            </a>
-          ))}
-        </nav>
+        {path === '/menu' && (
+          <nav className="container mx-auto flex justify-start overflow-x-auto no-scrollbar">
+            {categories.map((category) => (
+              <a
+                key={category.id}
+                href={`#${category.id}`}
+                className={cn(
+                  'flex-shrink-0 px-4 py-3 rounded-none border-b-2 text-base font-medium transition-colors duration-200',
+                  'hover:border-red-800 '
+                )}
+              >
+                {category.name}
+              </a>
+            ))}
+          </nav>
+        )}
       </div>
 
       {isMobileMenuOpen && (
