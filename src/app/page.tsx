@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import ProductCardHome from '@/components/ProductCardHome';
+// import ProductCardHome from '@/components/ProductCardHome';
 import ProductCardCircle from '@/components/ProductCardCircle';
 
 export default function Home() {
