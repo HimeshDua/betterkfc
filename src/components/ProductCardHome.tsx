@@ -1,4 +1,4 @@
-import {Card, CardContent, CardFooter, CardHeader} from '@/components/ui/card';
+import {Card, CardContent} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -33,7 +33,7 @@ export default function ProductCardHome({
           <span className="w-3.5 bg-primary h-6"></span>
         </span>
         <Image
-          src={'/images/card/CrispyDuoBox.png' || imageSrc}
+          src={imageSrc}
           alt={imageAlt}
           width={200}
           height={150}

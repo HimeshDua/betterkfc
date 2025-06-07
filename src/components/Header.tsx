@@ -7,12 +7,24 @@ import CartModal from '@/components/CartModal'; // Assuming this component exist
 import {MenuIcon, ShoppingCart, X} from 'lucide-react'; // Using X for close icon
 import Image from 'next/image'; // Import Image component
 import {useTheme} from 'next-themes';
+import {cn} from '@/lib/utils';
 
 export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems] = useState([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const {setTheme} = useTheme();
+
+  const categories = [
+    {id: 'all', name: 'All Products'},
+    {id: 'promotion', name: 'Promotion'},
+    {id: 'everyday-value', name: 'Everyday Value'},
+    {id: 'ala-cc', name: 'Ala-Carte-&-Combos'},
+    {id: 'signature', name: 'Signature'},
+    {id: 'sharing', name: 'Sharing'},
+    {id: 's-n-b', name: 'Snacks-&-Beverages'},
+    {id: 'mid', name: 'Midnight (Start at 12 am)'}
+  ];
 
   return (
     <header className="bg-background shadow-md sticky top-0 z-50">
@@ -60,7 +72,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="bg-background shadow-md py-3 px-4">
+      <div className="bg-background flex flex-col justify-center gap-y-3 shadow-md py-3 px-4">
         <div className="container mx-auto flex justify-between items-center">
           <Link href="/">
             <Image
@@ -114,6 +126,20 @@ export default function Header() {
             )}
           </Button>
         </div>
+        <nav className="container mx-auto flex justify-start overflow-x-auto no-scrollbar">
+          {categories.map((category) => (
+            <a
+              key={category.id}
+              href={`#${category.id}`}
+              className={cn(
+                'flex-shrink-0 px-4 py-3 rounded-none border-b-2 text-base font-medium transition-colors duration-200',
+                'hover:text-primary-foreground hover:border-primary-foreground'
+              )}
+            >
+              {category.name}
+            </a>
+          ))}
+        </nav>
       </div>
 
       {isMobileMenuOpen && (
