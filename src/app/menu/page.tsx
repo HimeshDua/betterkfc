@@ -3,6 +3,7 @@ import React, {useState, useMemo} from 'react';
 import {Button} from '@/components/ui/button';
 import ProductCardMenu from '@/components/ProductCardMenu';
 import {products} from '@/data/products';
+// import {Metadata} from 'next';
 
 const categories = [
   {id: 'all', name: 'All Products'},
@@ -14,6 +15,10 @@ const categories = [
   {id: 's-n-b', name: 'Snacks-&-Beverages'},
   {id: 'mid', name: 'Midnight (Start at 12 am)'}
 ];
+
+// export const metadata: Metadata = {
+//   title: 'Hello ji'
+// };
 
 interface Product {
   id: string;
@@ -27,17 +32,6 @@ interface Product {
 
 export default function MenuPage() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
-
-  const groupedProducts = useMemo(() => {
-    const grouped: {[key: string]: Product[]} = {};
-    products.forEach((product) => {
-      if (!grouped[product.category]) {
-        grouped[product.category] = [];
-      }
-      grouped[product.category].push(product);
-    });
-    return grouped;
-  }, []);
 
   const addToCart = (item: Product) => {
     setCartItems((prev) => {
@@ -86,7 +80,9 @@ export default function MenuPage() {
       <section className="flex-1 lg:w-3/4">
         {categories.map((category) => {
           if (category.id === 'all') return null;
-          const items = groupedProducts[category.id];
+          const items = products.filter(
+            (product) => product.category === category.id
+          );
           if (!items || items.length === 0) return null;
 
           return (
@@ -111,12 +107,6 @@ export default function MenuPage() {
             </section>
           );
         })}
-
-        {Object.values(groupedProducts).every((arr) => arr.length === 0) && (
-          <p className="text-center py-10 text-muted-foreground text-xl">
-            No products available in the menu.
-          </p>
-        )}
       </section>
 
       <aside className="w-full  lg:w-1/4 flex-shrink-0">

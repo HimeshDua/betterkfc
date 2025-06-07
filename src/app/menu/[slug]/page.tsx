@@ -1,10 +1,34 @@
 import {products} from '@/data/products';
+import {Metadata} from 'next';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
 import React from 'react';
 
 export async function generateStaticParams() {
   return products.map((item) => ({slug: item.id}));
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{slug: string}>;
+}): Promise<Metadata> {
+  const ressolvedParams = await params;
+  const product = products.find((p) => p.id === ressolvedParams.slug);
+  if (!product) {
+    return {
+      title: 'Product not found'
+    };
+  }
+  return {
+    title: `${product.name} | KFC Clone`,
+    description: product.description,
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: [`https://betterkfc.vercel.app${product.image}`]
+    }
+  };
 }
 
 async function page({params}: {params: Promise<{slug: string}>}) {
