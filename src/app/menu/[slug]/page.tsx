@@ -21,13 +21,34 @@ export async function generateMetadata({
     };
   }
   return {
-    title: `${product.name} | KFC Clone`,
+    title: product.name,
     description: product.description,
+    keywords: [
+      'kfc',
+      product.name,
+      'fast food',
+      'burger',
+      'chicken',
+      'Zinger',
+      'Fries'
+    ],
+    authors: [{name: 'Himesh Dua', url: 'https://betterkfc.vercel.app'}],
     openGraph: {
       title: product.name,
       description: product.description,
-      images: [`https://betterkfc.vercel.app${product.image}`]
-    }
+      images: [`https://betterkfc.vercel.app${product.image}`],
+      type: 'article',
+      locale: 'en_US',
+      url: `https://betterkfc.vercel.app/menu/${product.id}`
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: product.name,
+      description: product.description,
+      images: [`https://betterkfc.vercel.app${product.image}`],
+      creator: '@HimeshDua'
+    },
+    metadataBase: new URL('https://betterkfc.vercel.app')
   };
 }
 

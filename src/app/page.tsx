@@ -2,12 +2,42 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import {useState} from 'react';
 import ProductCardHome from '@/components/ProductCardHome';
 import ProductCardCircle from '@/components/ProductCardCircle';
+import CartModal from '@/components/CartModal';
 import {exploremenu} from '@/data/exploreMenu';
 import {newsLetterImages} from '@/data/newsLetterImages';
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+  description?: string;
+  quantity?: number;
+}
+
 export default function Home() {
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const addToCart = (product: Product) => {
+    setCartItems((prev) => {
+      const existing = prev.find((item) => item.id === product.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.id === product.id
+            ? {...item, quantity: (item.quantity ?? 1) + 1}
+            : item
+        );
+      }
+      return [...prev, {...product, quantity: 1}];
+    });
+    setIsCartOpen(true);
+  };
+
   return (
     <>
       <section className="relative w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[72vh] overflow-hidden">
@@ -19,6 +49,12 @@ export default function Home() {
           className="object-cover"
         />
       </section>
+
+      <CartModal
+        open={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+      />
 
       <section className="container mx-auto py-16 px-4">
         <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
@@ -41,16 +77,15 @@ export default function Home() {
           More Delicious Deals
         </h2>
         <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
-
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {exploremenu.map((offer) => (
             <ProductCardHome
               key={offer.id}
-              imageSrc={offer.image || '/images/card/burger.jpg'}
-              imageAlt={offer.name}
-              title={offer.name}
+              name={offer.name}
+              image={offer.image}
+              price={offer.price}
               description={offer.description}
-              buttonLink={offer.image}
+              addToBucket={() => addToCart(offer)}
             />
           ))}
         </div>

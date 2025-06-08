@@ -30,7 +30,7 @@ export const exploremenu = [
     id: 'krunch-burger-+-drink',
     name: 'Krunch Burger + Drink',
     price: 410,
-    image: '/images/products/krunch-burger-+-drink.png',
+    image: '/images/products/krunch-burger-drink.png',
     category: 'everyday-value',
     description:
       'Enjoy a crispy crunchy chicken fillet on a bed of lettuce with a soft bun, topped with the signature sauce. Served with a drink.'

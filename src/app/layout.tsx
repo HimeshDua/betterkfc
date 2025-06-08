@@ -8,8 +8,25 @@ import {ThemeProvider} from 'next-themes';
 const roboto_condensed = Roboto_Condensed({subsets: ['latin'], preload: true});
 
 export const metadata = {
-  title: 'KFC Pakistan Clone',
-  description: 'Delicious fast food. Built with ShadCN and Next.js'
+  title: 'Better KFC Clone',
+  description: 'Delicious fast food. Built with ShadCN and Next.js',
+  keywords: ['kfc', 'fast food', 'burger', 'chicken', 'Zinger', 'Fries'],
+  authors: [{name: 'Himesh Dua', url: 'https://betterkfc.vercel.app'}],
+  openGraph: {
+    title: 'Better KFC Clone',
+    description: 'Delicious fast food. Built with ShadCN and Next.js',
+    type: 'article',
+    locale: 'en_US',
+    url: `https://betterkfc.vercel.app`
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Better KFC Clone',
+    description: 'Delicious fast food. Built with ShadCN and Next.js',
+    images: [`https://betterkfc.vercel.app`],
+    creator: '@HimeshDua'
+  },
+  metadataBase: new URL('https://betterkfc.vercel.app')
 };
 
 export default function RootLayout({children}: {children: ReactNode}) {
