@@ -1,14 +1,7 @@
 'use client';
-import {ProductInterface} from '@/types/ProductType';
+import {ProductInterface} from '@/types/global-types';
 import {setCookie} from 'cookies-next';
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  FC,
-  useEffect
-} from 'react';
+import {createContext, useContext, useState, useEffect} from 'react';
 
 interface CartContextType {
   cart: ProductInterface[];

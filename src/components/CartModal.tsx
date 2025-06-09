@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import {Button} from '@/components/ui/button';
 import {Separator} from './ui/separator';
-import {ProductInterface} from '@/types/ProductType';
+import {ProductInterface} from '@/types/global-types';
 
 interface CartModalProps {
   open: boolean;

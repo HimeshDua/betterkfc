@@ -6,3 +6,9 @@ export interface ProductInterface {
   category: string;
   quantity?: number;
 }
+
+export type FormDataType = {
+  name: string;
+  email: string;
+  password: string;
+};

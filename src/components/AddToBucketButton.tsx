@@ -2,7 +2,7 @@
 
 import {Button} from '@/components/ui/button';
 import {useCart} from '@/contexts/CartContext';
-import {ProductInterface} from '@/types/ProductType';
+import {ProductInterface} from '@/types/global-types';
 
 export function AddToBucketButton({product}: {product: ProductInterface}) {
   const {addToCart} = useCart();
