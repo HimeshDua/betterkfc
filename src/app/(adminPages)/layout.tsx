@@ -8,7 +8,7 @@ import {ThemeProvider} from 'next-themes';
 const inter = Inter({subsets: ['latin']});
 
 export const metadata = {
-  title: 'KFC Pakistan Clone',
+  title: 'Admin - KFC Pakistan Clone',
   description: 'Delicious fast food. Built with ShadCN and Next.js'
 };
 
