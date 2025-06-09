@@ -1,136 +1,120 @@
 'use client';
 
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo, memo} from 'react';
+import {useCart} from '@/contexts/CartContext';
 import {Button} from './ui/button';
+import Image from 'next/image';
+import Link from 'next/link';
 
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  description?: string;
-  quantity?: number;
-}
-
-function CartSection({item}: {item: Product | null}) {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
-
-  useEffect(() => {
-    if (item) {
-      setCartItems((prev) => {
-        const exists = prev.find((i) => i.id === item.id);
-        if (exists) {
-          return prev.map((i) =>
-            i.id === item.id ? {...i, quantity: (i.quantity ?? 0) + 1} : i
-          );
-        }
-        return [...prev, {...item, quantity: 1}];
-      });
-    }
-  }, [item]);
-
-  const updateItemQuantity = (itemId: string, newQuantity: number) => {
-    setCartItems((prev) =>
-      prev
-        .map((i) =>
-          i.id === itemId ? {...i, quantity: Math.max(0, newQuantity)} : i
-        )
-        .filter((i) => (i.quantity ?? 0) > 0)
-    );
-  };
-
-  const removeFromCart = (id: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
+const CartSection = () => {
+  const {cart, setCart, removeFromCart} = useCart();
 
   const totalCartItems = useMemo(
-    () => cartItems.reduce((total, item) => total + (item.quantity ?? 0), 0),
-    [cartItems]
+    () => cart.reduce((total, item) => total + (item.quantity ?? 1), 0),
+    [cart]
   );
 
   const totalCartPrice = useMemo(
     () =>
-      cartItems.reduce(
-        (total, item) => total + item.price * (item.quantity ?? 0),
+      cart.reduce(
+        (total, item) => total + item.price * (item.quantity ?? 1),
         0
       ),
-    [cartItems]
+    [cart]
   );
 
-  return (
-    <aside className="w-full lg:w-1/4 flex-shrink-0">
-      <div className="lg:sticky lg:top-[180px] bg-card p-4 lg:p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4 text-foreground">Your Bucket</h2>
-        {cartItems.length === 0 ? (
-          <p className="text-muted-foreground">Your bucket is empty.</p>
-        ) : (
-          <div className="space-y-4">
-            {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between border-b pb-2"
-              >
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground">{item.name}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Qty: {item.quantity}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Price: Rs. {item.price * (item.quantity ?? 0)}
-                  </p>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      updateItemQuantity(item.id, (item.quantity ?? 0) - 1)
-                    }
-                    aria-label="Decrease quantity"
-                  >
-                    -
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      updateItemQuantity(item.id, (item.quantity ?? 0) + 1)
-                    }
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => removeFromCart(item.id)}
-                    aria-label="Remove item"
-                  >
-                    Remove
-                  </Button>
-                </div>
-              </div>
-            ))}
+  const updateValue = (itemId: string, delta: number) => {
+    const updatedCart = cart
+      .map((i) =>
+        i.id === itemId
+          ? {...i, quantity: Math.max(0, (i.quantity ?? 1) + delta)}
+          : i
+      )
+      .filter((i) => (i.quantity ?? 0) > 0);
+    setCart(updatedCart);
+  };
 
-            <footer className="pt-4 border-t-2 border-dashed border-border">
-              <div className="flex justify-between text-lg font-bold text-foreground">
-                <span>Total Items:</span>
-                <span>{totalCartItems}</span>
+  return (
+    <aside className="w-full lg:w-1/4 flex-shrink-0 lg:sticky lg:top-[190px] h-[75vh] p-4 bg-background rounded-xl shadow-xl border">
+      <h2 className="text-2xl font-bold mb-6 text-primary">🧺 Your Bucket</h2>
+
+      <section className="overflow-y-auto h-[55vh] space-y-4 pr-1">
+        {cart.length === 0 ? (
+          <p className="text-muted-foreground text-center">
+            Your bucket is empty.
+          </p>
+        ) : (
+          cart.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between gap-4 p-3 rounded-lg border hover:shadow-sm transition"
+            >
+              <div className="flex items-center gap-3">
+                <Image
+                  height={50}
+                  width={50}
+                  alt={item.name}
+                  src={item.image}
+                  className="rounded object-cover w-12 h-12"
+                />
+                <div>
+                  <p className="font-semibold">{item.name}</p>
+                  <span className="flex gap-x-2 text-lg font-semibold text-center text-muted-foreground">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => updateValue(item.id, -1)}
+                    >
+                      -
+                    </Button>
+                    <p className="inline-block w-4 text-center">
+                      {item.quantity ?? 1}
+                    </p>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => updateValue(item.id, 1)}
+                    >
+                      +
+                    </Button>
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-between text-lg font-bold text-foreground mt-2">
-                <span>Total Price:</span>
-                <span>Rs. {totalCartPrice}</span>
+
+              <div>
+                <p className="font-semibold text-end text-muted-foreground">
+                  Rs {item.price ?? 0}
+                </p>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Remove
+                </Button>
               </div>
-              <Button className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
-                Proceed to Checkout
-              </Button>
-            </footer>
-          </div>
+            </div>
+          ))
         )}
+      </section>
+
+      <div className="flex justify-between items-start mt-6 border-t pt-4">
+        <div className="space-y-1">
+          <p className="text-base">
+            <span className="font-medium">🛒 Total Items:</span>{' '}
+            {totalCartItems}
+          </p>
+          <p className="text-base">
+            <span className="font-medium">💰 Total Price:</span> Rs{' '}
+            {totalCartPrice}
+          </p>
+        </div>
+        <Link href="/menu/bucket">
+          <Button className="ml-4">View Bucket</Button>
+        </Link>
       </div>
     </aside>
   );
-}
+};
 
-export default CartSection;
+export default memo(CartSection);

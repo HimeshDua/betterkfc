@@ -8,22 +8,13 @@ import ProductCardCircle from '@/components/ProductCardCircle';
 import CartModal from '@/components/CartModal';
 import {exploremenu} from '@/data/exploreMenu';
 import {newsLetterImages} from '@/data/newsLetterImages';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  description?: string;
-  quantity?: number;
-}
+import {ProductInterface} from '@/types/ProductType';
 
 export default function Home() {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [cartItems, setCartItems] = useState<ProductInterface[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: ProductInterface) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
@@ -65,6 +56,7 @@ export default function Home() {
           {exploremenu.map((offer) => (
             <ProductCardCircle
               key={offer.id}
+              id={offer.id}
               image={offer.image}
               name={offer.name}
             />

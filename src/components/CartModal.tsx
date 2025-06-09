@@ -8,20 +8,12 @@ import {
 } from '@/components/ui/dialog';
 import {Button} from '@/components/ui/button';
 import {Separator} from './ui/separator';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  quantity?: number;
-}
+import {ProductInterface} from '@/types/ProductType';
 
 interface CartModalProps {
   open: boolean;
   onClose: () => void;
-  items: Product[];
+  items: ProductInterface[];
 }
 
 export default function CartModal({open, onClose, items}: CartModalProps) {
@@ -42,7 +34,7 @@ export default function CartModal({open, onClose, items}: CartModalProps) {
               Your cart is empty.
             </p>
           ) : (
-            items.map((item: Product, idx: number) => (
+            items.map((item: ProductInterface, idx: number) => (
               <>
                 <div key={idx} className="flex justify-between items-center">
                   <div className="flex items-center gap-2">

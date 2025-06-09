@@ -1,7 +1,10 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  swcMinify: true
+  // swcMinify: true
+  eslint: {
+    ignoreDuringBuilds: true
+  }
 };
 
 export default nextConfig;

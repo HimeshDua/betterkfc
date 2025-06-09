@@ -78,11 +78,11 @@ export default function Header() {
         <div className="container mx-auto flex justify-between items-center">
           <Link href="/">
             <Image
-              src={'/images/logo-2.svg'}
-              alt="KFC Logo"
-              width={60}
-              height={40}
-              className="h-8 md:h-10 w-auto object-contain"
+              src="/images/logo-2.svg"
+              alt="KFC Pakistan Logo"
+              width={80}
+              height={50}
+              className="h-10 w-auto object-contain"
             />
           </Link>
 

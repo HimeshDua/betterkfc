@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image'; // Assuming you'll use Next.js Image component for icons
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
