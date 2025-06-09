@@ -32,7 +32,11 @@ export const metadata = {
   metadataBase: new URL('https://betterkfc.vercel.app/menu')
 };
 
-export default async function RootLayout({children}: {children: ReactNode}) {
+export default async function MenuPageLayout({
+  children
+}: {
+  children: ReactNode;
+}) {
   const cartData = await getCartFromCookie();
   // console.log('cartdasta: ', cartData);
   return (

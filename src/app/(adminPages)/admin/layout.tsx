@@ -12,7 +12,7 @@ export const metadata = {
   description: 'Delicious fast food. Built with ShadCN and Next.js'
 };
 
-export default function RootLayout({children}: {children: ReactNode}) {
+export default function AdminLayout({children}: {children: ReactNode}) {
   return (
     <html lang="en">
       <body className={inter.className}>
