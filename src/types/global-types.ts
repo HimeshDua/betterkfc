@@ -13,7 +13,8 @@ export interface ProductInterface {
     | 'signature'
     | 'sharing'
     | 's-n-b'
-    | 'mid';
+    | 'mid'
+    | string;
   quantity?: number;
 }
 
