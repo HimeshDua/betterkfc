@@ -1,120 +1,47 @@
-'use client';
-
-import React, {useMemo, memo} from 'react';
-import {useCart} from '@/contexts/CartContext';
+import React from 'react';
 import {Button} from './ui/button';
-import Image from 'next/image';
 import Link from 'next/link';
+import CartSectionItem from './CartSectionItem';
+import {ProductInterface} from '@/types/global-types';
 
-const CartSection = () => {
-  const {cart, setCart, removeFromCart} = useCart();
-
-  const totalCartItems = useMemo(
-    () => cart.reduce((total, item) => total + (item.quantity ?? 1), 0),
-    [cart]
+const CartSection = async (cartData: {cartData: ProductInterface[]}) => {
+  const {cartData: cart} = cartData;
+  const totalCartItems = cart.reduce(
+    (total, item) => total + (item.quantity ?? 1),
+    0
   );
 
-  const totalCartPrice = useMemo(
-    () =>
-      cart.reduce(
-        (total, item) => total + item.price * (item.quantity ?? 1),
-        0
-      ),
-    [cart]
+  const totalCartPrice = cart.reduce(
+    (total, item) => total + item.price * (item.quantity ?? 1),
+    0
   );
-
-  const updateValue = (itemId: string, delta: number) => {
-    const updatedCart = cart
-      .map((i) =>
-        i.slug === itemId
-          ? {...i, quantity: Math.max(0, (i.quantity ?? 1) + delta)}
-          : i
-      )
-      .filter((i) => (i.quantity ?? 0) > 0);
-    setCart(updatedCart);
-  };
 
   return (
-    <aside className="w-full lg:w-1/4 flex-shrink-0 lg:sticky lg:top-[190px] h-[75vh] p-4 bg-background rounded-xl shadow-xl border">
-      <h2 className="text-2xl font-bold mb-6 text-primary">🧺 Your Bucket</h2>
+    <aside className="w-full lg:w-1/3 flex-shrink-0 lg:sticky lg:top-[120px] h-[75vh] p-4 bg-background rounded-xl shadow-xl border">
+      <h2 className="text-2xl font-bold mb-6 ps-2 text-primary">Your Bucket</h2>
 
-      <section className="overflow-y-auto h-[55vh] space-y-4 pr-1">
-        {cart.length === 0 ? (
-          <p className="text-muted-foreground text-center">
-            Your bucket is empty.
-          </p>
-        ) : (
-          cart.map((item) => (
-            <div
-              key={item.slug}
-              className="flex items-center justify-between gap-4 p-3 rounded-lg border hover:shadow-sm transition"
-            >
-              <div className="flex items-center gap-3">
-                <Image
-                  height={50}
-                  width={50}
-                  alt={item.name}
-                  src={item.image}
-                  className="rounded object-cover w-12 h-12"
-                />
-                <div>
-                  <p className="font-semibold">{item.name}</p>
-                  <span className="flex gap-x-2 text-lg font-semibold text-center text-muted-foreground">
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => updateValue(item.slug, -1)}
-                    >
-                      -
-                    </Button>
-                    <p className="inline-block w-4 text-center">
-                      {item.quantity ?? 1}
-                    </p>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => updateValue(item.slug, 1)}
-                    >
-                      +
-                    </Button>
-                  </span>
-                </div>
-              </div>
-
-              <div>
-                <p className="font-semibold text-end text-muted-foreground">
-                  Rs {item.price ?? 0}
-                </p>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => removeFromCart(item.slug)}
-                >
-                  Remove
-                </Button>
-              </div>
-            </div>
-          ))
-        )}
+      <section
+        className="overflow-y-auto h-[55vh] space-y-4 pr-1"
+        style={{scrollbarWidth: 'thin'}}
+      >
+        <CartSectionItem />
       </section>
 
-      <div className="flex justify-between items-start mt-6 border-t pt-4">
-        <div className="space-y-1">
-          <p className="text-base">
-            <span className="font-medium">🛒 Total Items:</span>{' '}
-            {totalCartItems}
-          </p>
-          <p className="text-base">
-            <span className="font-medium">💰 Total Price:</span> Rs{' '}
-            {totalCartPrice}
-          </p>
+      <div className="mt-4 pt-4 border-t flex flex-col space-y-2">
+        <div className="flex justify-between">
+          <span>Total Items:</span>
+          <span className="font-medium">{0 || totalCartItems}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Total Price:</span>
+          <span className="font-medium">Rs {0 || totalCartPrice}</span>
         </div>
         <Link href="/menu/bucket">
-          <Button className="ml-4">View Bucket</Button>
+          <Button className="w-full mt-2">View Bucket</Button>
         </Link>
       </div>
     </aside>
   );
 };
 
-export default memo(CartSection);
+export default CartSection;

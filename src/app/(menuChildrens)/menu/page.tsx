@@ -20,7 +20,7 @@ const categories = [
 export default function MenuPage() {
   const {addToCart} = useCart();
   return (
-    <section className="flex-1 lg:w-3/4">
+    <section className="flex-1 lg:w-3/5">
       {categories.map((category) => {
         if (category.slug === 'all') return null;
 
@@ -38,7 +38,7 @@ export default function MenuPage() {
             <h2 className="text-3xl font-bold mb-6 text-foreground">
               {category.name}
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid gap-6 grid-cols-2 md:grid-cols-3">
               {items.map((item) => (
                 <ProductCardMenu
                   key={item.slug}

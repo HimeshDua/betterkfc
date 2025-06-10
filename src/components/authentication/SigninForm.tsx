@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form';
 import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
 import {useState} from 'react';
+import {useRouter} from 'next/navigation';
 
 type SignInData = {
   email: string;
@@ -17,12 +18,38 @@ export default function SignInForm() {
     formState: {errors, isSubmitting}
   } = useForm<SignInData>();
 
-  const [signedIn, setSignedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
 
-  const onSubmit = async (data: SignInData) => {
-    console.log('Sign In Data:', data);
-    setSignedIn(true);
-    setTimeout(() => setSignedIn(false), 3000);
+  const onSubmit = async (formData: SignInData) => {
+    try {
+      setLoading(true);
+      setErrorMessage('');
+
+      const res = await fetch('/api/signin', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setTimeout(() => {
+          router.push('/');
+          router.refresh();
+        }, 1000);
+      } else {
+        setErrorMessage(data.message || 'Invalid email or password');
+      }
+    } catch (error) {
+      setErrorMessage('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,11 +99,24 @@ export default function SignInForm() {
           )}
         </div>
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? 'Signing In...' : 'Sign In'}
+        {/* Submit */}
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={loading || isSubmitting}
+        >
+          {loading ? 'Signing In...' : 'Sign In'}
         </Button>
 
-        {signedIn && (
+        {/* Error Message */}
+        {errorMessage && (
+          <p className="text-sm text-destructive text-center mt-2">
+            {errorMessage}
+          </p>
+        )}
+
+        {/* Success Message */}
+        {submitted && (
           <p className="text-sm text-green-600 dark:text-green-400 text-center mt-2">
             Signed in successfully!
           </p>

@@ -3,13 +3,31 @@
 import {useForm} from 'react-hook-form';
 import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import {NextRequest} from 'next/server';
+import {useRouter} from 'next/navigation';
 
 type FormData = {
   name: string;
   email: string;
   password: string;
+  location: string;
+  phone: string;
 };
+
+// Common Pakistani cities — you can expand this
+const PAKISTAN_CITIES = [
+  'Karachi',
+  'Lahore',
+  'Islamabad',
+  'Rawalpindi',
+  'Faisalabad',
+  'Multan',
+  'Peshawar',
+  'Quetta',
+  'Hyderabad',
+  'Sialkot'
+];
 
 export default function SignUpForm() {
   const {
@@ -19,9 +37,29 @@ export default function SignUpForm() {
   } = useForm<FormData>();
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const onSubmit = async (data: FormData) => {
-    console.log('Form submitted:', data);
+  const onSubmit = async (formData: FormData) => {
+    // useEffect(() => {}, [data]);
+    // console.log('Form submitted:', data);
+    try {
+      setLoading(true);
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(formData)
+      });
+      const data = await res.json();
+      if (data.success) {
+        router.push('/');
+        router.refresh();
+      }
+    } catch (error: any) {
+    } finally {
+      setLoading(false);
+    }
+
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
   };
@@ -93,12 +131,58 @@ export default function SignUpForm() {
           )}
         </div>
 
-        {/* Submit Button */}
+        {/* Location (select) */}
+        <div>
+          <select
+            {...register('location', {
+              required: 'Location is required'
+            })}
+            className="w-full p-2 border rounded-md text-sm bg-background"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select Location
+            </option>
+            {PAKISTAN_CITIES.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+          {errors.location && (
+            <p className="text-sm text-destructive mt-1">
+              {errors.location.message}
+            </p>
+          )}
+        </div>
+
+        {/* Phone number */}
+        <div>
+          <Input
+            type="tel"
+            placeholder="03XXXXXXXXX"
+            {...register('phone', {
+              required: 'Phone number is required',
+              pattern: {
+                value: /^03[0-9]{9}$/,
+                message:
+                  'Enter valid Pakistani mobile number (e.g. 03001234567)'
+              }
+            })}
+          />
+          {errors.phone && (
+            <p className="text-sm text-destructive mt-1">
+              {errors.phone.message}
+            </p>
+          )}
+        </div>
+
+        {/* Submit */}
         <Button type="submit" className="w-full" disabled={isSubmitting}>
           {isSubmitting ? 'Creating Account...' : 'Create Account'}
         </Button>
 
-        {/* Success Message */}
+        {/* Success */}
         {submitted && (
           <p className="text-sm text-green-600 dark:text-green-400 text-center mt-2">
             Signed up successfully!

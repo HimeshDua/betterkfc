@@ -56,3 +56,32 @@ export interface OrderInterface {
   paymentMethod: 'cod' | 'card';
   status: 'pending' | 'preparing' | 'delivered' | 'cancelled';
 }
+
+// verifyAuth.... :3
+
+export type decodedResultType = {
+  userId: string;
+  role: string;
+  name: string;
+  email: string;
+  phone: string;
+  location: string;
+};
+
+// useContext Typess ...... :3
+// useSessions User type
+
+export interface UserContextValueType {
+  user: UserType | null;
+  valid: boolean;
+  error?: string;
+}
+
+export type UserType = {
+  userId: string;
+  role: string;
+  name: string;
+  email: string;
+  phone: string;
+  location: string;
+};

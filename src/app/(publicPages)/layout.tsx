@@ -1,11 +1,10 @@
 import '@/styles/globals.css';
 import {ReactNode} from 'react';
 import {Roboto_Condensed} from 'next/font/google';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import {ThemeProvider} from 'next-themes';
-import {CartProvider} from '@/contexts/CartContext';
+import PageShell from '@/components/provider/PageShell';
 import {getCartFromCookie} from '@/actions/getCartFromCookie.action';
+import verifyAuth from '@/lib/auth';
+import {UserContextValueType} from '@/types/global-types';
 
 const roboto_condensed = Roboto_Condensed({subsets: ['latin'], preload: true});
 
@@ -32,20 +31,18 @@ export const metadata = {
 };
 
 export default async function RootLayout({children}: {children: ReactNode}) {
+  const authValue: UserContextValueType = await verifyAuth(['user', 'admin']);
   const cartData = await getCartFromCookie();
-  console.log('cartdasta: ', cartData);
+  console.log('authValue: ', authValue);
+
+  // console.log('cartdasta: ', cartData);
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={roboto_condensed.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <CartProvider initialCart={cartData}>
-            <div className="min-h-screen w-full bg-background">
-              <Header />
-              <main className="mx-auto px-4 py-6">{children}</main>
-              <Footer />
-            </div>
-          </CartProvider>
-        </ThemeProvider>
+        <PageShell authValue={authValue} cartData={cartData}>
+          <main className="mx-auto px-4 py-6">{children}</main>
+        </PageShell>
       </body>
     </html>
   );
