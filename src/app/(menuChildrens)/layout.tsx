@@ -45,8 +45,9 @@ export default async function MenuPageLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto_condensed.className}>
         <PageShell authValue={authValue} cartData={cartData}>
-          <main className="container mx-auto py-8 px-4 flex flex-col lg:flex-row gap-8 bg-background">
+          <main className="min-h-[90vh] max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
             {children}
+            {/* <CartSection /> */}
             <CartSection cartData={cartData} />
           </main>
         </PageShell>

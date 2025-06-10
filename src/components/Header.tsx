@@ -75,7 +75,7 @@ export default function Header() {
               </div>
             )}
           </nav>
-          {path === '/menu' && (
+          {/* {path === '/menu' && (
             <nav className="w-full flex justify-end overflow-x-auto no-scrollbar mt-2">
               {categories.map((category) => (
                 <a
@@ -92,7 +92,7 @@ export default function Header() {
                 </a>
               ))}
             </nav>
-          )}
+          )} */}
         </div>
         {/* Mobile Menu Button */}
         <button
