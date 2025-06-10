@@ -38,12 +38,12 @@ export default function SignUpForm() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const onSubmit = async (formData: FormData) => {
-    // useEffect(() => {}, [data]);
-    // console.log('Form submitted:', data);
     try {
+      setError(null);
       setLoading(true);
       const res = await fetch('/api/signup', {
         method: 'POST',
@@ -55,7 +55,9 @@ export default function SignUpForm() {
         router.push('/');
         router.refresh();
       }
+      setError(data.error);
     } catch (error: any) {
+      setError(`Failed to signup: ${error.meessage}`);
     } finally {
       setLoading(false);
     }
@@ -178,14 +180,21 @@ export default function SignUpForm() {
         </div>
 
         {/* Submit */}
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={isSubmitting || loading}
+        >
           {isSubmitting ? 'Creating Account...' : 'Create Account'}
         </Button>
 
-        {/* Success */}
-        {submitted && (
+        {!errors && submitted ? (
           <p className="text-sm text-green-600 dark:text-green-400 text-center mt-2">
             Signed up successfully!
+          </p>
+        ) : (
+          <p className="text-sm red-green-600 dark:red-green-400 text-center mt-2">
+            {error}
           </p>
         )}
       </form>
