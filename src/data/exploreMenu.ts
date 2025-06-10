@@ -1,6 +1,6 @@
 export const exploremenu = [
   {
-    id: 'ramen-wings',
+    slug: 'ramen-wings',
     name: 'Ramen Wings',
     price: 1800,
     image: '/images/products/ramen-wings.png',
@@ -9,7 +9,7 @@ export const exploremenu = [
       '8 x Hot and crispy wings glazed in spicy Ramen Sauce and topped with crunchy noodles.'
   },
   {
-    id: '3rilling',
+    slug: '3rilling',
     name: '3rilling',
     price: 3500,
     image: '/images/products/3rilling.png',
@@ -18,7 +18,7 @@ export const exploremenu = [
       '3 Zinger Burgers, 3 Chicken Drumsticks, 1 Bucket of Fries, and 3 Regular Drinks.'
   },
   {
-    id: 'krunch-burger',
+    slug: 'krunch-burger',
     name: 'Krunch Burger',
     price: 2200,
     image: '/images/products/krunch-burger.png',
@@ -27,7 +27,7 @@ export const exploremenu = [
       'Enjoy the crispy chicken fillet in a soft bun with our signature sauce with fresh lettuce.'
   },
   {
-    id: 'krunch-burger-drink',
+    slug: 'krunch-burger-drink',
     name: 'Krunch Burger + Drink',
     price: 410,
     image: '/images/products/krunch-burger-drink.png',

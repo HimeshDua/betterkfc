@@ -3,16 +3,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type ProductData = {
-  id: string;
+  slug: string;
   name: string;
   image: string;
 };
 
-export default function ProductCardCircle({id, name, image}: ProductData) {
+export default function ProductCardCircle({slug, name, image}: ProductData) {
   return (
     <Link
       className="rounded-t-full rounded-bl-full h-64 w-64"
-      href={`/menu/${id}`}
+      href={`/menu/${slug}`}
       prefetch
     >
       <Card className="flex flex-col items-center justify-start gap-0 rounded-t-full rounded-bl-full h-64 w-64">

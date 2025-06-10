@@ -7,7 +7,7 @@ interface CartContextType {
   cart: ProductInterface[];
   setCart: (cart: ProductInterface[]) => void;
   addToCart: (product: ProductInterface) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (slug: string) => void;
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -23,18 +23,18 @@ export const CartProvider = ({
 
   const addToCart = (item: ProductInterface) => {
     setCart((prev) => {
-      const exists = prev.find((i) => i.id === item.id);
+      const exists = prev.find((i) => i.slug === item.slug);
       if (exists) {
         return prev.map((i) =>
-          i.id === item.id ? {...i, quantity: (i.quantity ?? 1) + 1} : i
+          i.slug === item.slug ? {...i, quantity: (i.quantity ?? 1) + 1} : i
         );
       }
       return [...prev, {...item, quantity: 1}];
     });
   };
 
-  const removeFromCart = (id: string) => {
-    setCart((prev) => prev.filter((p) => p.id !== id));
+  const removeFromCart = (slug: string) => {
+    setCart((prev) => prev.filter((p) => p.slug !== slug));
   };
 
   useEffect(() => {

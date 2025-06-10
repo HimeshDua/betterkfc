@@ -26,7 +26,7 @@ const CartSection = () => {
   const updateValue = (itemId: string, delta: number) => {
     const updatedCart = cart
       .map((i) =>
-        i.id === itemId
+        i.slug === itemId
           ? {...i, quantity: Math.max(0, (i.quantity ?? 1) + delta)}
           : i
       )
@@ -46,7 +46,7 @@ const CartSection = () => {
         ) : (
           cart.map((item) => (
             <div
-              key={item.id}
+              key={item.slug}
               className="flex items-center justify-between gap-4 p-3 rounded-lg border hover:shadow-sm transition"
             >
               <div className="flex items-center gap-3">
@@ -63,7 +63,7 @@ const CartSection = () => {
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => updateValue(item.id, -1)}
+                      onClick={() => updateValue(item.slug, -1)}
                     >
                       -
                     </Button>
@@ -73,7 +73,7 @@ const CartSection = () => {
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => updateValue(item.id, 1)}
+                      onClick={() => updateValue(item.slug, 1)}
                     >
                       +
                     </Button>
@@ -88,7 +88,7 @@ const CartSection = () => {
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeFromCart(item.slug)}
                 >
                   Remove
                 </Button>

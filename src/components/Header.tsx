@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import {Button} from '@/components/ui/button';
 import {useState} from 'react';
-import CartModal from '@/components/CartModal'; // Assuming this component exists
-import {MenuIcon, ShoppingCart, X} from 'lucide-react'; // Using X for close icon
-import Image from 'next/image'; // Import Image component
+import CartModal from '@/components/CartModal';
+import {MenuIcon, ShoppingCart, X} from 'lucide-react';
+import Image from 'next/image';
 import {useTheme} from 'next-themes';
 import {cn} from '@/lib/utils';
 import {usePathname} from 'next/navigation';
@@ -18,14 +18,14 @@ export default function Header() {
   const path = usePathname();
 
   const categories = [
-    {id: 'all', name: 'All Products'},
-    {id: 'promotion', name: 'Promotion'},
-    {id: 'everyday-value', name: 'Everyday Value'},
-    {id: 'ala-cc', name: 'Ala-Carte-&-Combos'},
-    {id: 'signature', name: 'Signature'},
-    {id: 'sharing', name: 'Sharing'},
-    {id: 's-n-b', name: 'Snacks-&-Beverages'},
-    {id: 'mid', name: 'Midnight (Start at 12 am)'}
+    {slug: 'all', name: 'All Products'},
+    {slug: 'promotion', name: 'Promotion'},
+    {slug: 'everyday-value', name: 'Everyday Value'},
+    {slug: 'ala-cc', name: 'Ala-Carte-&-Combos'},
+    {slug: 'signature', name: 'Signature'},
+    {slug: 'sharing', name: 'Sharing'},
+    {slug: 's-n-b', name: 'Snacks-&-Beverages'},
+    {slug: 'mid', name: 'Midnight (Start at 12 am)'}
   ];
 
   return (
@@ -50,7 +50,6 @@ export default function Header() {
             </span>
           </div>
 
-          {/* Login and Cart */}
           <div className="flex items-center space-x-4">
             <Link
               href="/profile"
@@ -132,8 +131,8 @@ export default function Header() {
           <nav className="container mx-auto flex justify-start overflow-x-auto no-scrollbar">
             {categories.map((category) => (
               <a
-                key={category.id}
-                href={`#${category.id}`}
+                key={category.slug}
+                href={`#${category.slug}`}
                 className={cn(
                   'flex-shrink-0 px-4 py-3 rounded-none border-b-2 text-base font-medium transition-colors duration-200',
                   'hover:border-red-800 '

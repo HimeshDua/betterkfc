@@ -16,10 +16,10 @@ export default function Home() {
 
   const addToCart = (product: ProductInterface) => {
     setCartItems((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+      const existing = prev.find((item) => item.slug === product.slug);
       if (existing) {
         return prev.map((item) =>
-          item.id === product.id
+          item.slug === product.slug
             ? {...item, quantity: (item.quantity ?? 1) + 1}
             : item
         );
@@ -55,8 +55,8 @@ export default function Home() {
         <div className="justify-center grid sm:grid-cols-2 lg:grid-cols-4">
           {exploremenu.map((offer) => (
             <ProductCardCircle
-              key={offer.id}
-              id={offer.id}
+              key={offer.slug}
+              slug={offer.slug}
               image={offer.image}
               name={offer.name}
             />
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {exploremenu.map((offer) => (
             <ProductCardHome
-              key={offer.id}
+              key={offer.slug}
               name={offer.name}
               image={offer.image}
               price={offer.price}

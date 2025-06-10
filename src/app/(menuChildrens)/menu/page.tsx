@@ -7,14 +7,14 @@ import {useCart} from '@/contexts/CartContext';
 import {addToCookieCart} from '@/actions/addToCookieCart.action';
 
 const categories = [
-  {id: 'all', name: 'All Products'},
-  {id: 'promotion', name: 'Promotion'},
-  {id: 'everyday-value', name: 'Everyday Value'},
-  {id: 'ala-cc', name: 'Ala-Carte-&-Combos'},
-  {id: 'signature', name: 'Signature'},
-  {id: 'sharing', name: 'Sharing'},
-  {id: 's-n-b', name: 'Snacks-&-Beverages'},
-  {id: 'mid', name: 'Midnight (Start at 12 am)'}
+  {slug: 'all', name: 'All Products'},
+  {slug: 'promotion', name: 'Promotion'},
+  {slug: 'everyday-value', name: 'Everyday Value'},
+  {slug: 'ala-cc', name: 'Ala-Carte-&-Combos'},
+  {slug: 'signature', name: 'Signature'},
+  {slug: 'sharing', name: 'Sharing'},
+  {slug: 's-n-b', name: 'Snacks-&-Beverages'},
+  {slug: 'mid', name: 'Midnight (Start at 12 am)'}
 ];
 
 export default function MenuPage() {
@@ -22,22 +22,26 @@ export default function MenuPage() {
   return (
     <section className="flex-1 lg:w-3/4">
       {categories.map((category) => {
-        if (category.id === 'all') return null;
+        if (category.slug === 'all') return null;
 
         const items = products.filter(
-          (product) => product.category === category.id
+          (product) => product.category === category.slug
         );
         if (!items.length) return null;
 
         return (
-          <section key={category.id} id={category.id} className="mb-12 pt-4">
+          <section
+            key={category.slug}
+            id={category.slug}
+            className="mb-12 pt-4"
+          >
             <h2 className="text-3xl font-bold mb-6 text-foreground">
               {category.name}
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
               {items.map((item) => (
                 <ProductCardMenu
-                  key={item.id}
+                  key={item.slug}
                   {...item}
                   onAdd={async () => {
                     await addToCookieCart(item);

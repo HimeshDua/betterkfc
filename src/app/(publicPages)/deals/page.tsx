@@ -8,7 +8,7 @@ import {Button} from '@/components/ui/button';
 export default function DealsPage() {
   const deals = [
     {
-      id: 1,
+      slug: 1,
       title: 'Zinger Box Meal',
       description:
         'The classic Zinger, regular fries, 1 pc chicken, and a drink. A complete meal!',
@@ -19,7 +19,7 @@ export default function DealsPage() {
       new: true // Mark as new deal
     },
     {
-      id: 2,
+      slug: 2,
       title: 'Wow Combo',
       description: '1 Zinger, 1 Pc Chicken, 1 Regular Fries, 1 Regular Drink',
       image: '/images/deal-wow-combo.jpg', // Placeholder
@@ -28,7 +28,7 @@ export default function DealsPage() {
       link: '/menu/wow-combo'
     },
     {
-      id: 3,
+      slug: 3,
       title: 'Family Feast 4 Pc',
       description:
         '4 pieces of our famous fried chicken, 2 large fries, 2 drinks. Perfect for small families.',
@@ -38,7 +38,7 @@ export default function DealsPage() {
       link: '/menu/family-feast-4pc'
     },
     {
-      id: 4,
+      slug: 4,
       title: 'Twister Meal',
       description: 'Our delicious Twister wrap, regular fries, and a drink.',
       image: '/images/deal-twister-meal.jpg', // Placeholder
@@ -47,7 +47,7 @@ export default function DealsPage() {
       link: '/menu/twister-meal'
     },
     {
-      id: 5,
+      slug: 5,
       title: 'Hot Wings Bucket (10 Pc)',
       description: '10 fiery Hot Wings for an extra kick! Comes with a dip.',
       image: '/images/deal-hotwings-10pc.jpg', // Placeholder
@@ -57,7 +57,7 @@ export default function DealsPage() {
       seasonal: true // Mark as seasonal
     },
     {
-      id: 6,
+      slug: 6,
       title: 'Mega Deal',
       description:
         '2 Zinger Burgers, 2 Pc Chicken, 4 Hot Wings, Large Fries & 1.5L Drink.',
@@ -103,7 +103,7 @@ export default function DealsPage() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {deals.map((deal) => (
             <div
-              key={deal.id}
+              key={deal.slug}
               className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white border border-gray-200"
             >
               <div className="relative w-full h-60 sm:h-52 overflow-hidden">

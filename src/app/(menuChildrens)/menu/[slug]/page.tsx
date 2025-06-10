@@ -6,7 +6,7 @@ import {notFound} from 'next/navigation';
 import React from 'react';
 
 export async function generateStaticParams() {
-  return products.map((item) => ({slug: item.id}));
+  return products.map((item) => ({slug: item.slug}));
 }
 
 export async function generateMetadata({
@@ -15,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{slug: string}>;
 }): Promise<Metadata> {
   const ressolvedParams = await params;
-  const product = products.find((p) => p.id === ressolvedParams.slug);
+  const product = products.find((p) => p.slug === ressolvedParams.slug);
   if (!product) {
     return {
       title: 'Product not found'
@@ -40,7 +40,7 @@ export async function generateMetadata({
       images: [`https://betterkfc.vercel.app${product.image}`],
       type: 'article',
       locale: 'en_US',
-      url: `https://betterkfc.vercel.app/menu/${product.id}`
+      url: `https://betterkfc.vercel.app/menu/${product.slug}`
     },
     twitter: {
       card: 'summary_large_image',
@@ -55,7 +55,7 @@ export async function generateMetadata({
 
 async function page({params}: {params: Promise<{slug: string}>}) {
   const resolvedParams = await params;
-  const product = products.find((p) => p.id === resolvedParams.slug);
+  const product = products.find((p) => p.slug === resolvedParams.slug);
   if (!product) return notFound();
   // const {addToCart} = useCart();
 
