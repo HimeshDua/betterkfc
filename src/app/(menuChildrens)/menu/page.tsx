@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ProductCardMenu from '@/components/ProductCardMenu';
-import {products} from '@/data/products';
+import {products} from '@/data/data';
 import {useCart} from '@/contexts/CartContext';
 import {addToCookieCart} from '@/actions/addToCookieCart.action';
 

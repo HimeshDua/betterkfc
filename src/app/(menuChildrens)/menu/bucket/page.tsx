@@ -29,7 +29,7 @@ const BucketPage: React.FC = () => {
     [currentCart]
   );
   const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
+  // const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -37,24 +37,27 @@ const BucketPage: React.FC = () => {
   async function handleSubmit() {
     setError(null);
     setSuccess(false);
-    if (!address.trim() || !phone.trim()) {
+    if (!address.trim()) {
       setError('Please provide both address and phone number.');
       return;
     }
     setLoading(true);
     try {
-      const requestData = {address, phone, currentCart, totalPrice};
+      const requestData = {address, currentCart, totalPrice};
+      console.log('requestData: ', requestData);
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(requestData)
       });
-      if (!res.ok) {
-        throw new Error('Failed to place order. Please try again.');
+      const data = await res.json();
+      console.log('requestData bodiiiii: ', res);
+      if (!data.success) {
+        throw new Error(`${data.error}`);
       }
       setSuccess(true);
       setAddress('');
-      setPhone('');
+      // setPhone('');
     } catch (err: any) {
       setError(err.message || 'Something went wrong.');
     } finally {
@@ -81,11 +84,14 @@ const BucketPage: React.FC = () => {
             </Alert>
           )}
           {success && (
-            <Alert variant="default" className="mb-4">
-              <AlertDescription>Order placed successfully!</AlertDescription>
+            <Alert variant="default" className="mb-4 border-green-500">
+              <AlertDescription className="text-green-500">
+                Order placed successfully!
+              </AlertDescription>
             </Alert>
           )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6"> */}
+          <div className="grid grid-cols-1 gap-4 mb-6">
             <Input
               type="text"
               placeholder="Address"
@@ -94,14 +100,14 @@ const BucketPage: React.FC = () => {
               aria-label="Delivery Address"
               disabled={loading}
             />
-            <Input
+            {/* <Input
               type="tel"
               placeholder="Phone Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               aria-label="Phone Number"
               disabled={loading}
-            />
+            /> */}
           </div>
         </CardContent>
         <Separator />

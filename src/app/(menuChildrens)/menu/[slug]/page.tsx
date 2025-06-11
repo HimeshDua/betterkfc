@@ -1,5 +1,5 @@
 import {AddToBucketButton} from '@/components/AddToBucketButton';
-import {products} from '@/data/products';
+import {products} from '@/data/data';
 import {Metadata} from 'next';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';

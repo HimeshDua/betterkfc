@@ -1,3 +1,84 @@
+export const navLinks = [
+  {name: 'Menu', href: '/menu'},
+  {name: 'Deals', href: '/deals'},
+  {name: 'Locations', href: '/locations'},
+  {name: 'About', href: '/about'}
+];
+
+export const categories = [
+  {slug: 'all', name: 'All Products'},
+  {slug: 'promotion', name: 'Promotion'},
+  {slug: 'everyday-value', name: 'Everyday Value'},
+  {slug: 'ala-cc', name: 'Ala-Carte-&-Combos'},
+  {slug: 'signature', name: 'Signature'},
+  {slug: 'sharing', name: 'Sharing'},
+  {slug: 's-n-b', name: 'Snacks-&-Beverages'},
+  {slug: 'mid', name: 'Midnight (Start at 12 am)'}
+];
+
+export const exploremenu = [
+  {
+    slug: 'ramen-wings',
+    name: 'Ramen Wings',
+    price: 1800,
+    image: '/images/products/ramen-wings.png',
+    category: 'promotion',
+    description:
+      '8 x Hot and crispy wings glazed in spicy Ramen Sauce and topped with crunchy noodles.'
+  },
+  {
+    slug: '3rilling',
+    name: '3rilling',
+    price: 3500,
+    image: '/images/products/3rilling.png',
+    category: 'promotion',
+    description:
+      '3 Zinger Burgers, 3 Chicken Drumsticks, 1 Bucket of Fries, and 3 Regular Drinks.'
+  },
+  {
+    slug: 'krunch-burger',
+    name: 'Krunch Burger',
+    price: 2200,
+    image: '/images/products/krunch-burger.png',
+    category: 'everyday-value',
+    description:
+      'Enjoy the crispy chicken fillet in a soft bun with our signature sauce with fresh lettuce.'
+  },
+  {
+    slug: 'krunch-burger-drink',
+    name: 'Krunch Burger + Drink',
+    price: 410,
+    image: '/images/products/krunch-burger-drink.png',
+    category: 'everyday-value',
+    description:
+      'Enjoy a crispy crunchy chicken fillet on a bed of lettuce with a soft bun, topped with the signature sauce. Served with a drink.'
+  }
+];
+
+export const newsLetterImages = [
+  {
+    src: '/images/newsletters/fingers.png',
+    alt: 'Delicious KFC chicken fingers',
+    link: '/menu/fingers'
+  },
+  {
+    src: '/images/newsletters/operation.png',
+    alt: 'KFC operation behind the scenes',
+    link: '/about/operations'
+  },
+  {
+    src: '/images/newsletters/playstore.webp',
+    alt: 'Download KFC app on Play Store',
+    link: 'https://play.google.com/store/apps/details?id=com.kfc.pk',
+    external: true
+  },
+  {
+    src: '/images/hero-banner-2.png',
+    alt: 'Another great offer',
+    link: '/deals'
+  }
+];
+
 export const products = [
   // Promotion
   {

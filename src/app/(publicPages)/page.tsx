@@ -6,9 +6,8 @@ import {useState} from 'react';
 import ProductCardHome from '@/components/ProductCardHome';
 import ProductCardCircle from '@/components/ProductCardCircle';
 import CartModal from '@/components/CartModal';
-import {exploremenu} from '@/data/exploreMenu';
-import {newsLetterImages} from '@/data/newsLetterImages';
 import {ProductInterface} from '@/types/global-types';
+import {exploremenu, newsLetterImages} from '@/data/data';
 
 export default function Home() {
   const [cartItems, setCartItems] = useState<ProductInterface[]>([]);

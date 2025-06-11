@@ -8,6 +8,7 @@ import {Menu, X, Sun, Moon} from 'lucide-react';
 import {useSessions} from '@/contexts/UserContext';
 import {cn} from '@/lib/utils';
 import {useTheme} from 'next-themes';
+import {categories, navLinks} from '@/data/data';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -15,27 +16,9 @@ export default function Header() {
   const {user, valid} = useSessions();
   const {theme, setTheme} = useTheme();
 
-  const navLinks = [
-    {name: 'Menu', href: '/menu'},
-    {name: 'Deals', href: '/deals'},
-    {name: 'Locations', href: '/locations'},
-    {name: 'About', href: '/about'}
-  ];
-
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
-
-  const categories = [
-    {slug: 'all', name: 'All Products'},
-    {slug: 'promotion', name: 'Promotion'},
-    {slug: 'everyday-value', name: 'Everyday Value'},
-    {slug: 'ala-cc', name: 'Ala-Carte-&-Combos'},
-    {slug: 'signature', name: 'Signature'},
-    {slug: 'sharing', name: 'Sharing'},
-    {slug: 's-n-b', name: 'Snacks-&-Beverages'},
-    {slug: 'mid', name: 'Midnight (Start at 12 am)'}
-  ];
 
   const path = usePathname();
 
@@ -44,8 +27,11 @@ export default function Header() {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <h1 className="text-3xl text-nowrap font-bold text-primary">
-            KFC Clone
+          <h1 className="text-3xl italic text-nowrap font-bold text-primary relative">
+            KFC
+            <span className="absolute -bottom-1 -right-4 text-xs font-semibold text-muted-foreground tracking-wide">
+              better
+            </span>
           </h1>
         </Link>
 

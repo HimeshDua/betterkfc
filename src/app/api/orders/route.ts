@@ -8,9 +8,9 @@ export async function POST(req: NextRequest) {
   try {
     const authValue = await verifyAuth(['user', 'admin']);
     const userId = authValue.user?.userId;
-    const {address, phone, currentCart, totalPrice} = await req.json();
+    const {address, currentCart: productsCart, totalPrice} = await req.json();
 
-    if (!address?.trim() || !phone?.trim()) {
+    if (!address?.trim()) {
       return NextResponse.json(
         {success: false, error: 'All fields are required.'},
         {status: 400}
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const newOrder = await Order.create({
       userId,
-      products: currentCart || [],
+      products: productsCart,
       totalAmount: totalPrice || 0,
       status: 'pending',
       orderedAt: new Date(),
