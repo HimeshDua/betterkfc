@@ -4,15 +4,27 @@ import Link from 'next/link';
 import {useState} from 'react';
 import {usePathname} from 'next/navigation';
 import {Button} from '@/components/ui/button';
-import {Menu, X} from 'lucide-react';
+import {Menu, X, Sun, Moon} from 'lucide-react';
 import {useSessions} from '@/contexts/UserContext';
 import {cn} from '@/lib/utils';
+import {useTheme} from 'next-themes';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const {user, valid} = useSessions();
-  const path = usePathname();
+  const {theme, setTheme} = useTheme();
+
+  const navLinks = [
+    {name: 'Menu', href: '/menu'},
+    {name: 'Deals', href: '/deals'},
+    {name: 'Locations', href: '/locations'},
+    {name: 'About', href: '/about'}
+  ];
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   const categories = [
     {slug: 'all', name: 'All Products'},
@@ -25,25 +37,19 @@ export default function Header() {
     {slug: 'mid', name: 'Midnight (Start at 12 am)'}
   ];
 
-  const navLinks = [
-    {name: 'Menu', href: '/menu'},
-    {name: 'Deals', href: '/deals'},
-    {name: 'Locations', href: '/locations'},
-    {name: 'About', href: '/about'}
-  ];
+  const path = usePathname();
 
   return (
     <header className="w-full border-b bg-background shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <h1 className="text-2xl text-nowrap font-bold text-primary">
+          <h1 className="text-3xl text-nowrap font-bold text-primary">
             KFC Clone
           </h1>
         </Link>
 
         {/* Desktop Navigation */}
-
         <div className="hidden md:flex flex-col w-full items-center">
           <nav className="w-full flex justify-end items-center gap-6">
             {navLinks.map(({name, href}) => (
@@ -57,6 +63,16 @@ export default function Header() {
                 </span>
               </Link>
             ))}
+
+            {/* Theme Toggle Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </Button>
 
             {user ? (
               <span className="text-sm font-semibold text-primary">
@@ -75,25 +91,27 @@ export default function Header() {
               </div>
             )}
           </nav>
-          {/* {path === '/menu' && (
-            <nav className="w-full flex justify-end overflow-x-auto no-scrollbar mt-2">
-              {categories.map((category) => (
-                <a
-                  key={category.slug}
-                  href={`#${category.slug}`}
-                  className={cn(
-                    'flex-shrink-0 px-4 py-3 border-b-2 text-sm font-medium whitespace-nowrap',
-                    'hover:border-primary',
-                    'transition-colors',
-                    'border-transparent'
-                  )}
-                >
-                  {category.name}
-                </a>
-              ))}
-            </nav>
-          )} */}
+          {path === '/menu' && (
+            <div className="w-full flex justify-end mt-2 overflow-x-auto no-scrollbar">
+              <nav className="flex gap-4">
+                {categories.map((category) => (
+                  <Link
+                    key={category.slug}
+                    href={`#${category.slug}`}
+                    className={cn(
+                      'px-4 py-2 text-sm font-medium whitespace-nowrap rounded-md border',
+                      'hover:bg-primary/10 hover:text-primary transition-colors',
+                      'text-muted-foreground border-transparent'
+                    )}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          )}
         </div>
+
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -117,6 +135,26 @@ export default function Header() {
                 </Button>
               </Link>
             ))}
+
+            {/* Theme Toggle (Mobile) */}
+            <Button
+              variant="ghost"
+              onClick={() => {
+                toggleTheme();
+                setMobileOpen(false);
+              }}
+              className="w-full justify-start text-base"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="mr-2 h-4 w-4" /> Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon className="mr-2 h-4 w-4" /> Dark Mode
+                </>
+              )}
+            </Button>
 
             {valid ? (
               <p className="text-primary font-semibold text-base px-2 mt-2">
