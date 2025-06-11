@@ -3,6 +3,8 @@ import {model, models, Schema} from 'mongoose';
 
 const orderSchema = new Schema<OrderInterface>(
   {
+    userId: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+
     products: [
       {
         productData: {

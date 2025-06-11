@@ -43,7 +43,7 @@ const BucketPage: React.FC = () => {
     }
     setLoading(true);
     try {
-      const requestData = {address, phone};
+      const requestData = {address, phone, currentCart, totalPrice};
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

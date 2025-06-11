@@ -32,7 +32,7 @@ export interface UserInterface {
   phone: string;
   role: 'user' | 'admin';
   location: string;
-  orders: Schema.Types.ObjectId[];
+  ordersId: Schema.Types.ObjectId[];
 }
 
 // Order Schema Interfaces
@@ -49,6 +49,7 @@ export interface OrderedProduct {
 }
 
 export interface OrderInterface {
+  userId: Schema.Types.ObjectId;
   products: OrderedProduct[];
   deliveryAddress: string;
   orderedAt: Date;
