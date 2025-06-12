@@ -36,11 +36,12 @@ export default function MenuPage() {
           <section
             key={category.slug}
             id={category.slug}
-            className={`mb-12 pt-4  ${
-              category.slug === 'mid' &&
-              !midNight &&
-              'pointer-events-none opacity-50'
-            }`}
+            className={`mb-12 pt-4 px-0 sm:px-4 md:px-4
+                ${
+                  category.slug === 'mid' &&
+                  !midNight &&
+                  'pointer-events-none opacity-50 '
+                }`}
           >
             <h2 className="text-3xl font-bold mb-6 text-foreground">
               {category.name}
