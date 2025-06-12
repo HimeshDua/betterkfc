@@ -5,17 +5,25 @@ import {cookies} from 'next/headers';
 
 const verifyAuth = async (allowedRole: string[]) => {
   const JWT_SECRET = process.env.JWT_SECRET!;
-  const token = (await cookies()).get('token')?.value;
+  try {
+    const token = (await cookies()).get('token')?.value;
 
-  if (!token) {
-    return {valid: false, user: null, error: 'Unauthorized'};
-  }
-  const decoded = verify(token, JWT_SECRET) as decodedResultType;
+    if (!token) {
+      return {valid: false, user: null, error: 'Unauthorized'};
+    }
+    const decoded = verify(token, JWT_SECRET) as decodedResultType;
 
-  if (!allowedRole.includes(decoded.role)) {
-    return {valid: false, user: null, error: 'Forbidden'};
+    if (!allowedRole.includes(decoded.role)) {
+      return {valid: false, user: null, error: 'Forbidden'};
+    }
+    return {valid: true, user: decoded};
+  } catch (err: any) {
+    return {
+      valid: false,
+      user: null,
+      error: err.message || 'Invalid or expired token'
+    };
   }
-  return {valid: true, user: decoded};
 };
 
 export default verifyAuth;

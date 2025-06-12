@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from './ui/button';
 import Link from 'next/link';
 import {
@@ -9,12 +9,21 @@ import {
   CardContent,
   CardFooter
 } from '@/components/ui/card';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@/components/ui/sheet';
+
 import {ScrollArea} from './ui/scroll-area';
 import {useCart} from '@/contexts/CartContext';
 import Image from 'next/image';
 
 const CartSection = () => {
   const {cart, setCart, removeFromCart} = useCart();
+  const [open, setOpen] = useState(false);
 
   const updateValue = (itemId: string, delta: number) => {
     const updatedCart = cart
@@ -37,15 +46,13 @@ const CartSection = () => {
     0
   );
 
-  return (
-    <Card className="w-full md:w-80 lg:w-96 h-[88vh] sticky top-18">
-      {/* w-full lg:w-1/3 flex-shrink-0 lg:sticky lg:top-[80px] h-[75vh]  */}
+  const CartContent = (
+    <>
       <CardHeader>
         <CardTitle>Your Bucket</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <ScrollArea className="h-[55vh] space-y-4 p-4">
-          {/* <CartSectionItem /> */}
           {cart.length === 0 ? (
             <Card>
               <CardContent>
@@ -105,11 +112,10 @@ const CartSection = () => {
               </Card>
             ))
           )}
-          {/* <CartSectionItem /> */}
         </ScrollArea>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
-        <div className="flex justify-between gap-3">
+        <div className="flex justify-between gap-3 w-full text-sm">
           <div className="flex w-fit gap-x-1.5 justify-between">
             <span>Total Items:</span>
             <span className="font-medium">{totalItems}</span>
@@ -120,10 +126,38 @@ const CartSection = () => {
           </div>
         </div>
         <Link href="/menu/bucket" className="w-full">
-          <Button className="w-full mt-2">View Bucket</Button>
+          <Button className="w-full mt-2" onClick={() => setOpen(false)}>
+            View Bucket
+          </Button>
         </Link>
       </CardFooter>
-    </Card>
+    </>
+  );
+
+  return (
+    <>
+      {/* 👉 Bottom Sheet for mobile */}
+      <div className="fixed bottom-4 right-4 lg:hidden z-50">
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button size="lg" className="rounded-full shadow-lg px-6">
+              🛒 Your Bucket
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="bottom" className="h-[80vh] overflow-y-auto p-0">
+            <SheetHeader>
+              <SheetTitle className="sr-only">Your Bucket</SheetTitle>
+            </SheetHeader>
+            {CartContent}
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      {/* 👉 Sidebar for desktop */}
+      <div className="hidden lg:block w-full md:w-80 xl:w-96 h-[88vh] sticky top-18">
+        <Card className="h-full">{CartContent}</Card>
+      </div>
+    </>
   );
 };
 

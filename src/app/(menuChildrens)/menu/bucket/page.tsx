@@ -16,9 +16,14 @@ import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
 import {Separator} from '@/components/ui/separator';
 import {Alert, AlertDescription} from '@/components/ui/alert';
+import {useSessions} from '@/contexts/UserContext';
+import {editCookies} from '@/lib/editCookie';
 
 const BucketPage: React.FC = () => {
   const {cart} = useCart();
+  const {user} = useSessions();
+  const storedAddress = user?.location;
+  const storedPhone = user?.phone;
   const currentCart = cart || [];
   const totalItems = useMemo(
     () => currentCart.reduce((sum, i) => sum + (i.quantity ?? 1), 0),
@@ -28,8 +33,8 @@ const BucketPage: React.FC = () => {
     () => currentCart.reduce((sum, i) => sum + i.price * (i.quantity ?? 1), 0),
     [currentCart]
   );
-  const [address, setAddress] = useState('');
-  // const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState(storedAddress ?? '');
+  const [phone, setPhone] = useState(storedPhone ?? '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -37,27 +42,30 @@ const BucketPage: React.FC = () => {
   async function handleSubmit() {
     setError(null);
     setSuccess(false);
-    if (!address.trim()) {
+    if (!address.trim() || !phone.trim()) {
       setError('Please provide both address and phone number.');
       return;
     }
     setLoading(true);
     try {
-      const requestData = {address, currentCart, totalPrice};
-      console.log('requestData: ', requestData);
+      const requestData = {address, phone, currentCart, totalPrice};
+      await editCookies(address.trim(), phone.trim());
+      // console.log('requestData: ', requestData);
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(requestData)
       });
       const data = await res.json();
-      console.log('requestData bodiiiii: ', res);
+      // console.log('requestData bodiiiii: ', res);
       if (!data.success) {
+        console.log(data.error);
         throw new Error(`${data.error}`);
       }
+      console.log(data.message);
       setSuccess(true);
       setAddress('');
-      // setPhone('');
+      setPhone('');
     } catch (err: any) {
       setError(err.message || 'Something went wrong.');
     } finally {
@@ -66,11 +74,22 @@ const BucketPage: React.FC = () => {
   }
 
   return (
-    <main className="max-w-4xl mx-auto flex flex-col gap-10 py-10">
-      <h1 className="text-4xl font-bold text-center text-primary mb-4">
+    <main
+      className="sm:max-w-xl md:max-w-4xl  mx-auto flex flex-col gap-y-10 py-10  xl:max-w-4xl
+        [@media(min-width:581px)]:[@media(max-width:640px)]:w-[34rem]
+        [@media(min-width:481px)]:[@media(max-width:580px)]:w-[29rem]
+        [@media(min-width:421px)]:[@media(max-width:480px)]:w-[26rem]
+        [@media(max-width:420px)]:w-[20rem]
+        [@media(max-width:1200px)]:w-[48rem]
+        [@media(max-width:1150px)]:w-[46rem]
+        [@media(min-width:1024px)]:[@media(max-width:1060px)]:w-[43rem]
+    "
+    >
+      <h1 className="text-3xl sm:text-4xl font-bold text-center text-primary mb-4">
         Your Bucket
       </h1>
-      <Card className="max-w-2xl mx-auto w-full">
+
+      <Card className="w-full mx-auto">
         <CardHeader>
           <CardTitle>Delivery Details</CardTitle>
           <CardDescription>
@@ -90,8 +109,7 @@ const BucketPage: React.FC = () => {
               </AlertDescription>
             </Alert>
           )}
-          {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6"> */}
-          <div className="grid grid-cols-1 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <Input
               type="text"
               placeholder="Address"
@@ -100,19 +118,19 @@ const BucketPage: React.FC = () => {
               aria-label="Delivery Address"
               disabled={loading}
             />
-            {/* <Input
+            <Input
               type="tel"
               placeholder="Phone Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               aria-label="Phone Number"
               disabled={loading}
-            /> */}
+            />
           </div>
         </CardContent>
         <Separator />
-        <CardFooter className="flex items-center justify-between pt-4">
-          <div className="space-y-1">
+        <CardFooter className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4">
+          <div className="space-y-1 text-sm">
             <p>
               Total Items:{' '}
               <span className="font-medium text-foreground">{totalItems}</span>
@@ -126,6 +144,7 @@ const BucketPage: React.FC = () => {
           </div>
           <Button
             size="lg"
+            className="w-full sm:w-auto"
             disabled={currentCart.length === 0 || loading}
             aria-label="Place Order"
             onClick={handleSubmit}
@@ -134,6 +153,7 @@ const BucketPage: React.FC = () => {
           </Button>
         </CardFooter>
       </Card>
+
       <section className="w-full">
         <h2 className="text-2xl font-semibold mb-6">Your Items</h2>
         {currentCart.length === 0 ? (
@@ -143,11 +163,11 @@ const BucketPage: React.FC = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="flex overflow-x-auto space-x-6 pb-4 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          <div className="flex overflow-x-auto max-w-sm sm:max-w-4xl  space-x-4 pb-4 -mx-4 px-4 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             {currentCart.map((item) => (
               <Card
                 key={item.slug}
-                className="flex-shrink-0 w-72 rounded-xl shadow-md border overflow-hidden"
+                className="flex-shrink-0 w-64 sm:w-72 rounded-xl shadow-md border overflow-hidden"
               >
                 <Link href={item.slug}>
                   <Image
@@ -155,29 +175,26 @@ const BucketPage: React.FC = () => {
                     alt={item.name}
                     width={288}
                     height={180}
-                    className="rounded-t-xl object-cover w-full h-48"
+                    className="rounded-t-xl object-cover w-full h-40 sm:h-48"
                     onError={(e) => {
                       e.currentTarget.src = `https://placehold.co/288x180/6B7280/FFFFFF?text=Image+Error`;
                       e.currentTarget.alt = `Image for ${item.name} failed to load`;
                     }}
                   />
                 </Link>
-                <CardContent className="flex flex-col space-y-3 p-4">
-                  <h3 className="font-semibold text-lg truncate">
+                <CardContent className="flex flex-col space-y-2 p-4">
+                  <h3 className="font-semibold text-base sm:text-lg truncate">
                     {item.name}
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     Rs {item.price.toFixed(2)} each
                   </p>
-                  <p className="font-medium text-base">
-                    Quantity:{' '}
-                    <span className="text-foreground">
-                      {item.quantity ?? 1}
-                    </span>
+                  <p className="text-sm font-medium">
+                    Quantity: <span>{item.quantity ?? 1}</span>
                   </p>
-                  <p className="font-medium text-base">
+                  <p className="text-sm font-medium">
                     Subtotal:{' '}
-                    <span className="text-foreground">
+                    <span>
                       Rs {(item.price * (item.quantity ?? 1)).toFixed(2)}
                     </span>
                   </p>

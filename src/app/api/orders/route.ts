@@ -6,11 +6,18 @@ import {NextRequest, NextResponse} from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
+    const {
+      address,
+      phone,
+      currentCart: productsCart,
+      totalPrice
+    } = await req.json();
+
     const authValue = await verifyAuth(['user', 'admin']);
     const userId = authValue.user?.userId;
-    const {address, currentCart: productsCart, totalPrice} = await req.json();
+    console.log('USER ID:', userId);
 
-    if (!address?.trim()) {
+    if (!address?.trim() || !phone?.trim()) {
       return NextResponse.json(
         {success: false, error: 'All fields are required.'},
         {status: 400}
@@ -29,7 +36,7 @@ export async function POST(req: NextRequest) {
     });
 
     await User.findByIdAndUpdate(userId, {
-      $push: {ordersId: newOrder._id}
+      $push: {orders: newOrder._id}
     });
 
     return NextResponse.json(

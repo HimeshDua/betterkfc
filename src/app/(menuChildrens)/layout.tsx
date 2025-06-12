@@ -47,7 +47,6 @@ export default async function MenuPageLayout({
         <PageShell authValue={authValue} cartData={cartData}>
           <main className="min-h-[90vh] max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
             {children}
-            {/* <CartSection /> */}
             <CartSection />
           </main>
         </PageShell>
