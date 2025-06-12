@@ -8,17 +8,13 @@ import {Separator} from '@/components/ui/separator';
 import {formatDistanceToNow} from 'date-fns';
 import {useEffect, useState} from 'react';
 import {UserInterface} from '@/types/global-types';
-import {useSessions} from '@/contexts/UserContext';
-import {useRouter} from 'next/navigation';
 import Image from 'next/image';
 
 export default function AdminOrdersPage() {
   const [isClient, setIsClient] = useState(false);
   const [users, setUsers] = useState<UserInterface[]>([]);
   const [loading, setLoading] = useState(true);
-  const {user} = useSessions();
-  const router = useRouter();
-  const [updatedStatus, setUpdatedStatus] = useState('');
+  const [error, setError] = useState(true);
   const orderRoute = '/api/admin/orders';
 
   useEffect(() => {
@@ -32,8 +28,9 @@ export default function AdminOrdersPage() {
         const data = await res.json();
         if (data.success) {
           setUsers(data.users);
-        } else {
-          throw new Error(data.error || 'Failed to fetch orders');
+        }
+        if (data.error) {
+          setError(data.error || 'Failed to fetch orders');
         }
       } catch (error: any) {
         console.error(error.message);
@@ -44,12 +41,16 @@ export default function AdminOrdersPage() {
     fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="p-6 text-center text-muted-foreground">
-        Loading orders...
-      </div>
-    );
+  // if (loading) {
+  //   return (
+  //     <div className="p-6 text-center text-muted-foreground">
+  //       Loading orders...
+  //     </div>
+  //   );
+  // }
+
+  if (error) {
+    return <div className="p-6 text-center text-muted-foreground">{error}</div>;
   }
 
   if (!users.length) {
@@ -120,7 +121,7 @@ export default function AdminOrdersPage() {
                         </p>
                       </div>
 
-                      {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         {order.products.map((prod, i) => (
                           <div
                             key={i}
@@ -141,7 +142,7 @@ export default function AdminOrdersPage() {
                             </p>
                           </div>
                         ))}
-                      </div> */}
+                      </div>
 
                       <div className="flex flex-wrap gap-2 pt-3">
                         {['pending', 'preparing', 'delivered', 'cancelled'].map(
@@ -176,7 +177,6 @@ export default function AdminOrdersPage() {
                                     )
                                   }))
                                 );
-                                // data.upStatus || status
                               }}
                             >
                               {status}

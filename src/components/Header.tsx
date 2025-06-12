@@ -62,7 +62,11 @@ export default function Header() {
 
             {user ? (
               <span className="text-sm font-semibold text-primary">
-                {user.name}
+                {user.role === 'admin' ? (
+                  <Link href={'/admin'}>{user.name}</Link>
+                ) : (
+                  <Link href={'/profile'}>{user.name}</Link>
+                )}
               </span>
             ) : (
               <div className="flex items-center gap-3">

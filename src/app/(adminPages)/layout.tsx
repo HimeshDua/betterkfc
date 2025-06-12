@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 import {ReactNode} from 'react';
 import {Roboto_Condensed} from 'next/font/google';
-import PageShell from '@/components/provider/PageShell';
+import AdminPageShell from '@/components/provider/AdminPageShell';
 import {getCartFromCookie} from '@/actions/getCartFromCookie.action';
 import {UserContextValueType} from '@/types/global-types';
 import verifyAuth from '@/lib/auth';
@@ -37,15 +37,16 @@ export default async function AdminPageLayout({
 }) {
   const authValue: UserContextValueType = await verifyAuth(['admin']);
   const cartData = await getCartFromCookie();
-  console.log('authValue: ', authValue);
+  // console.log('authValue: ', authValue);
+
   // console.log('cartdasta: ', cartData);
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={roboto_condensed.className}>
-        <PageShell authValue={authValue} cartData={cartData}>
+        <AdminPageShell authValue={authValue} cartData={cartData}>
           <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
-        </PageShell>
+        </AdminPageShell>
       </body>
     </html>
   );
