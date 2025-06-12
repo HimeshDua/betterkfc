@@ -17,10 +17,10 @@ interface PageShellProps {
 async function AdminPageShell({children, authValue, cartData}: PageShellProps) {
   // console.log('authValue PageShell: ', authValue);
 
-  const isAdmin = authValue.user?.role === 'admin';
-  if (!isAdmin) {
-    useRouter().back();
-  }
+  // const isAdmin = authValue.user?.role === 'admin';
+  // if (!isAdmin) {
+  //   useRouter().back();
+  // }
 
   return (
     <div className="min-h-screen w-full bg-background">

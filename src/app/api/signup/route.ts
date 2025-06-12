@@ -11,13 +11,7 @@ export async function POST(req: NextRequest) {
   try {
     const {name, email, password, location, phone} = await req.json();
 
-    if (
-      !name?.trim() ||
-      !email?.trim() ||
-      !password?.trim() ||
-      !location?.trim() ||
-      !location?.trim()
-    ) {
+    if (!name?.trim() || !email?.trim() || !password?.trim()) {
       return NextResponse.json(
         {success: false, error: 'Missing fields'},
         {status: 400}

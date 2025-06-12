@@ -6,21 +6,28 @@ import {sign} from 'jsonwebtoken';
 import {NextResponse} from 'next/server';
 import connectToDB from '@/lib/connectTodb';
 
+const ADMIN_SECRET = 'Himesh123';
 export async function POST(req: NextRequest) {
   const JWT_SECRET = process.env.JWT_SECRET!;
   try {
-    const {name, email, password, location, phone} = await req.json();
+    const {name, email, password, location, phone, secret} = await req.json();
 
     if (
       !name?.trim() ||
       !email?.trim() ||
       !password?.trim() ||
-      !location?.trim() ||
-      !location?.trim()
+      !secret?.trim()
     ) {
       return NextResponse.json(
         {success: false, error: 'Missing fields'},
         {status: 400}
+      );
+    }
+
+    if (secret !== ADMIN_SECRET) {
+      return NextResponse.json(
+        {success: false, error: 'Invalid Secret'},
+        {status: 401}
       );
     }
 
@@ -56,24 +63,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const newUser = await User.create({
+    const newAdmin = await User.create({
       name: trimmedName,
       password: hashedPass,
       email: trimmedEmail,
       location: trimmedLocation,
-      phone: trimmedPhone
+      phone: trimmedPhone,
+      role: 'admin'
     });
 
-    const {password: _password, ...userWithoutPassword} = newUser.toObject();
+    const {password: _password, ...userWithoutPassword} = newAdmin.toObject();
 
     const token = sign(
       {
-        userId: newUser._id,
-        role: newUser.role,
-        name: newUser.name,
-        email: newUser.email,
-        phone: newUser.phone,
-        location: newUser.location
+        userId: newAdmin._id,
+        role: newAdmin.role,
+        name: newAdmin.name,
+        email: newAdmin.email,
+        phone: newAdmin.phone,
+        location: newAdmin.location
       },
       JWT_SECRET
     );
@@ -83,7 +91,7 @@ export async function POST(req: NextRequest) {
       path: '/',
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 7 * 60 * 60 * 24
+      maxAge: 1 * 60 * 60 * 24
     });
 
     const res = NextResponse.json(

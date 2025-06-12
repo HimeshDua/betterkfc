@@ -3,8 +3,7 @@
 import {useForm} from 'react-hook-form';
 import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
-import {useEffect, useState} from 'react';
-import {NextRequest} from 'next/server';
+import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 
 type FormData = {
@@ -15,7 +14,6 @@ type FormData = {
   phone: string;
 };
 
-// Common Pakistani cities — you can expand this
 const PAKISTAN_CITIES = [
   'Karachi',
   'Lahore',
@@ -133,12 +131,12 @@ export default function SignUpForm() {
           )}
         </div>
 
-        {/* Location (select) */}
-        <div>
+        <p className="text-sm text-muted-foreground mt-1">Optional</p>
+
+        <div className="flex gap-x-3">
+          {/* Location (select) */}
           <select
-            {...register('location', {
-              required: 'Location is required'
-            })}
+            {...register('location')}
             className="w-full p-2 border rounded-md text-sm bg-background"
             defaultValue=""
           >
@@ -156,22 +154,9 @@ export default function SignUpForm() {
               {errors.location.message}
             </p>
           )}
-        </div>
 
-        {/* Phone number */}
-        <div>
-          <Input
-            type="tel"
-            placeholder="03XXXXXXXXX"
-            {...register('phone', {
-              required: 'Phone number is required',
-              pattern: {
-                value: /^03[0-9]{9}$/,
-                message:
-                  'Enter valid Pakistani mobile number (e.g. 03001234567)'
-              }
-            })}
-          />
+          {/* Phone number */}
+          <Input type="tel" placeholder="03XXXXXXXXX" {...register('phone')} />
           {errors.phone && (
             <p className="text-sm text-destructive mt-1">
               {errors.phone.message}

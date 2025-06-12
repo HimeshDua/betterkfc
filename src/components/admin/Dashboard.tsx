@@ -8,49 +8,36 @@ import {Separator} from '@/components/ui/separator';
 import {formatDistanceToNow} from 'date-fns';
 import {useEffect, useState} from 'react';
 import {UserInterface} from '@/types/global-types';
+// import {useSessions} from '@/contexts/UserContext';
+// import {useRouter} from 'next/navigation';
 import Image from 'next/image';
 
-export default function AdminOrdersPage() {
+const orderRoute = '/api/admin/orders';
+export default function Dashboard({
+  userData,
+  isLoading
+}: {
+  userData: UserInterface[];
+  isLoading: boolean;
+}) {
   const [isClient, setIsClient] = useState(false);
-  const [users, setUsers] = useState<UserInterface[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(true);
-  const orderRoute = '/api/admin/orders';
+  const [users, setUsers] = useState<UserInterface[]>(userData || []);
+  const [loading, setLoading] = useState(isLoading || true);
+  // const [error, setError] = useState(true);
+  // const {user} = useSessions();
+  // const router = useRouter();
+  // const [updatedStatus, setUpdatedStatus] = useState('');
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(orderRoute);
-        const data = await res.json();
-        if (data.success) {
-          setUsers(data.users);
-        }
-        if (data.error) {
-          setError(data.error || 'Failed to fetch orders');
-        }
-      } catch (error: any) {
-        console.error(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div className="p-6 text-center text-muted-foreground">
-  //       Loading orders...
-  //     </div>
-  //   );
-  // }
-
-  if (error) {
-    return <div className="p-6 text-center text-muted-foreground">{error}</div>;
+  if (loading) {
+    return (
+      <div className="p-6 text-center text-muted-foreground">
+        Loading orders...
+      </div>
+    );
   }
 
   if (!users.length) {
@@ -71,10 +58,10 @@ export default function AdminOrdersPage() {
               <div>
                 <h2 className="text-xl font-semibold">{user.name}</h2>
                 <p className="text-sm text-muted-foreground">
-                  {user.email} — {user.phone}
+                  {user.email} — {user.phone || 'MYOB'}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Location: {user.location}
+                  Location: {user.location || 'Earth'}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Last order:{' '}
@@ -144,7 +131,7 @@ export default function AdminOrdersPage() {
                         ))}
                       </div>
 
-                      <div className="flex flex-wrap gap-2 pt-3">
+                      {/* <div className="flex flex-wrap gap-2 pt-3">
                         {['pending', 'preparing', 'delivered', 'cancelled'].map(
                           (status) => (
                             <Button
@@ -167,12 +154,14 @@ export default function AdminOrdersPage() {
                                   }
                                 );
                                 const data = await res.json();
+                                const newStatus = data?.order?.status || status;
+
                                 setUsers((prev) =>
                                   prev.map((u) => ({
                                     ...u,
                                     orders: u.orders.map((o) =>
                                       o._id === order._id
-                                        ? {...o, status: data.order.status}
+                                        ? {...o, status: newStatus}
                                         : o
                                     )
                                   }))
@@ -180,10 +169,10 @@ export default function AdminOrdersPage() {
                               }}
                             >
                               {status}
-                            </Button>
+                            </Button> 
                           )
                         )}
-                      </div>
+                      </div>*/}
                     </CardContent>
                   </Card>
                 ))}

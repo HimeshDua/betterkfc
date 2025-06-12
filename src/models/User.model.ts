@@ -6,9 +6,9 @@ const userSchema = new Schema<UserInterface>(
     name: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    phone: {type: String, required: true, unique: true},
+    phone: {type: String, unique: true},
     role: {type: String, enum: ['user', 'admin'], default: 'user'},
-    location: {type: String, required: true},
+    location: {type: String},
 
     orders: [{type: Schema.Types.ObjectId, ref: 'Order'}]
   },

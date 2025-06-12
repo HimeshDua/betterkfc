@@ -9,9 +9,10 @@ import {useRouter} from 'next/navigation';
 type SignInData = {
   email: string;
   password: string;
+  secret: string;
 };
 
-export default function SignInForm() {
+export default function AdminSignInForm() {
   const {
     register,
     handleSubmit,
@@ -95,6 +96,22 @@ export default function SignInForm() {
           {errors.password && (
             <p className="text-sm text-destructive mt-1">
               {errors.password.message}
+            </p>
+          )}
+        </div>
+
+        {/* Secret */}
+        <div>
+          <Input
+            type="password"
+            placeholder="Secret key"
+            {...register('secret', {
+              required: 'Secret key is required'
+            })}
+          />
+          {errors.secret && (
+            <p className="text-sm text-destructive mt-1">
+              {errors.secret.message}
             </p>
           )}
         </div>
