@@ -19,6 +19,9 @@ const categories = [
 
 export default function MenuPage() {
   const {addToCart} = useCart();
+  const hour = new Date().getHours();
+  const midNight = hour >= 0 && hour <= 4;
+
   return (
     <section className="flex-1 lg:w-3/5">
       {categories.map((category) => {
@@ -33,7 +36,11 @@ export default function MenuPage() {
           <section
             key={category.slug}
             id={category.slug}
-            className="mb-12 pt-4"
+            className={`mb-12 pt-4  ${
+              category.slug === 'mid' &&
+              !midNight &&
+              'pointer-events-none opacity-50'
+            }`}
           >
             <h2 className="text-3xl font-bold mb-6 text-foreground">
               {category.name}

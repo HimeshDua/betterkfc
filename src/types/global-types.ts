@@ -26,29 +26,39 @@ export type FormDataType = {
 
 // User Schema Interfaces
 export interface UserInterface {
+  _id: string;
   name: string;
   email: string;
   password: string;
   phone: string;
   role: 'user' | 'admin';
   location: string;
-  ordersId: Schema.Types.ObjectId[];
+  orders: OrderInterface[];
 }
 
 // Order Schema Interfaces
+// export interface OrderedProduct {
+//   productData: {
+//     slug: string;
+//     name: string;
+//     image: string;
+//     price: number;
+//   };
+//   quantity: number;
+//   // selectedOptions?: Record<string, any>;
+//   priceAtOrderTime: number;
+// }
+
 export interface OrderedProduct {
-  productData: {
-    slug: string;
-    name: string;
-    image: string;
-    price: number;
-  };
+  slug: string;
+  name: string;
+  image: string;
+  price: number;
   quantity: number;
-  // selectedOptions?: Record<string, any>;
-  priceAtOrderTime: number;
 }
 
 export interface OrderInterface {
+  _id: string;
   userId: Schema.Types.ObjectId;
   products: OrderedProduct[];
   deliveryAddress: string;

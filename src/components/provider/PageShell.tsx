@@ -21,7 +21,7 @@ async function PageShell({children, authValue, cartData}: PageShellProps) {
           <CartProvider initialCart={cartData}>
             <Header />
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </CartProvider>
         </UserProvider>
       </ThemeProvider>

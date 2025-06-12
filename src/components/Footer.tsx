@@ -10,7 +10,6 @@ export default function Footer() {
       <div className="container mx-auto px-4 space-y-10">
         {/* Top Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-primary-foreground/20 pb-10">
-          {/* Logo + Social */}
           <div className="space-y-4">
             <Link href="/">
               <Image

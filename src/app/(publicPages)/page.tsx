@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import ProductCardHome from '@/components/ProductCardHome';
 import ProductCardCircle from '@/components/ProductCardCircle';
 import CartModal from '@/components/CartModal';
@@ -27,6 +27,15 @@ export default function Home() {
     });
     setIsCartOpen(true);
   };
+
+  useEffect(() => {
+    if (
+      typeof window !== undefined &&
+      localStorage.getItem('theme') === undefined
+    ) {
+      localStorage.setItem('theme', 'system');
+    }
+  }, []);
 
   return (
     <>
