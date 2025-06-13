@@ -54,17 +54,6 @@ export default function AuthHeader() {
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </Button>
-
-            <div className="flex items-center gap-3">
-              <Link href="/signin">
-                <Button variant="outline" size="sm">
-                  Login
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button size="sm">Sign Up</Button>
-              </Link>
-            </div>
           </nav>
         </div>
 
@@ -103,7 +92,8 @@ export default function AuthHeader() {
             >
               {theme === 'dark' ? (
                 <>
-                  <Sun className="mr-2 h-4 w-4" /> Light Mode
+                  <Sun className="mr-2 h-4 w-4" />
+                  Light Mode
                 </>
               ) : (
                 <>
@@ -111,23 +101,6 @@ export default function AuthHeader() {
                 </>
               )}
             </Button>
-
-            <Link href="/signin" onClick={() => setMobileOpen(false)}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-base"
-              >
-                Login
-              </Button>
-            </Link>
-            <Link href="/signup" onClick={() => setMobileOpen(false)}>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-base"
-              >
-                Sign Up
-              </Button>
-            </Link>
           </div>
         </div>
       )}
