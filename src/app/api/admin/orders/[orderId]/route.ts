@@ -5,11 +5,11 @@ import Order from '@/models/Order.model';
 
 export async function PATCH(
   req: NextRequest,
-  context: {params: {orderId: string}}
+  context: {params: Promise<{orderId: string}>}
 ) {
   try {
     await connectToDB();
-    const {orderId} = context.params;
+    const {orderId} = await context.params;
     const {status} = await req.json();
 
     const updatedStatus = await Order.findByIdAndUpdate(
