@@ -16,7 +16,72 @@ export const categories = [
   {slug: 'mid', name: 'Midnight (Start at 12 am)'}
 ];
 
-export const exploremenu = [
+export const moreDeliciousDeals = [
+  {
+    slug: 'boneless-strips',
+    name: 'Boneless Strips',
+    price: 440,
+    image: '/images/products/boneless-strips.png',
+    category: 'everyday-value',
+    description:
+      '4 Zinger strips, dinner roll, regular fries, coleslaw, dip and regular soft drink.'
+  },
+  {
+    slug: 'twister',
+    name: 'Twister',
+    price: 440,
+    image: '/images/products/twister.png',
+    category: 'everyday-value',
+    description:
+      '2 zinger strips drizzled with KFC signature pepper mayo, tomatoes and fresh lettuce, all wrapped in a lightly toasted tortilla.'
+  },
+  {
+    slug: 'krunch-combo',
+    name: 'Krunch Combo',
+    price: 590,
+    image: '/images/products/krunch-combo.png',
+    category: 'everyday-value',
+    description:
+      'Enjoy a crispy crunchy chicken fillet on a bed of lettuce with a soft bun, topped with the signature sauce. Served with fries and drink.'
+  },
+  {
+    slug: 'chicken-n-chips',
+    name: 'Chicken & Chips',
+    price: 620,
+    image: '/images/products/chicken-n-chips.png',
+    category: 'everyday-value',
+    description:
+      '2 Pieces hot and crispy chicken, dinner roll, regular fries, and dip sauce.'
+  },
+  {
+    slug: '3-pcs-chicken',
+    name: '3 Pcs Chicken',
+    price: 690,
+    image: '/images/products/3-pcs-chicken.png',
+    category: 'everyday-value',
+    description: '3 Pieces of Hot and Crispy fried chicken.'
+  },
+  {
+    slug: 'crispy-box',
+    name: 'Crispy Box',
+    price: 710,
+    image: '/images/products/crispy-box.png',
+    category: 'signature',
+    description:
+      '2 Pieces hot and crispy chicken, regular fries, coleslaw and regular drink.'
+  },
+  {
+    slug: 'boneless-box',
+    name: 'Boneless Box',
+    price: 710,
+    image: '/images/products/boneless-box.png',
+    category: 'signature',
+    description:
+      '4 Zinger strips, dinner roll, regular fries, coleslaw, dip and regular soft drink.'
+  }
+];
+
+export const exploreMenu = [
   {
     slug: 'ramen-wings',
     name: 'Ramen Wings',
@@ -52,6 +117,41 @@ export const exploremenu = [
     category: 'everyday-value',
     description:
       'Enjoy a crispy crunchy chicken fillet on a bed of lettuce with a soft bun, topped with the signature sauce. Served with a drink.'
+  },
+  {
+    slug: 'zinger-burger',
+    name: 'Zinger Burger',
+    price: 600,
+    image: '/images/products/zinger-burger.png',
+    category: 'ala-cc',
+    description:
+      "Scrumptious whole muscle zinger with KFC's signature dressing with fresh lettuce bundled together in a sesame seeded bun."
+  },
+  {
+    slug: 'mighty-zinger',
+    name: 'Mighty Zinger',
+    price: 770,
+    image: '/images/products/mighty-zinger.png',
+    category: 'ala-cc',
+    description:
+      '2 whole muscle zingers with cheese and fresh lettuce, all bundled in a Mighty bun.'
+  },
+  {
+    slug: 'value-bucket',
+    name: 'Value Bucket',
+    price: 2050,
+    image: '/images/products/value-bucket.png',
+    category: 'sharing',
+    description: '9 Pieces hot and crispy chicken.'
+  },
+  {
+    slug: 'family-festival-1',
+    name: 'Family Festival 1',
+    price: 2190,
+    image: '/images/products/family-festival-1.png',
+    category: 'sharing',
+    description:
+      '4 Krunch burgers, 4 pieces Hot and Crispy Chicken, 2 Dinner Rolls, and 1.5 Liter drink.'
   }
 ];
 

@@ -2,18 +2,13 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import {useEffect, useState} from 'react';
-import ProductCardHome from '@/components/ProductCardHome';
-import ProductCardCircle from '@/components/ProductCardCircle';
-import CartModal from '@/components/CartModal';
-import {ProductInterface} from '@/types/global-types';
-import {exploremenu, newsLetterImages} from '@/data/data';
-import {useCart} from '@/contexts/CartContext';
+import {useEffect} from 'react';
+import HeroSlider from '@/components/home/ImageSlider';
+import DeliciousDealsSlider from '@/components/home/DeliciousDealsSlider';
+import ExploreMenuSlider from '@/components/home/ExploreMenuSlider';
+import {newsLetterImages} from '@/data/data';
 
 export default function Home() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const {cart, addToCart} = useCart();
-
   useEffect(() => {
     if (
       typeof window !== undefined &&
@@ -25,60 +20,9 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[72vh] overflow-hidden">
-        <Image
-          src="/images/hero-banner-2.png"
-          alt="Finger Lickin' Good!"
-          priority
-          fill
-          className="object-cover"
-        />
-      </section>
-
-      <CartModal
-        open={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cart}
-      />
-
-      <section className="container mx-auto py-16 px-4">
-        <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
-          Explore Menu
-        </h2>
-        <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
-        <div className="justify-center grid sm:grid-cols-2 lg:grid-cols-4">
-          {exploremenu.map((offer) => (
-            <ProductCardCircle
-              key={offer.slug}
-              slug={offer.slug}
-              image={offer.image}
-              name={offer.name}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="container mx-auto py-16 px-4">
-        <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
-          More Delicious Deals
-        </h2>
-        <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {exploremenu.map((offer: ProductInterface) => (
-            <ProductCardHome
-              key={offer.slug}
-              name={offer.name}
-              image={offer.image}
-              price={offer.price}
-              description={offer.description}
-              addToBucket={() => {
-                addToCart(offer);
-                setIsCartOpen(true);
-              }}
-            />
-          ))}
-        </div>
-      </section>
+      <HeroSlider />
+      <ExploreMenuSlider />
+      <DeliciousDealsSlider />
 
       <section className="py-16">
         <div className="container mx-auto px-4">
