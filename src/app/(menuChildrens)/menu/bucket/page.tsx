@@ -21,7 +21,7 @@ import {editCookies} from '@/lib/editCookie';
 
 const BucketPage: React.FC = () => {
   const {cart} = useCart();
-  const {user} = useSessions();
+  const {user, valid} = useSessions();
   const storedAddress = user?.location;
   const storedPhone = user?.phone;
   const currentCart = cart || [];
@@ -74,85 +74,95 @@ const BucketPage: React.FC = () => {
   }
 
   return (
-    // <main
-    //   className="sm:max-w-xl md:max-w-4xl  mx-auto flex flex-col gap-y-10 py-10  xl:max-w-4xl
-    //     [@media(min-width:581px)]:[@media(max-width:640px)]:w-[34rem]
-    //     [@media(min-width:481px)]:[@media(max-width:580px)]:w-[29rem]
-    //     [@media(min-width:421px)]:[@media(max-width:480px)]:w-[26rem]
-    //     [@media(max-width:420px)]:w-[20rem]
-    //     [@media(max-width:1200px)]:w-[48rem]
-    //     [@media(max-width:1150px)]:w-[46rem]
-    //     [@media(min-width:1024px)]:[@media(max-width:1060px)]:w-[43rem]
-    // "
     <main className="mx-auto flex flex-col gap-y-10 py-10">
       <h1 className="text-3xl sm:text-4xl font-bold text-center text-primary mb-4">
         Your Bucket
       </h1>
-
-      <Card className="w-full mx-auto">
-        <CardHeader>
-          <CardTitle>Delivery Details</CardTitle>
-          <CardDescription>
-            Please provide your delivery information.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {error && (
-            <Alert variant="destructive" className="mb-4">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-          {success && (
-            <Alert variant="default" className="mb-4 border-green-500">
-              <AlertDescription className="text-green-500">
-                Order placed successfully!
-              </AlertDescription>
-            </Alert>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <Input
-              type="text"
-              placeholder="Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              aria-label="Delivery Address"
-              disabled={loading}
-            />
-            <Input
-              type="tel"
-              placeholder="Phone Number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              aria-label="Phone Number"
-              disabled={loading}
-            />
-          </div>
-        </CardContent>
-        <Separator />
-        <CardFooter className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4">
-          <div className="space-y-1 text-sm">
-            <p>
-              Total Items:{' '}
-              <span className="font-medium text-foreground">{totalItems}</span>
-            </p>
-            <p>
-              Total Price:{' '}
-              <span className="font-medium text-foreground">
-                Rs {totalPrice.toFixed(2)}
-              </span>
-            </p>
-          </div>
-          <Button
-            size="lg"
-            className="w-full sm:w-auto"
-            disabled={currentCart.length === 0 || loading}
-            aria-label="Place Order"
-            onClick={handleSubmit}
-          >
-            {loading ? 'Placing Order...' : 'Place Order'}
-          </Button>
-        </CardFooter>
-      </Card>
+      {!user && !valid ? (
+        <Card className="w-full mx-auto">
+          <CardHeader>
+            <CardTitle className="text-3xl">Unauthenticated</CardTitle>
+            <CardDescription className="text-lg">
+              Signin to checkout
+            </CardDescription>
+            <CardContent className="flex flex-col px-0 mt-2 gap-3">
+              <Button variant="default" asChild>
+                <Link href="/signin">Sign In</Link>
+              </Button>
+              <Button variant="default" asChild>
+                <Link href="/signup">Sign Up</Link>
+              </Button>
+            </CardContent>
+          </CardHeader>
+        </Card>
+      ) : (
+        <Card className="w-full mx-auto">
+          <CardHeader>
+            <CardTitle>Delivery Details</CardTitle>
+            <CardDescription>
+              Please provide your delivery information.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {error && (
+              <Alert variant="destructive" className="mb-4">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            {success && (
+              <Alert variant="default" className="mb-4 border-green-500">
+                <AlertDescription className="text-green-500">
+                  Order placed successfully!
+                </AlertDescription>
+              </Alert>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <Input
+                type="text"
+                placeholder="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                aria-label="Delivery Address"
+                disabled={loading}
+              />
+              <Input
+                type="tel"
+                placeholder="Phone Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                aria-label="Phone Number"
+                disabled={loading}
+              />
+            </div>
+          </CardContent>
+          <Separator />
+          <CardFooter className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4">
+            <div className="space-y-1 text-sm">
+              <p>
+                Total Items:{' '}
+                <span className="font-medium text-foreground">
+                  {totalItems}
+                </span>
+              </p>
+              <p>
+                Total Price:{' '}
+                <span className="font-medium text-foreground">
+                  Rs {totalPrice.toFixed(2)}
+                </span>
+              </p>
+            </div>
+            <Button
+              size="lg"
+              className="w-full sm:w-auto"
+              disabled={currentCart.length === 0 || loading}
+              aria-label="Place Order"
+              onClick={handleSubmit}
+            >
+              {loading ? 'Placing Order...' : 'Place Order'}
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
 
       <section className="w-full">
         <h2 className="text-2xl font-semibold mb-6">Your Items</h2>
@@ -167,7 +177,9 @@ const BucketPage: React.FC = () => {
             {currentCart.map((item) => (
               <Card
                 key={item.slug}
-                className="flex-shrink-0 w-64 sm:w-72 rounded-xl shadow-md border overflow-hidden"
+                className={`flex-shrink-0 w-64 sm:w-72 rounded-xl shadow-md border overflow-hidden ${
+                  !user && !valid && 'pointer-events-none opacity-60'
+                }`}
               >
                 <Link href={item.slug}>
                   <Image
