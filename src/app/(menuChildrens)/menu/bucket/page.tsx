@@ -74,17 +74,17 @@ const BucketPage: React.FC = () => {
   }
 
   return (
-    <main
-      className="sm:max-w-xl md:max-w-4xl  mx-auto flex flex-col gap-y-10 py-10  xl:max-w-4xl
-        [@media(min-width:581px)]:[@media(max-width:640px)]:w-[34rem]
-        [@media(min-width:481px)]:[@media(max-width:580px)]:w-[29rem]
-        [@media(min-width:421px)]:[@media(max-width:480px)]:w-[26rem]
-        [@media(max-width:420px)]:w-[20rem]
-        [@media(max-width:1200px)]:w-[48rem]
-        [@media(max-width:1150px)]:w-[46rem]
-        [@media(min-width:1024px)]:[@media(max-width:1060px)]:w-[43rem]
-    "
-    >
+    // <main
+    //   className="sm:max-w-xl md:max-w-4xl  mx-auto flex flex-col gap-y-10 py-10  xl:max-w-4xl
+    //     [@media(min-width:581px)]:[@media(max-width:640px)]:w-[34rem]
+    //     [@media(min-width:481px)]:[@media(max-width:580px)]:w-[29rem]
+    //     [@media(min-width:421px)]:[@media(max-width:480px)]:w-[26rem]
+    //     [@media(max-width:420px)]:w-[20rem]
+    //     [@media(max-width:1200px)]:w-[48rem]
+    //     [@media(max-width:1150px)]:w-[46rem]
+    //     [@media(min-width:1024px)]:[@media(max-width:1060px)]:w-[43rem]
+    // "
+    <main className="mx-auto flex flex-col gap-y-10 py-10">
       <h1 className="text-3xl sm:text-4xl font-bold text-center text-primary mb-4">
         Your Bucket
       </h1>
@@ -163,7 +163,7 @@ const BucketPage: React.FC = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="flex overflow-x-auto max-w-sm sm:max-w-4xl  space-x-4 pb-4 -mx-4 px-4 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          <div className="flex overflow-x-auto space-x-4 pb-4 -mx-4 px-4 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             {currentCart.map((item) => (
               <Card
                 key={item.slug}

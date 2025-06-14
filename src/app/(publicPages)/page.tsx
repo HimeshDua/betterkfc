@@ -43,6 +43,23 @@ export default function Home() {
 
       <section className="container mx-auto py-16 px-4">
         <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
+          Explore Menu
+        </h2>
+        <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
+        <div className="justify-center grid sm:grid-cols-2 lg:grid-cols-4">
+          {exploremenu.map((offer) => (
+            <ProductCardCircle
+              key={offer.slug}
+              slug={offer.slug}
+              image={offer.image}
+              name={offer.name}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="container mx-auto py-16 px-4">
+        <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
           More Delicious Deals
         </h2>
         <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
@@ -58,23 +75,6 @@ export default function Home() {
                 addToCart(offer);
                 setIsCartOpen(true);
               }}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="container mx-auto py-16 px-4">
-        <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
-          Explore Menu
-        </h2>
-        <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
-        <div className="justify-center grid sm:grid-cols-2 lg:grid-cols-4">
-          {exploremenu.map((offer) => (
-            <ProductCardCircle
-              key={offer.slug}
-              slug={offer.slug}
-              image={offer.image}
-              name={offer.name}
             />
           ))}
         </div>
