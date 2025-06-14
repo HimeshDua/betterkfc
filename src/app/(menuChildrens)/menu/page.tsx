@@ -23,7 +23,7 @@ export default function MenuPage() {
   const midNight = hour >= 0 && hour <= 4;
 
   return (
-    <section className="flex-1 lg:w-3/5">
+    <section>
       {categories.map((category) => {
         if (category.slug === 'all') return null;
 
