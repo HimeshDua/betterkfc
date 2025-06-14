@@ -4,23 +4,25 @@ import Link from 'next/link';
 import {useState} from 'react';
 import {usePathname} from 'next/navigation';
 import {Button} from '@/components/ui/button';
-import {Menu, X, Sun, Moon} from 'lucide-react';
+import {Menu, X, Sun, Moon, ShoppingCart} from 'lucide-react';
 import {useSessions} from '@/contexts/UserContext';
 import {cn} from '@/lib/utils';
 import {useTheme} from 'next-themes';
 import {categories, navLinks} from '@/data/data';
+import {useCart} from '@/contexts/CartContext';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const {user, valid} = useSessions();
   const {theme, setTheme} = useTheme();
+  const {cart} = useCart();
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
-  const path = usePathname();
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   return (
     <header className="w-full border-b bg-background shadow-sm sticky top-0 z-50">
@@ -60,13 +62,23 @@ export default function Header() {
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </Button>
 
+            {/* Cart Button */}
+            <Link href="/menu/bucket">
+              <Button variant="ghost" size="icon" className="relative">
+                <ShoppingCart size={20} />
+                {totalItems > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Button>
+            </Link>
+
             {user ? (
               <span className="text-sm font-semibold text-primary">
-                {user.role === 'admin' ? (
-                  <Link href={'/admin'}>{user.name}</Link>
-                ) : (
-                  <Link href={'/profile'}>{user.name}</Link>
-                )}
+                <Link href={user.role === 'admin' ? '/admin' : '/profile'}>
+                  {user.name}
+                </Link>
               </span>
             ) : (
               <div className="flex items-center gap-3">
@@ -81,7 +93,8 @@ export default function Header() {
               </div>
             )}
           </nav>
-          {path === '/menu' && (
+
+          {pathname === '/menu' && (
             <div className="w-full flex justify-end mt-2 overflow-x-auto no-scrollbar">
               <nav className="flex gap-4">
                 {categories.map((category) => (
@@ -145,6 +158,22 @@ export default function Header() {
                 </>
               )}
             </Button>
+
+            {/* Cart Button (Mobile) */}
+            <Link href="/menu/bucket" onClick={() => setMobileOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-base relative"
+              >
+                <ShoppingCart size={18} className="mr-2" />
+                View Cart
+                {totalItems > 0 && (
+                  <span className="absolute top-0 right-4 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Button>
+            </Link>
 
             {valid ? (
               <p className="text-primary font-semibold text-base px-2 mt-2">

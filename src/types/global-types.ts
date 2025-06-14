@@ -5,16 +5,8 @@ export interface ProductInterface {
   name: string;
   price: number;
   image: string;
-  category:
-    | 'all'
-    | 'promotion'
-    | 'everyday-value'
-    | 'ala-cc'
-    | 'signature'
-    | 'sharing'
-    | 's-n-b'
-    | 'mid'
-    | string;
+  description: string;
+  category: string;
   quantity?: number;
 }
 

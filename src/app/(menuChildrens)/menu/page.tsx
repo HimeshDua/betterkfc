@@ -52,8 +52,8 @@ export default function MenuPage() {
                   key={item.slug}
                   {...item}
                   onAdd={async () => {
-                    await addToCookieCart(item);
                     addToCart(item);
+                    await addToCookieCart(item);
                   }}
                 />
               ))}

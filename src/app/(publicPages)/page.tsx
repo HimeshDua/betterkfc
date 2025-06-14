@@ -8,25 +8,11 @@ import ProductCardCircle from '@/components/ProductCardCircle';
 import CartModal from '@/components/CartModal';
 import {ProductInterface} from '@/types/global-types';
 import {exploremenu, newsLetterImages} from '@/data/data';
+import {useCart} from '@/contexts/CartContext';
 
 export default function Home() {
-  const [cartItems, setCartItems] = useState<ProductInterface[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const addToCart = (product: ProductInterface) => {
-    setCartItems((prev) => {
-      const existing = prev.find((item) => item.slug === product.slug);
-      if (existing) {
-        return prev.map((item) =>
-          item.slug === product.slug
-            ? {...item, quantity: (item.quantity ?? 1) + 1}
-            : item
-        );
-      }
-      return [...prev, {...product, quantity: 1}];
-    });
-    setIsCartOpen(true);
-  };
+  const {cart, addToCart} = useCart();
 
   useEffect(() => {
     if (
@@ -52,8 +38,30 @@ export default function Home() {
       <CartModal
         open={isCartOpen}
         onClose={() => setIsCartOpen(false)}
-        items={cartItems}
+        items={cart}
       />
+
+      <section className="container mx-auto py-16 px-4">
+        <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
+          More Delicious Deals
+        </h2>
+        <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {exploremenu.map((offer: ProductInterface) => (
+            <ProductCardHome
+              key={offer.slug}
+              name={offer.name}
+              image={offer.image}
+              price={offer.price}
+              description={offer.description}
+              addToBucket={() => {
+                addToCart(offer);
+                setIsCartOpen(true);
+              }}
+            />
+          ))}
+        </div>
+      </section>
 
       <section className="container mx-auto py-16 px-4">
         <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
@@ -67,25 +75,6 @@ export default function Home() {
               slug={offer.slug}
               image={offer.image}
               name={offer.name}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="container mx-auto py-16 px-4">
-        <h2 className="uppercase text-3xl md:text-4xl font-bold text-start mb-4">
-          More Delicious Deals
-        </h2>
-        <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {exploremenu.map((offer) => (
-            <ProductCardHome
-              key={offer.slug}
-              name={offer.name}
-              image={offer.image}
-              price={offer.price}
-              description={offer.description}
-              addToBucket={() => addToCart(offer)}
             />
           ))}
         </div>
