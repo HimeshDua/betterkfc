@@ -8,29 +8,28 @@ type ProductData = {
   image: string;
 };
 
-export default function ProductCardCircle({slug, name, image}: ProductData) {
+export default function ProductCardUnique({slug, name, image}: ProductData) {
   return (
-    <Link
-      className="rounded-t-full rounded-bl-full h-64 w-64"
-      href={`/menu/${slug}`}
-      prefetch
-    >
-      <Card className="flex flex-col items-center justify-start gap-0 rounded-t-full rounded-bl-full h-64 w-64">
-        <div className="flex items-center justify-center w-52 h-52 mt-4 mb-2 relative">
+    <div>
+      <Card className="group mx-auto h-64 w-64 rounded-t-full rounded-bl-full shadow-md transition-transform duration-200 hover:shadow-lg flex flex-col items-center justify-start">
+        <div className="relative w-48 h-48 mt-4">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-cover rounded-full"
-            sizes="208px"
+            className="object-cover rounded-full border-4 border-background group-hover:border-primary transition-all duration-200"
+            sizes="192px"
             priority
           />
         </div>
-        <span className="text-center text-base font-semibold px-2">
-          {name}
-          <div className="w-16 h-1 bg-red-600 rounded-full mt-1" />
-        </span>
+
+        <div className="mt-2 text-center px-2 bg-red-5000">
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
+            {name}
+          </h3>
+          <div className="w-12 h-1 mt-1 bg-primary mx-auto rounded-full" />
+        </div>
       </Card>
-    </Link>
+    </div>
   );
 }

@@ -155,16 +155,50 @@ export const exploreMenu = [
   }
 ];
 
+export const deals = [
+  {
+    slug: 'wow-box',
+    name: 'Wow Box',
+    price: 1050,
+    image: '/images/products/wow-box.png',
+    description:
+      'Zinger burger, hot and crispy piece, regular fries, coleslaw and regular soft drink.'
+  },
+
+  {
+    slug: 'crispy-duo-box',
+    name: 'Crispy Duo Box',
+    price: 1350,
+    image: '/images/products/crispy-duo-box.png',
+    description: '5 Chicken pieces, large fries and 2 regular soft drinks.'
+  },
+  {
+    slug: 'cheesy-chicken-loaded-fries',
+    name: 'Cheesy Chicken Loaded Fries',
+    price: 650,
+    image: '/images/products/cheesy-chicken-loaded-fries.png',
+    description:
+      'Crispy fries loaded with succulent chicken pieces and a generous topping of melted cheese.'
+  },
+  {
+    slug: 'midnight-deal-2',
+    name: 'Midnight Deal 2',
+    price: 610,
+    image: '/images/products/midnight-deal-2.png',
+    description: '2 Krunch burgers with 2 regular soft drinks.'
+  }
+];
+
 export const newsLetterImages = [
   {
     src: '/images/newsletters/fingers.png',
     alt: 'Delicious KFC chicken fingers',
-    link: '/menu/fingers'
+    link: '/menu/fries'
   },
   {
     src: '/images/newsletters/operation.png',
     alt: 'KFC operation behind the scenes',
-    link: '/about/operations'
+    link: '/about'
   },
   {
     src: '/images/newsletters/playstore.webp',
@@ -175,7 +209,7 @@ export const newsLetterImages = [
   {
     src: '/images/hero-banner-2.png',
     alt: 'Another great offer',
-    link: '/deals'
+    link: '/menu#promotion'
   }
 ];
 

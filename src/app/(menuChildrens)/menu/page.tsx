@@ -4,7 +4,6 @@ import {products} from '@/data/data';
 
 const categories = [
   {slug: 'all', name: 'All Products'},
-  {slug: 'favorites', name: 'Favorites'},
   {slug: 'promotion', name: 'Promotion'},
   {slug: 'everyday-value', name: 'Everyday Value'},
   {slug: 'ala-cc', name: 'Ala-Carte-&-Combos'},

@@ -1,172 +1,82 @@
-// pages/deals.js (or app/deals/page.js for Next.js 13+)
-'use client';
-
-import Image from 'next/image';
-import Link from 'next/link';
+import {Card, CardContent} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
+import Image from 'next/image';
+import {deals} from '@/data/data';
+import Link from 'next/link';
 
 export default function DealsPage() {
-  const deals = [
-    {
-      slug: 1,
-      title: 'Zinger Box Meal',
-      description:
-        'The classic Zinger, regular fries, 1 pc chicken, and a drink. A complete meal!',
-      image: '/images/deal-zinger-box.jpg', // Placeholder
-      price: 'PKR 999', // Example price
-      buttonText: 'Order Now',
-      link: '/menu/zinger-box-meal',
-      new: true // Mark as new deal
-    },
-    {
-      slug: 2,
-      title: 'Wow Combo',
-      description: '1 Zinger, 1 Pc Chicken, 1 Regular Fries, 1 Regular Drink',
-      image: '/images/deal-wow-combo.jpg', // Placeholder
-      price: 'PKR 1250',
-      buttonText: 'Add to Cart',
-      link: '/menu/wow-combo'
-    },
-    {
-      slug: 3,
-      title: 'Family Feast 4 Pc',
-      description:
-        '4 pieces of our famous fried chicken, 2 large fries, 2 drinks. Perfect for small families.',
-      image: '/images/deal-family-4pc.jpg', // Placeholder
-      price: 'PKR 2100',
-      buttonText: 'Order Now',
-      link: '/menu/family-feast-4pc'
-    },
-    {
-      slug: 4,
-      title: 'Twister Meal',
-      description: 'Our delicious Twister wrap, regular fries, and a drink.',
-      image: '/images/deal-twister-meal.jpg', // Placeholder
-      price: 'PKR 750',
-      buttonText: 'Order Now',
-      link: '/menu/twister-meal'
-    },
-    {
-      slug: 5,
-      title: 'Hot Wings Bucket (10 Pc)',
-      description: '10 fiery Hot Wings for an extra kick! Comes with a dip.',
-      image: '/images/deal-hotwings-10pc.jpg', // Placeholder
-      price: 'PKR 900',
-      buttonText: 'Order Now',
-      link: '/menu/hot-wings-bucket',
-      seasonal: true // Mark as seasonal
-    },
-    {
-      slug: 6,
-      title: 'Mega Deal',
-      description:
-        '2 Zinger Burgers, 2 Pc Chicken, 4 Hot Wings, Large Fries & 1.5L Drink.',
-      image: '/images/deal-mega-deal.jpg', // Placeholder
-      price: 'PKR 2800',
-      buttonText: 'Order Now',
-      link: '/menu/mega-deal'
-    }
-  ];
-
   return (
-    <>
-      {/* Hero Banner for Deals */}
-      <section
-        className="relative w-full h-[40vh] md:h-[50vh] bg-cover bg-center"
-        style={{backgroundImage: "url('/images/deals-hero-banner.jpg')"}}
-      >
-        <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-          <div className="text-center text-white px-4">
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-lg">
-              Deals & Promotions
-            </h1>
-            <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md">
-              Grab your favorites for less! Discover our latest irresistible
-              offers.
-            </p>
-            <div className="mt-8">
-              <Link href="/menu">
-                <Button className="bg-red-600 hover:bg-red-700 px-8 py-4 text-lg md:text-xl rounded-full shadow-lg transition-transform transform hover:scale-105">
-                  View Full Menu
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section className="container mx-auto py-16 px-4">
+      <div className="text-center max-w-4xl mx-auto mb-16">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-primary mb-6 leading-tight">
+          Today's Hot Deals
+        </h1>
+        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+          Craving something delicious? Check out our limited-time offers and
+          enjoy your favorites at unbeatable prices!
+        </p>
+      </div>
 
-      {/* Deals Grid Section */}
-      <section className="container mx-auto py-16 px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800">
-          Current Offers
-        </h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {deals.map((deal) => (
-            <div
-              key={deal.slug}
-              className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white border border-gray-200"
-            >
-              <div className="relative w-full h-60 sm:h-52 overflow-hidden">
-                <Image
-                  src={deal.image}
-                  alt={deal.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 group-hover:scale-105"
-                />
-                {deal.new && (
-                  <span className="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                    NEW!
-                  </span>
-                )}
-                {deal.seasonal && (
-                  <span className="absolute top-3 right-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                    SEASONAL
-                  </span>
-                )}
-              </div>
-              <div className="p-6 text-center">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-                  {deal.title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed mb-4">
+      {/* Deals Cards Grid */}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {deals.map((deal) => (
+          <Card className="relative">
+            <div className="relative w-full h-48 sm:h-56 flex items-center justify-center">
+              <span className="absolute -top-6 flex flex-row gap-2">
+                <span className="w-3.5 bg-primary h-6"></span>
+                <span className="w-3.5 bg-primary h-6"></span>
+                <span className="w-3.5 bg-primary h-6"></span>
+              </span>
+
+              <Image
+                src={deal.image}
+                alt={deal.name}
+                width={200}
+                height={150}
+                className="object-contain max-w-[90%] max-h-[90%]"
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                loading="lazy"
+              />
+            </div>
+            <CardContent className=" text-center flex flex-col flex-grow">
+              <h3 className="text-xl font-semibold mb-2 text-foreground">
+                {deal.name}
+              </h3>
+              {deal.description && (
+                <p className="text-sm line-clamp-2 text-muted-foreground mb-2">
                   {deal.description}
                 </p>
-                <p className="text-red-600 font-bold text-3xl mb-6">
-                  {deal.price}
+              )}
+              {deal.price && (
+                <p className="text-lg text-start font-bold  mb-4">
+                  Rs. {deal.price}
                 </p>
-                <Link href={deal.link}>
-                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-full text-lg font-semibold shadow-md">
-                    {deal.buttonText}
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-        {deals.length === 0 && (
-          <div className="text-center py-10 text-gray-600 text-xl">
-            No deals available at the moment. Please check back soon!
-          </div>
-        )}
-      </section>
+              )}
+              <Link href={`/menu/${deal.slug}`}>
+                <Button className="mt-auto w-full">View Product</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
-      {/* Call to Action: Find a Store */}
-      <section className="bg-gray-100 py-16 text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
-            Ready to Grab Your Deal?
-          </h2>
-          <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Find your nearest KFC restaurant to enjoy these amazing offers!
-          </p>
-          <Link href="/locations">
-            <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl rounded-full shadow-lg transition-transform transform hover:scale-105">
-              Find a Store
-            </Button>
-          </Link>
-        </div>
-      </section>
-    </>
+      <div className="text-center max-w-xl mx-auto py-12">
+        <h3 className="text-3xl font-bold text-foreground mb-4">
+          Want More Options?
+        </h3>
+        <p className="text-muted-foreground text-base mb-6">
+          Explore our full menu for a wider variety of delicious meals and
+          customize your perfect order.
+        </p>
+        <Link href="/menu">
+          <Button
+            variant="outline"
+            className="text-lg px-8 py-4 border-2 font-semibold"
+          >
+            View Full Menu
+          </Button>
+        </Link>
+      </div>
+    </section>
   );
 }

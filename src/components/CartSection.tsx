@@ -66,13 +66,15 @@ const CartSection = () => {
               <Card key={item.slug} className="overflow-hidden">
                 <CardContent className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <Image
-                      height={50}
-                      width={50}
-                      alt={item.name}
-                      src={item.image}
-                      className="rounded object-cover w-12 h-12"
-                    />
+                    <Link href={`/menu/${item.slug}`} className="bg-accent/60">
+                      <Image
+                        height={50}
+                        width={50}
+                        alt={item.name}
+                        src={item.image}
+                        className="rounded object-cover w-12 h-12"
+                      />
+                    </Link>
                     <div>
                       <p className="font-semibold">{item.name}</p>
                       <div className="flex gap-x-2 text-lg font-semibold text-muted-foreground">
@@ -136,7 +138,7 @@ const CartSection = () => {
 
   return (
     <>
-      {/* 👉 Bottom Sheet for mobile */}
+      {/* Bottom Sheet for mobile */}
       <div className="fixed bottom-4 right-4 lg:hidden z-50">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
@@ -153,7 +155,7 @@ const CartSection = () => {
         </Sheet>
       </div>
 
-      {/* 👉 Sidebar for desktop */}
+      {/* Sidebar for desktop */}
       <div className="hidden lg:block w-full md:w-80 xl:w-96 h-[88vh] sticky top-18">
         <Card className="h-full">{CartContent}</Card>
       </div>

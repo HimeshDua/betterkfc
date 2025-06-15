@@ -1,7 +1,7 @@
 'use client';
 
 import Slider from 'react-slick';
-import ProductCardCircle from '@/components/ProductCardCircle';
+import ProductCardUnique from '@/components/ProductCardCircle';
 import {ArrowLeft, ArrowRight} from 'lucide-react';
 import {exploreMenu} from '@/data/data';
 
@@ -30,7 +30,7 @@ export default function ExploreMenuSlider() {
     arrows: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
@@ -47,7 +47,13 @@ export default function ExploreMenuSlider() {
         }
       },
       {
-        breakpoint: 640,
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 620,
         settings: {
           slidesToShow: 1
         }
@@ -62,10 +68,10 @@ export default function ExploreMenuSlider() {
       </h2>
       <div className="w-[5rem] h-1 bg-red-600 mb-8"></div>
 
-      <Slider {...settings} className="relative">
+      <Slider {...settings} className="relative m-auto">
         {exploreMenu.map((offer) => (
-          <div key={offer.slug} className="px-2">
-            <ProductCardCircle
+          <div key={offer.slug} className="p-2 py-6">
+            <ProductCardUnique
               slug={offer.slug}
               image={offer.image}
               name={offer.name}
