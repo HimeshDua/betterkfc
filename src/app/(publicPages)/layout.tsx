@@ -33,7 +33,7 @@ export const metadata = {
 export default async function RootLayout({children}: {children: ReactNode}) {
   const authValue: UserContextValueType = await verifyAuth(['user', 'admin']);
   const cartData = await getCartFromCookie();
-  console.log('authValue: ', authValue);
+  // console.log('authValue: ', authValue);
 
   // console.log('cartdasta: ', cartData);
 

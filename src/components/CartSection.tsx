@@ -118,11 +118,11 @@ const CartSection = () => {
   return (
     <>
       {/* Bottom Sheet for mobile */}
-      <div className="fixed bottom-4 right-4 lg:hidden z-50">
+      <div className="fixed bottom-4 right-8 lg:hidden z-50">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <Button size="lg" className="rounded-full shadow-lg px-6">
-              🛒 Your Bucket
+            <Button size="lg" className="rounded-full shadow-lg">
+              Your Bucket
             </Button>
           </SheetTrigger>
           <SheetContent side="bottom" className="h-[80vh] overflow-y-auto p-0">

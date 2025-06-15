@@ -45,9 +45,10 @@ export default function Footer() {
                 >
                   <Image
                     src={`/images/icons/${icon}`}
+                    className="scale-75"
                     alt={name}
-                    width={20}
-                    height={20}
+                    width={50}
+                    height={50}
                   />
                 </Link>
               ))}
@@ -143,10 +144,12 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:justify-between items-center text-xs text-primary-foreground/60 pt-4 gap-2">
           <p>&copy; {currentYear} KFC. All rights reserved</p>
           <p className="text-primary font-semibold">
-            Powered by{' '}
-            <span className="underline hover:opacity-80 cursor-pointer">
-              Simplex Technology Solutions
-            </span>
+            Created by{' '}
+            <a href="https://github.com/HimeshDua">
+              <span className="underline hover:opacity-80 cursor-pointer">
+                Himesh Dua
+              </span>
+            </a>
           </p>
         </div>
       </div>

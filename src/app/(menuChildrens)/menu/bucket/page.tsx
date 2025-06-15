@@ -1,10 +1,10 @@
 'use client';
 
-import React, {useMemo, useState} from 'react';
-import {useCart} from '@/contexts/CartContext'; // Assuming this path is correct
+import React, {useState} from 'react';
+import {useCart} from '@/contexts/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
-import {ArrowLeft} from 'lucide-react'; // For the back arrow icon
+import {ArrowLeft} from 'lucide-react';
 import {
   Card,
   CardHeader,
@@ -15,26 +15,19 @@ import {
 } from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
-// Separator is removed for consistent design
 import {Alert, AlertDescription} from '@/components/ui/alert';
-import {useSessions} from '@/contexts/UserContext'; // Assuming this path is correct
-import {editCookies} from '@/lib/editCookie'; // Assuming this path is correct
+import {useSessions} from '@/contexts/UserContext';
+import {editCookies} from '@/lib/editCookie';
 
 const BucketPage: React.FC = () => {
-  const {cart, removeFromCart, updateQuantity, clearCart} = useCart();
+  const {cart, clearCart, completeTotals} = useCart();
   const {user, valid} = useSessions();
   const storedAddress = user?.location;
   const storedPhone = user?.phone;
   const currentCart = cart || [];
 
-  const totalItems = useMemo(
-    () => currentCart.reduce((sum, i) => sum + (i.quantity ?? 1), 0),
-    [currentCart]
-  );
-  const totalPrice = useMemo(
-    () => currentCart.reduce((sum, i) => sum + i.price * (i.quantity ?? 1), 0),
-    [currentCart]
-  );
+  const {totalItems, totalPrice} = completeTotals;
+
   const [address, setAddress] = useState(storedAddress ?? '');
   const [phone, setPhone] = useState(storedPhone ?? '');
   const [loading, setLoading] = useState(false);
@@ -72,26 +65,19 @@ const BucketPage: React.FC = () => {
 
   return (
     <div className="bg-background text-foreground min-h-[calc(100vh-64px)]">
-      {/* Top Bar with Back Arrow and Title */}
-      <div className="sticky top-0 z-20 bg-background py-4 px-4 sm:px-6 md:py-6 border-b border-border flex items-center justify-center shadow-sm">
-        <Link
-          href="/menu" // Assuming back to menu or previous page
-          className="absolute left-4 p-2 rounded-full hover:bg-accent/20 transition-colors"
-          aria-label="Go back"
-        >
-          <ArrowLeft className="h-6 w-6 text-foreground" />
-        </Link>
-        <h1 className="text-xl md:text-2xl font-bold text-foreground">
-          Your Bucket
-        </h1>
-      </div>
-
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl space-y-8">
-        {/* Hero Section */}
-        <section className="text-center max-w-3xl mx-auto mb-8">
+        <section className="relative text-center max-w-3xl mx-auto mb-8">
+          <Link
+            href="/menu"
+            className="absolute -left-6 p-2 rounded-full hover:bg-accent/20 transition-colors"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="h-6 w-6 text-foreground" />
+          </Link>
           <h2 className="text-4xl md:text-5xl font-extrabold text-primary leading-tight">
             Review Your Order
           </h2>
+
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mt-2">
             Confirm your delicious selections and delivery details before
             placing your order.
@@ -219,11 +205,11 @@ const BucketPage: React.FC = () => {
               </CardContent>
             </Card>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="flex overflow-x-auto space-x-6 pb-4 -mx-4 px-4 scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
               {currentCart.map((item) => (
                 <Card
                   key={item.slug}
-                  className={`rounded-xl shadow-md border border-border overflow-hidden bg-card ${
+                  className={`flex-shrink-0 w-64 rounded-xl shadow-md border border-border overflow-hidden bg-card ${
                     !user && !valid && 'pointer-events-none opacity-60'
                   }`}
                 >
@@ -262,32 +248,6 @@ const BucketPage: React.FC = () => {
                       Subtotal: Rs{' '}
                       {(item.price * (item.quantity ?? 1)).toFixed(2)}
                     </p>
-
-                    <div className="flex justify-between items-center mt-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => updateQuantity(item.slug, -1)}
-                        disabled={(item.quantity || 1) <= 1}
-                      >
-                        -
-                      </Button>
-                      <span className="text-lg font-bold">{item.quantity}</span>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => updateQuantity(item.slug, +1)}
-                      >
-                        +
-                      </Button>
-                      <Button
-                        variant="destructive"
-                        size="sm"
-                        onClick={() => removeFromCart(item.slug)}
-                      >
-                        Remove
-                      </Button>
-                    </div>
                   </CardContent>
                 </Card>
               ))}
