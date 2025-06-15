@@ -3,30 +3,26 @@ import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const developer = 'Himesh Dua'; // e.g., 'Developed by XYZ'
 
   return (
-    <footer className="bg-primary text-primary-foreground py-10 md:py-14">
+    <footer className="bg-primary dark:bg-[#202020] text-primary-foreground py-10 md:py-14">
       <div className="container mx-auto px-4 space-y-10">
-        {/* Top Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-primary-foreground/20 pb-10">
-          <div className="space-y-4">
-            <Link href="/">
-              <Image
-                src="/images/logo-2.svg"
-                alt="KFC Pakistan Logo"
-                width={100}
-                height={50}
-                className="h-10 w-auto"
-              />
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 pb-10 border-b border-primary-foreground/20">
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <Link href="/" className="flex justify-center md:justify-start">
+              <h1 className="text-3xl italic text-nowrap font-bold text-primary relative">
+                KFC
+                <span className="absolute -bottom-1 -right-4 text-xs font-semibold text-muted-foreground tracking-wide">
+                  better
+                </span>
+              </h1>
             </Link>
-
-            <div className="flex gap-3 mt-4">
+            <div className="flex gap-4">
               {[
                 {
-                  name: 'Facebook',
-                  icon: 'facebook.svg',
-                  link: 'https://facebook.com/kfcpakistanofficial'
+                  name: 'YouTube',
+                  icon: 'youtube.svg',
+                  link: 'https://youtube.com/kfcpakistan6047'
                 },
                 {
                   name: 'Instagram',
@@ -34,9 +30,9 @@ export default function Footer() {
                   link: 'https://instagram.com/kfcpakistanofficial'
                 },
                 {
-                  name: 'Twitter',
-                  icon: 'twitter.svg',
-                  link: 'https://twitter.com/kfcpakistanofficial'
+                  name: 'Facebook',
+                  icon: 'facebook.svg',
+                  link: 'https://facebook.com/kfcpakistanofficial'
                 }
               ].map(({name, icon, link}) => (
                 <Link
@@ -45,7 +41,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`KFC Pakistan ${name}`}
-                  className="bg-white rounded-full w-9 h-9 flex items-center justify-center hover:scale-105 transition"
+                  className="bg-primary-foreground text-primary rounded-full w-9 h-9 flex items-center justify-center hover:scale-105 transition-transform"
                 >
                   <Image
                     src={`/images/icons/${icon}`}
@@ -58,87 +54,100 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Legal Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm text-primary-foreground/80">
-              {['terms', 'privacy', 'disclaimer', 'careers'].map((path) => (
-                <li key={path}>
-                  <Link
-                    href={`/${path}`}
-                    className="hover:underline capitalize"
-                  >
-                    {path.replace('-', ' ')}
-                  </Link>
-                </li>
-              ))}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-16">
+            <ul className="space-y-3 text-sm text-primary-foreground/80">
+              <li>
+                <Link
+                  href="/about-us"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/privacy-policy"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
-          </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-primary-foreground/80">
-              {[
-                {name: 'About Us', href: '/about'},
-                {name: 'Contact Us', href: '/contact'},
-                {name: 'Our Menu', href: '/menu'},
-                {name: 'Promotions', href: '/deals'},
-                {name: 'Feedback', href: '/feedback'}
-              ].map(({name, href}) => (
-                <li key={name}>
-                  <Link href={href} className="hover:underline">
-                    {name}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-3 text-sm text-primary-foreground/80">
+              <li>
+                <Link
+                  href="/contact"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/locations"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Store Locator
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/track-order"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Track Order
+                </Link>
+              </li>
             </ul>
-          </div>
 
-          {/* App + Contact */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Download App</h4>
-            <div className="flex flex-col space-y-3 mb-6">
+            <div className="space-y-3">
               <Link
-                href="https://play.google.com/store/apps/details?id=com.kfc.pk"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/terms-and-conditions"
+                className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors block"
               >
-                <Image
-                  src="/images/app-store-badges/google-play.svg"
-                  alt="Google Play"
-                  width={130}
-                  height={40}
-                  className="w-32"
-                />
+                Terms & Conditions
               </Link>
-              <Link
-                href="https://apps.apple.com/pk/app/kfc-pakistan/id123456789"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/images/app-store-badges/app-store.svg"
-                  alt="App Store"
-                  width={130}
-                  height={40}
-                  className="w-32"
-                />
-              </Link>
+              <div className="flex flex-col space-y-3 mt-4">
+                <Link
+                  href="https://apps.apple.com/pk/app/kfc-pakistan/id123456789"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/footer/app-store.png"
+                    alt="App Store"
+                    width={120}
+                    height={36}
+                    className="w-auto h-9"
+                  />
+                </Link>
+                <Link
+                  href="https://play.google.com/store/apps/details?id=com.kfc.pk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/footer/play-store.png"
+                    alt="Google Play"
+                    width={120}
+                    height={36}
+                    className="w-auto h-9"
+                  />
+                </Link>
+              </div>
             </div>
-            <h4 className="text-lg font-semibold mb-2">Contact Us</h4>
-            <p className="text-sm text-primary-foreground/80">
-              <Link href="tel:+9221111532532" className="hover:underline">
-                UAN: +92 21 111 532 532
-              </Link>
-            </p>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="text-center text-xs text-primary-foreground/60 pt-4">
-          <p>&copy; {currentYear} KFC Pakistan. All Rights Reserved.</p>
-          {developer && <p className="mt-1">{developer}</p>}
+        <div className="flex flex-col md:flex-row md:justify-between items-center text-xs text-primary-foreground/60 pt-4 gap-2">
+          <p>&copy; {currentYear} KFC. All rights reserved</p>
+          <p className="text-primary font-semibold">
+            Powered by{' '}
+            <span className="underline hover:opacity-80 cursor-pointer">
+              Simplex Technology Solutions
+            </span>
+          </p>
         </div>
       </div>
     </footer>

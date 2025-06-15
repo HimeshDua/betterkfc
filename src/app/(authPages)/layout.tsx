@@ -39,7 +39,6 @@ export default async function AuthPageLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthHeader />
           <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
-          {/* <Footer /> */}
         </ThemeProvider>
       </body>
     </html>

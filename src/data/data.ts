@@ -2,7 +2,7 @@ export const navLinks = [
   {name: 'Menu', href: '/menu'},
   {name: 'Deals', href: '/deals'},
   {name: 'Locations', href: '/locations'},
-  {name: 'About', href: '/about'}
+  {name: 'About', href: '/about-us'}
 ];
 
 export const categories = [
@@ -201,13 +201,13 @@ export const newsLetterImages = [
     link: '/about'
   },
   {
-    src: '/images/newsletters/playstore.webp',
+    src: '/images/newsletters/playstore.jpg',
     alt: 'Download KFC app on Play Store',
     link: 'https://play.google.com/store/apps/details?id=com.kfc.pk',
     external: true
   },
   {
-    src: '/images/hero-banner-2.png',
+    src: '/images/newsletters/promotion-letter.jpg',
     alt: 'Another great offer',
     link: '/menu#promotion'
   }

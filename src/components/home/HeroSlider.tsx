@@ -5,9 +5,10 @@ import Image from 'next/image';
 import {ArrowLeft, ArrowRight} from 'lucide-react';
 
 const images = [
-  '/images/hero-banner-1.jpg',
-  '/images/hero-banner-2.png',
-  '/images/hero-banner-3.png'
+  '/images/hero/banner-1.jpg',
+  '/images/hero/banner-2.jpg',
+  '/images/hero/banner-3.png',
+  '/images/hero/banner-4.jpg'
 ];
 
 const NextArrow = (props: any) => {
