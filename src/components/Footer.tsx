@@ -93,7 +93,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/track-order"
+                  href="/menu/bucket"
                   className="hover:text-primary-foreground transition-colors"
                 >
                   Track Order

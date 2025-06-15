@@ -1,11 +1,13 @@
 import {AddToBucketButton} from '@/components/AddToBucketButton';
 import CardShowCase from '@/components/CardShowCase';
 import {Badge} from '@/components/ui/badge';
-import {Card, CardContent} from '@/components/ui/card';
+import {Card} from '@/components/ui/card';
 import {Separator} from '@/components/ui/separator';
 import {products} from '@/data/data';
+import {ArrowLeft} from 'lucide-react';
 import {Metadata} from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import React from 'react';
 
@@ -61,7 +63,6 @@ async function menuSlugPage({params}: {params: Promise<{slug: string}>}) {
   const resolvedParams = await params;
   const product = products.find((p) => p.slug === resolvedParams.slug);
   if (!product) return notFound();
-  // const {addToCart} = useCart();
 
   const categoryMap: Record<string, string> = {
     promotion: 'Promotion',
@@ -79,72 +80,94 @@ async function menuSlugPage({params}: {params: Promise<{slug: string}>}) {
     .filter((p) => p.slug !== product.slug);
 
   return (
-    <div className="p-4 sm:p-6">
-      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8">
-        <div className="w-full bg-accent/60 rounded-md overflow-hidden">
-          <Image
-            src={product.image}
-            alt={product.name}
-            width={600}
-            height={400}
-            className="rounded-2xl object-cover w-full h-[260px] sm:h-[360px] md:h-[420px] lg:h-[480px]"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-          />
-        </div>
+    <div className="bg-background min-h-[calc(100vh-64px)]">
+      <div className="sticky top-0 z-20 bg-background py-4 px-4 sm:px-6 md:py-6 border-b border-border flex items-center justify-center shadow-sm">
+        <Link
+          href="/menu"
+          className="absolute left-4 p-2 rounded-full hover:bg-accent/20 transition-colors"
+          aria-label="Go back to menu"
+        >
+          <ArrowLeft className="h-6 w-6 text-foreground" />
+        </Link>
+        <h1 className="text-xl md:text-2xl font-bold text-foreground">
+          {product.name}
+        </h1>
+      </div>
 
-        {/* Product Info Section */}
-        <Card className="w-full">
-          <CardContent className="p-6 space-y-5">
-            <div className="flex items-center justify-between gap-4 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-bold text-primary">
+      <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
+        <Card className="shadow-lg p-4 md:p-8 flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
+          <div className="w-full md:w-1/2 flex justify-center items-center bg-card rounded-lg relative aspect-square overflow-hidden border border-border">
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={600}
+              height={600}
+              className="object-contain w-full h-full p-4 md:p-6"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 space-y-6">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-primary leading-tight">
                 {product.name}
-              </h1>
-              <Badge variant="outline" className="text-xs">
+              </h2>
+              <Badge
+                variant="outline"
+                className="text-sm px-3 py-1 rounded-full border-primary text-primary self-start"
+              >
                 {categoryMap[product.category]}
               </Badge>
             </div>
 
-            <p className="text-muted-foreground text-sm sm:text-base">
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
               {product.description}
             </p>
 
-            <div className="flex items-center gap-4">
-              <span className="text-lg sm:text-xl font-semibold text-foreground">
+            <div className="flex items-center gap-4 text-foreground">
+              <span className="text-2xl md:text-3xl font-bold">
                 Rs. {product.price}
               </span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm md:text-base text-muted-foreground">
                 Tax included
               </span>
             </div>
 
             <div className="flex flex-wrap gap-3 text-sm">
-              <Badge variant="secondary">Popular</Badge>
-              <Badge variant="secondary">In Stock</Badge>
+              <Badge variant="secondary" className="px-3 py-1 rounded-full">
+                Popular
+              </Badge>
+              <Badge variant="secondary" className="px-3 py-1 rounded-full">
+                In Stock
+              </Badge>
             </div>
 
-            <Separator />
+            <Separator className="bg-border" />
 
-            <div className="w-full">
+            <div className="w-full pt-2">
               <AddToBucketButton product={product} />
             </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Recommended Section */}
-      {mayLike.length > 0 && (
-        <div className="mt-12">
-          <h2 className="text-lg sm:text-xl font-bold mb-4">
-            You may also like
-          </h2>
-          <div className="flex gap-4 overflow-x-auto -mx-4 px-4 pb-2 sm:pb-4 snap-x scroll-smooth scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
-            {mayLike.map((item) => (
-              <CardShowCase key={item.slug} item={item} />
-            ))}
           </div>
-        </div>
-      )}
+        </Card>
+        {mayLike.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center lg:text-left">
+              You may also like
+            </h2>
+            <div className="flex gap-4 overflow-x-auto -mx-4 px-4 pb-2 sm:pb-4 snap-x scroll-smooth scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
+              {mayLike.map((item) => (
+                <div
+                  key={item.slug}
+                  className="min-w-[200px] sm:min-w-[240px] md:min-w-[280px] snap-center"
+                >
+                  <CardShowCase item={item} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

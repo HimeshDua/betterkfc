@@ -1,15 +1,29 @@
 import Image from 'next/image';
-import {Separator} from '@/components/ui/separator';
+import Link from 'next/link';
+import {ArrowLeft} from 'lucide-react';
 
 export default function AboutUsPage() {
   return (
-    <div className="bg-background text-foreground">
-      <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20 max-w-4xl space-y-12 md:space-y-16">
-        <section className="text-center md:text-left">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+    <div className="bg-background text-foreground min-h-[calc(100vh-64px)]">
+      <div className="sticky top-14 z-20 bg-background py-4 px-4 sm:px-6 md:py-6 border-b border-border flex items-center justify-center shadow-sm">
+        <Link
+          href="/"
+          className="absolute left-4 p-2 rounded-full hover:bg-accent/20 transition-colors"
+          aria-label="Go back"
+        >
+          <ArrowLeft className="h-6 w-6 text-foreground" />
+        </Link>
+        <h1 className="text-xl md:text-2xl font-bold text-foreground">
+          About Us
+        </h1>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl space-y-12 md:space-y-16">
+        <section className="text-center md:text-left space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">
             About Us
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
             KFC entered Pakistan in 1997 and since then, it&apos;s been a
             journey full of excitement and Finger Lickin&apos; goodness! The
             first KFC restaurant opened in Pakistan opened in Gulshan Iqbal,
@@ -19,20 +33,18 @@ export default function AboutUsPage() {
             customers the most delicious chicken and an excellent dining
             experience.
           </p>
-          <p className="text-lg md:text-xl text-primary font-semibold mt-6">
+          <p className="text-base md:text-lg text-primary font-semibold mt-6">
             WE PRIDE OURSELVES ON USING QUALITY HALAL CHICKEN AND LOCAL
             INGREDIENTS FROM TRUSTED SUPPLIERS
           </p>
         </section>
 
-        <Separator className="my-10 bg-border" />
-
         <section className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="order-2 md:order-1 text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+          <div className="order-2 md:order-1 text-center md:text-left space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary">
               History
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base text-muted-foreground leading-relaxed">
               It all started with Colonel Harland Sanders, the man who convinced
               the world by saying "We do chicken right!" Sanders took a great
               deal of time perfecting his iconic secret recipe of 11 herbs and
@@ -54,10 +66,8 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <Separator className="my-10 bg-border" />
-
         <section>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-10">
             The Story of World&apos;s Best Chicken
           </h2>
           <div className="relative flex flex-col items-center">
@@ -124,22 +134,16 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <Separator className="my-10 bg-border" />
-
-        <section className="text-center py-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Today
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+        <section className="text-center py-8 space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">Today</h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
             Today we have more than 25,000 KFC restaurants in over 145 countries
             and territories around the world.
           </p>
         </section>
 
-        <Separator className="my-10 bg-border" />
-
         <section>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-10">
             Fast Facts about KFC Pakistan
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -158,7 +162,7 @@ export default function AboutUsPage() {
               },
               {
                 year: '9000+',
-                text: 'Our Finger Lickin&apos; Chicken is brought to you by the hardwork of a team of 9000+ people across Pakistan'
+                text: "Our Finger Lickin' Chicken is brought to you by the hardwork of a team of 9000+ people across Pakistan"
               }
             ].map((fact) => (
               <div
@@ -174,20 +178,18 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <Separator className="my-10 bg-border" />
-
-        <section className="text-center md:text-left">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+        <section className="text-center md:text-left space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">
             Mitao Bhook
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base text-muted-foreground leading-relaxed">
             Mitao Bhook is KFC&apos;s pledge to give back to society. Over the
             years we have made it our mission to spread the message of hope,
             bringing positive change in the lives of people and providing better
             living standards. Mitao Bhook strengthens the community on the
             pillars of Education, Inclusion & Diversity.
           </p>
-          <ul className="list-disc list-inside text-lg text-muted-foreground mt-6 space-y-3 md:text-left">
+          <ul className="list-disc list-inside text-base text-muted-foreground mt-6 space-y-3 md:text-left">
             <li>
               Adopted 6 TCF schools since 2014 in Gadaap West, Muzaffargarh,
               Faisalabad, and Quetta, educating 1700+ students

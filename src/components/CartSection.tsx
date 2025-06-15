@@ -22,29 +22,8 @@ import {useCart} from '@/contexts/CartContext';
 import Image from 'next/image';
 
 const CartSection = () => {
-  const {cart, setCart, removeFromCart} = useCart();
+  const {cart, completeTotals, removeFromCart, updateQuantity} = useCart();
   const [open, setOpen] = useState(false);
-
-  const updateValue = (itemId: string, delta: number) => {
-    const updatedCart = cart
-      .map((i) =>
-        i.slug === itemId
-          ? {...i, quantity: Math.max(0, (i.quantity ?? 1) + delta)}
-          : i
-      )
-      .filter((i) => (i.quantity ?? 0) > 0);
-    setCart(updatedCart);
-  };
-
-  const totalItems = cart.reduce(
-    (total, item) => total + (item.quantity ?? 1),
-    0
-  );
-
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.price * (item.quantity ?? 1),
-    0
-  );
 
   const CartContent = (
     <>
@@ -81,7 +60,7 @@ const CartSection = () => {
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={() => updateValue(item.slug, -1)}
+                          onClick={() => updateQuantity(item.slug, -1)}
                         >
                           -
                         </Button>
@@ -91,7 +70,7 @@ const CartSection = () => {
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={() => updateValue(item.slug, 1)}
+                          onClick={() => updateQuantity(item.slug, 1)}
                         >
                           +
                         </Button>
@@ -120,11 +99,11 @@ const CartSection = () => {
         <div className="flex justify-between gap-3 w-full text-sm">
           <div className="flex w-fit gap-x-1.5 justify-between">
             <span>Total Items:</span>
-            <span className="font-medium">{totalItems}</span>
+            <span className="font-medium">{completeTotals.totalItems}</span>
           </div>
           <div className="flex gap-x-1.5 justify-between">
             <span>Total Price:</span>
-            <span className="font-medium">Rs {totalPrice}</span>
+            <span className="font-medium">Rs {completeTotals.totalPrice}</span>
           </div>
         </div>
         <Link href="/menu/bucket" className="w-full">
