@@ -41,7 +41,7 @@ export default function Header() {
         <div className="hidden md:flex flex-col w-full items-center">
           <nav className="w-full flex justify-end items-center gap-6">
             {navLinks.map(({name, href}) => (
-              <Link key={name} href={href}>
+              <Link key={name} href={href} prefetch>
                 <span
                   className={`text-sm font-medium hover:text-primary ${
                     pathname === href ? 'text-primary' : 'text-muted-foreground'
@@ -129,7 +129,12 @@ export default function Header() {
         <div className="md:hidden bg-background border-t shadow-inner">
           <div className="flex flex-col px-4 py-3 gap-2">
             {navLinks.map(({name, href}) => (
-              <Link key={name} href={href} onClick={() => setMobileOpen(false)}>
+              <Link
+                key={name}
+                href={href}
+                prefetch
+                onClick={() => setMobileOpen(false)}
+              >
                 <Button
                   variant="ghost"
                   className="w-full justify-start text-left text-base hover:bg-muted"

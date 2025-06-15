@@ -61,6 +61,7 @@ export default function AboutUsPage() {
               alt="Colonel Harland Sanders"
               width={350}
               height={350}
+              priority
               className="rounded-full shadow-lg border-4 border-accent"
             />
           </div>
