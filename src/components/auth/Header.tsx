@@ -44,6 +44,16 @@ export default function AuthHeader() {
                 </span>
               </Link>
             ))}
+            <div className="flex items-center gap-3">
+              <Link href="/signin">
+                <Button variant="outline" size="sm">
+                  Login
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button size="sm">Sign Up</Button>
+              </Link>
+            </div>
 
             {/* Theme Toggle Button */}
             <Button

@@ -1,33 +1,19 @@
+'use client';
 import {Card, CardContent, CardFooter} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import Image from 'next/image';
 import {Heart} from 'lucide-react';
 import Link from 'next/link';
+import {useCart} from '@/contexts/CartContext';
+import {ProductInterface} from '@/types/global-types';
 
-type ProductData = {
-  slug: string;
-  name: string;
-  price: number;
-  image: string;
-  description?: string;
-};
-
-type ProductCardProps = ProductData & {
-  onAdd: (product: ProductData) => void;
-};
-
-export default function ProductCardMenu({
-  slug,
-  name,
-  price,
-  image,
-  description,
-  onAdd
-}: ProductCardProps) {
+export default function ProductCardMenu({item}: {item: ProductInterface}) {
+  const {addToCart} = useCart();
+  const {price, slug, description, name, image} = item;
   const formattedPrice = `Rs. ${price.toLocaleString()}`;
 
   return (
-    <Card className="relative p-2 px-4 pb-7 group">
+    <Card className="relative p-2 pb-7 group">
       <Link href={`menu/${slug}`}>
         <Heart className="absolute right-4 top-4 hover:text-primary/50 transition-colors duration-150 z-10" />
         <div className="relative w-full h-48 sm:h-56 overflow-hidden">
@@ -57,7 +43,9 @@ export default function ProductCardMenu({
         <Button
           className="rounded-lg"
           size="sm"
-          onClick={() => onAdd({slug, name, price, image, description})}
+          onClick={async () => {
+            addToCart(item);
+          }}
         >
           + Add To Bucket
         </Button>

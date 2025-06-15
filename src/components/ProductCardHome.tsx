@@ -39,11 +39,13 @@ export default function ProductCardHome({
       <CardContent className=" text-center flex flex-col flex-grow">
         <h3 className="text-xl font-semibold mb-2 text-foreground">{name}</h3>
         {description && (
-          <p className="text-sm text-muted-foreground mb-2 flex-grow">
+          <p className="text-sm line-clamp-2 text-muted-foreground mb-2">
             {description}
           </p>
         )}
-        {price && <p className="text-lg text-start font-bold  mb-4">{price}</p>}
+        {price && (
+          <p className="text-lg text-start font-bold  mb-4">Rs. {price}</p>
+        )}
         <Button onClick={() => addToBucket()} className="mt-auto w-full">
           + Add To Bucket
         </Button>

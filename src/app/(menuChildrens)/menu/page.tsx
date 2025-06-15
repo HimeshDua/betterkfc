@@ -1,13 +1,10 @@
-'use client';
-
 import React from 'react';
 import ProductCardMenu from '@/components/ProductCardMenu';
 import {products} from '@/data/data';
-import {useCart} from '@/contexts/CartContext';
-import {addToCookieCart} from '@/actions/addToCookieCart.action';
 
 const categories = [
   {slug: 'all', name: 'All Products'},
+  {slug: 'favorites', name: 'Favorites'},
   {slug: 'promotion', name: 'Promotion'},
   {slug: 'everyday-value', name: 'Everyday Value'},
   {slug: 'ala-cc', name: 'Ala-Carte-&-Combos'},
@@ -18,7 +15,6 @@ const categories = [
 ];
 
 export default function MenuPage() {
-  const {addToCart} = useCart();
   const hour = new Date().getHours();
   const midNight = hour >= 0 && hour <= 4;
 
@@ -46,16 +42,9 @@ export default function MenuPage() {
             <h2 className="text-3xl font-bold mb-6 text-foreground">
               {category.name}
             </h2>
-            <div className="grid gap-6 grid-cols-2 md:grid-cols-3">
+            <div className="grid gap-2 sm:gap-3 md:gap-4 lg:gap-5 grid-cols-2 md:grid-cols-3">
               {items.map((item) => (
-                <ProductCardMenu
-                  key={item.slug}
-                  {...item}
-                  onAdd={async () => {
-                    addToCart(item);
-                    await addToCookieCart(item);
-                  }}
-                />
+                <ProductCardMenu key={item.slug} item={item} />
               ))}
             </div>
           </section>

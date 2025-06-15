@@ -81,8 +81,7 @@ async function menuSlugPage({params}: {params: Promise<{slug: string}>}) {
   return (
     <div className="p-4 sm:p-6">
       <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8">
-        {/* Image Section */}
-        <div className="w-full">
+        <div className="w-full bg-accent rounded-md overflow-hidden">
           <Image
             src={product.image}
             alt={product.name}
