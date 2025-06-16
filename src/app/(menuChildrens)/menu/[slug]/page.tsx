@@ -81,13 +81,12 @@ async function menuSlugPage({params}: {params: Promise<{slug: string}>}) {
 
   return (
     <div className="bg-background min-h-[calc(100vh-64px)]">
-      <div className="sticky top-0 z-20 bg-background py-4 px-4 sm:px-6 md:py-6 border-b border-border flex items-center justify-center shadow-sm">
+      <div className="bg-background py-4 px-4 sm:px-6 md:py-6 border-b border-border flex items-center justify-between shadow-sm">
         <Link
-          href="/menu"
-          className="absolute left-4 p-2 rounded-full hover:bg-accent/20 transition-colors"
-          aria-label="Go back to menu"
+          href="/"
+          className="flex items-center gap-2 text-primary hover:underline"
         >
-          <ArrowLeft className="h-6 w-6 text-foreground" />
+          <ArrowLeft className="w-5 h-5" /> Back to Menu
         </Link>
         <h1 className="text-xl md:text-2xl font-bold text-foreground">
           {product.name}

@@ -100,18 +100,23 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="bg-background container mx-auto text-foreground min-h-[90vh] px-4 py-8 md:px-12 lg:px-20">
-      <div className="mb-10 flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-primary hover:underline"
-        >
-          <ArrowLeft className="w-5 h-5" /> Back to Home
-        </Link>
-        <h1 className="text-2xl font-bold">My Profile</h1>
+    <div className="relative bg-background container mx-auto text-foreground min-h-[90vh] px-4 py-8 md:px-12 lg:px-20">
+      <div className="sticky top-14 z-20 bg-background mb-2">
+        <div className=" py-4 px-4 sm:px-6 md:py-6 flex items-center justify-center">
+          <Link
+            href="/"
+            className="absolute left-4 p-2 rounded-full hover:bg-accent/20 transition-colors"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="h-6 w-6 text-foreground" />
+          </Link>
+          <h1 className="text-xl md:text-2xl font-bold text-foreground">
+            My Profile
+          </h1>
+        </div>
+        <Separator />
       </div>
 
-      {/* Personal Info */}
       <Card className="mb-10">
         <CardHeader>
           <CardTitle>Personal Information</CardTitle>

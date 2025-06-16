@@ -7,6 +7,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import {ArrowLeft} from 'lucide-react'; // For the back arrow icon
 import Link from 'next/link';
+import {Separator} from '@/components/ui/separator';
 
 type Store = {
   id: number;
@@ -68,7 +69,6 @@ const stores: Store[] = [
   }
 ];
 
-// Fix for default Leaflet icon paths
 delete (L.Icon.Default as any).prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: '/leaflet/marker-icon-2x.png',
@@ -81,17 +81,20 @@ export default function LocationsPage() {
 
   return (
     <div className="bg-background text-foreground min-h-[calc(100vh-64px)]">
-      <div className="sticky top-14 z-20 bg-background py-4 px-4 sm:px-6 md:py-6 border-b border-border flex items-center justify-center shadow-sm">
-        <Link
-          href="/"
-          className="absolute left-4 p-2 rounded-full hover:bg-accent/20 transition-colors"
-          aria-label="Go back"
-        >
-          <ArrowLeft className="h-6 w-6 text-foreground" />
-        </Link>
-        <h1 className="text-xl md:text-2xl font-bold text-foreground">
-          Locations
-        </h1>
+      <div className="sticky top-14 z-20 bg-background mb-2">
+        <div className=" py-4 px-4 sm:px-6 md:py-6 flex items-center justify-center">
+          <Link
+            href="/"
+            className="absolute left-4 p-2 rounded-full hover:bg-accent/20 transition-colors"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="h-6 w-6 text-foreground" />
+          </Link>
+          <h1 className="text-xl md:text-2xl font-bold text-foreground">
+            Locations
+          </h1>
+        </div>
+        <Separator />
       </div>
 
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl space-y-12">
