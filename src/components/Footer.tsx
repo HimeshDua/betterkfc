@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 pb-10 border-b border-primary-foreground/20">
           <div className="flex flex-col items-center md:items-start gap-4">
             <Link href="/" className="flex justify-center md:justify-start">
-              <h1 className="text-3xl italic text-nowrap font-bold text-primary relative">
+              <h1 className="text-3xl italic text-nowrap font-bold text-accent dark:text-primary relative">
                 KFC
                 <span className="absolute -bottom-1 -right-4 text-xs font-semibold text-muted-foreground tracking-wide">
                   better

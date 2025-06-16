@@ -20,7 +20,6 @@ export default function AuthHeader() {
   return (
     <header className="w-full border-b bg-background shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/">
           <h1 className="text-3xl italic text-nowrap font-bold text-primary relative">
             KFC
@@ -31,12 +30,12 @@ export default function AuthHeader() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex flex-col w-full items-center">
-          <nav className="w-full flex justify-end items-center gap-6">
+        <div className="hidden md:flex flex-col w-full items-end">
+          <nav className="flex items-center gap-6">
             {navLinks.map(({name, href}) => (
               <Link key={name} href={href} prefetch>
                 <span
-                  className={`text-sm font-medium hover:text-primary ${
+                  className={`text-sm font-medium hover:text-primary transition-colors ${
                     pathname === href ? 'text-primary' : 'text-muted-foreground'
                   }`}
                 >
@@ -44,7 +43,26 @@ export default function AuthHeader() {
                 </span>
               </Link>
             ))}
-            <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              className="group"
+            >
+              {theme === 'dark' ? (
+                <Sun
+                  size={18}
+                  className="group-hover:scale-110 transition-transform"
+                />
+              ) : (
+                <Moon
+                  size={18}
+                  className="group-hover:scale-110 transition-transform"
+                />
+              )}
+            </Button>
+            <div className="flex items-center gap-3 ml-4">
               <Link href="/signin">
                 <Button variant="outline" size="sm">
                   Login
@@ -54,31 +72,21 @@ export default function AuthHeader() {
                 <Button size="sm">Sign Up</Button>
               </Link>
             </div>
-
-            {/* Theme Toggle Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </Button>
           </nav>
         </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden"
+          className="md:hidden p-2 rounded-md hover:bg-accent/20 transition-colors"
+          aria-label="Toggle mobile menu"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background border-t shadow-inner">
+        <div className="md:hidden bg-background border-t shadow-inner pb-4">
           <div className="flex flex-col px-4 py-3 gap-2">
             {navLinks.map(({name, href}) => (
               <Link
@@ -89,26 +97,24 @@ export default function AuthHeader() {
               >
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-left text-base hover:bg-muted"
+                  className="w-full justify-start text-left text-base h-auto py-2 hover:bg-muted"
                 >
                   {name}
                 </Button>
               </Link>
             ))}
 
-            {/* Theme Toggle (Mobile) */}
             <Button
               variant="ghost"
               onClick={() => {
                 toggleTheme();
                 setMobileOpen(false);
               }}
-              className="w-full justify-start text-base"
+              className="w-full justify-start text-base h-auto py-2"
             >
               {theme === 'dark' ? (
                 <>
-                  <Sun className="mr-2 h-4 w-4" />
-                  Light Mode
+                  <Sun className="mr-2 h-4 w-4" /> Light Mode
                 </>
               ) : (
                 <>
@@ -116,6 +122,23 @@ export default function AuthHeader() {
                 </>
               )}
             </Button>
+
+            <Link href="/signin" onClick={() => setMobileOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-base h-auto py-2"
+              >
+                Login
+              </Button>
+            </Link>
+            <Link href="/signup" onClick={() => setMobileOpen(false)}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-base h-auto py-2"
+              >
+                Sign Up
+              </Button>
+            </Link>
           </div>
         </div>
       )}

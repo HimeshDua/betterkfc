@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
     const authValue = await verifyAuth(['user', 'admin']);
     const userId = authValue.user?.userId;
-    console.log('USER ID:', userId);
+    // console.log('USER ID:', userId);
 
     if (!address?.trim() || !phone?.trim()) {
       return NextResponse.json(
@@ -25,7 +25,6 @@ export async function POST(req: NextRequest) {
     }
 
     await connectToDB();
-
     const newOrder = await Order.create({
       userId,
       products: productsCart,
