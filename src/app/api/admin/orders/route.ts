@@ -15,10 +15,13 @@ export async function GET() {
     }
 
     await connectToDB();
-    const allUsers = await User.find().select('-password').populate({
-      path: 'orders',
-      select: 'products totalAmount status orderedAt deliveryAddress'
-    });
+    const allUsers = await User.find()
+      .select('-password')
+      .populate({
+        path: 'orders',
+        select: 'products totalAmount status orderedAt deliveryAddress'
+      })
+      .sort({orderedAt: -1});
 
     return NextResponse.json(
       {
