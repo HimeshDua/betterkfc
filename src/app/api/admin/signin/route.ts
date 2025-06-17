@@ -32,6 +32,13 @@ export async function POST(req: NextRequest) {
 
     const user = await User.findOne({email: trimmedEmail});
 
+    if (user.role !== 'admin') {
+      return NextResponse.json(
+        {success: false, error: 'Only admins can authenticate with this route'},
+        {status: 401}
+      );
+    }
+
     if (!user) {
       return NextResponse.json(
         {success: false, error: 'Invalid credentials'},

@@ -88,3 +88,13 @@ export type UserType = {
   phone: string;
   location: string;
 };
+
+// locations page
+export type Store = {
+  id: number;
+  name: string;
+  position: [number, number];
+  address: string;
+  hours: string;
+  phone?: string;
+};

@@ -15,7 +15,7 @@ export async function GET() {
     }
 
     await connectToDB();
-    const allUsers = await User.find()
+    const allUsers = await User.find({role: 'user'})
       .select('-password')
       .populate({
         path: 'orders',

@@ -1,6 +1,43 @@
 import {Separator} from '@/components/ui/separator';
 import {ArrowLeft} from 'lucide-react';
+import {Metadata} from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Better KFC Clone',
+  description:
+    'Learn how Better KFC Clone collects, uses, and protects your personal information. Your privacy and data security are our priority.',
+  keywords: [
+    'privacy policy',
+    'data protection',
+    'user privacy',
+    'cookies',
+    'KFC clone',
+    'Better KFC',
+    'customer data',
+    'terms',
+    'user agreement'
+  ],
+  authors: [{name: 'Himesh Dua', url: 'https://betterkfc.vercel.app'}],
+  openGraph: {
+    title: 'Privacy Policy | Better KFC Clone',
+    description:
+      'Understand how your data is handled at Better KFC Clone. We are committed to protecting your privacy and securing your information.',
+    type: 'article',
+    locale: 'en_US',
+    url: 'https://betterkfc.vercel.app/privacy-policy',
+    siteName: 'Better KFC Clone'
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Privacy Policy | Better KFC Clone',
+    description:
+      'Your privacy matters. Read how Better KFC Clone handles your data securely and transparently.',
+    images: ['https://betterkfc.vercel.app/og-privacy.png'],
+    creator: '@HimeshDua'
+  },
+  metadataBase: new URL('https://betterkfc.vercel.app')
+};
 
 export default function PrivacyPolicyPage() {
   return (

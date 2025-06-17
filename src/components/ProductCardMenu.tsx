@@ -14,7 +14,7 @@ export default function ProductCardMenu({item}: {item: ProductInterface}) {
 
   return (
     <Card className="relative p-2 pb-7 group">
-      <Link href={`menu/${slug}`}>
+      <Link prefetch href={`menu/${slug}`}>
         <Heart className="absolute right-4 top-4 hover:text-primary/50 transition-colors duration-150 z-10" />
         <div className="relative w-full h-48 sm:h-56 overflow-hidden">
           <Image

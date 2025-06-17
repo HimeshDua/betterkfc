@@ -1,3 +1,5 @@
+import {Store} from '@/types/global-types';
+
 export const navLinks = [
   {name: 'Menu', href: '/menu'},
   {name: 'Deals', href: '/deals'},
@@ -737,5 +739,57 @@ export const products = [
     image: '/images/products/midnight-deal-3.png',
     category: 'mid',
     description: 'Another exciting deal for your late-night cravings.'
+  }
+];
+
+// locations page
+export const stores: Store[] = [
+  {
+    id: 1,
+    name: 'KFC Saddar Karachi',
+    position: [24.855891547657794, 67.02978965857143],
+    address: 'Plot No. 7, Abdullah Haroon Road, Saddar, Karachi',
+    hours: '11:00 AM - 12:00 AM',
+    phone: '(021) 111-532-532'
+  },
+  {
+    id: 2,
+    name: 'KFC Gulshan-e-Iqbal',
+    position: [24.9235, 67.0822],
+    address: 'Block 5, Rashid Minhas Road, Gulshan-e-Iqbal, Karachi',
+    hours: '10:00 AM - 2:00 AM',
+    phone: '(021) 111-532-532'
+  },
+  {
+    id: 3,
+    name: 'KFC DHA Phase 6',
+    position: [24.7985, 67.0676],
+    address: '26th St, Tauheed Commercial Area, DHA Phase 6, Karachi',
+    hours: '24 Hours',
+    phone: '(021) 111-532-532'
+  },
+  {
+    id: 4,
+    name: 'KFC Malir Cantt',
+    position: [24.9125, 67.1818],
+    address: 'Main Malir Cantt Road, Karachi',
+    hours: '11:00 AM - 1:00 AM',
+    phone: '(021) 111-532-532'
+  },
+  {
+    id: 5,
+    name: 'KFC Clifton',
+    position: [24.8142, 67.0264],
+    address: 'Ocean Mall, G-3, Block 9, Clifton, Karachi',
+    hours: '11:00 AM - 12:00 AM',
+    phone: '(021) 111-532-532'
+  },
+  {
+    id: 6,
+    name: 'KFC Shahra-e-Faisal',
+    position: [24.8569, 67.0617],
+    address: 'P.E.C.H.S. Block 2, Shahra-e-Faisal, Karachi',
+    hours: '24 Hours',
+    phone: '(021) 111-532-532'
   }
 ];

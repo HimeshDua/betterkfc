@@ -5,6 +5,7 @@ import {UserProvider} from '@/contexts/UserContext';
 import {ProductInterface, UserContextValueType} from '@/types/global-types';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import {Toaster} from 'sonner';
 
 interface PageShellProps {
   children: React.ReactNode;
@@ -20,6 +21,7 @@ async function PageShell({children, authValue, cartData}: PageShellProps) {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <UserProvider value={authValue}>
           <CartProvider initialCart={cartData}>
+            <Toaster />
             <Header />
             {children}
             <Footer />

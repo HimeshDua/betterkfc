@@ -29,7 +29,7 @@ export default function AdminSignInForm() {
       setLoading(true);
       setErrorMessage('');
 
-      const res = await fetch('/api/signin', {
+      const res = await fetch('/api/admin/signin', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData)
@@ -44,7 +44,7 @@ export default function AdminSignInForm() {
           router.refresh();
         }, 1000);
       } else {
-        setErrorMessage(data.message || 'Invalid email or password');
+        setErrorMessage(data.error || 'Invalid email or password');
       }
     } catch (error) {
       setErrorMessage('Something went wrong. Please try again.');

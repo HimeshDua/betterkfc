@@ -84,6 +84,7 @@ async function menuSlugPage({params}: {params: Promise<{slug: string}>}) {
       <div className="bg-background py-4 px-4 sm:px-6 md:py-6 border-b border-border flex items-center justify-between shadow-sm">
         <Link
           href="/"
+          prefetch
           className="flex items-center gap-2 text-primary hover:underline"
         >
           <ArrowLeft className="w-5 h-5" /> Back to Menu
