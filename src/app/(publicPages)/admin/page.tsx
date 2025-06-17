@@ -250,13 +250,8 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Dashboard Header */}
       <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 px-6 md:py-6 md:px-10 flex flex-col sm:flex-row justify-between items-center gap-4">
-        {' '}
-        {/* Increased padding, added gap */}
         <h1 className="text-3xl md:text-4xl font-extrabold text-foreground mb-0">
-          {' '}
-          {/* Removed mb-4 for better alignment */}
           Admin Dashboard
         </h1>
         <Dialog open={isProductModalOpen} onOpenChange={setIsProductModalOpen}>
@@ -265,14 +260,10 @@ export default function AdminDashboardPage() {
               size="lg"
               className="px-8 py-4 text-lg font-semibold min-w-[200px]"
             >
-              {' '}
-              {/* Added min-width */}
               Add New Product
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[500px] md:max-w-[700px]">
-            {' '}
-            {/* Increased max-width for larger dialog */}
             <DialogHeader>
               <DialogTitle>Upload New Product</DialogTitle>
               <DialogDescription>
@@ -283,11 +274,7 @@ export default function AdminDashboardPage() {
               onSubmit={handleProductUpload}
               className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4"
             >
-              {' '}
-              {/* Changed to 2 columns on medium screens */}
               <div className="grid gap-2 col-span-1">
-                {' '}
-                {/* Name takes 1 column */}
                 <Label htmlFor="name">Product Name</Label>
                 <Input
                   id="name"
@@ -299,8 +286,6 @@ export default function AdminDashboardPage() {
                 />
               </div>
               <div className="grid gap-2 col-span-1">
-                {' '}
-                {/* Price takes 1 column */}
                 <Label htmlFor="price">Price (Rs.)</Label>
                 <Input
                   id="price"
@@ -314,8 +299,6 @@ export default function AdminDashboardPage() {
                 />
               </div>
               <div className="grid gap-2 col-span-full">
-                {' '}
-                {/* Image URL takes full width */}
                 <Label htmlFor="image">Image URL</Label>
                 <Input
                   id="image"
@@ -327,8 +310,6 @@ export default function AdminDashboardPage() {
                 />
               </div>
               <div className="grid gap-2 col-span-full">
-                {' '}
-                {/* Category takes full width for consistency, or could be next to image */}
                 <Label htmlFor="category">Category</Label>
                 <Select
                   onValueChange={handleProductCategoryChange}
@@ -348,8 +329,6 @@ export default function AdminDashboardPage() {
                 </Select>
               </div>
               <div className="grid gap-2 col-span-full">
-                {' '}
-                {/* Description takes full width */}
                 <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
@@ -361,8 +340,6 @@ export default function AdminDashboardPage() {
                 />
               </div>
               <DialogFooter className="col-span-full pt-4">
-                {' '}
-                {/* Ensure footer spans all columns */}
                 <Button type="submit" disabled={loadingProductUpload}>
                   {loadingProductUpload ? 'Uploading...' : 'Upload Product'}
                 </Button>
@@ -423,7 +400,7 @@ export default function AdminDashboardPage() {
             </CardContent>
           </Card>
         </div>
-        {/* Customer Orders Section - Refined Layout & Styling */}
+
         <Card className="border shadow-lg rounded-lg flex flex-col bg-card">
           <CardHeader className="pb-4 pt-6 px-6 border-b border-border">
             <CardTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
@@ -458,8 +435,6 @@ export default function AdminDashboardPage() {
                     className="group relative border bg-background shadow-sm rounded-md transition-all duration-300 hover:shadow-md"
                   >
                     <CardHeader className="p-4 border-b border-border/80 flex flex-col sm:flex-row justify-between sm:items-center bg-muted/40">
-                      {' '}
-                      {/* Softer background for user header */}
                       <div className="flex items-center gap-3">
                         <Users className="w-5 h-5 text-primary" />
                         <h3 className="text-lg font-semibold text-foreground">
@@ -474,8 +449,6 @@ export default function AdminDashboardPage() {
                       </Badge>
                     </CardHeader>
                     <CardContent className="p-4 sm:p-6 space-y-5">
-                      {' '}
-                      {/* Adjusted internal spacing */}
                       <div className="text-sm text-muted-foreground flex flex-col sm:flex-row sm:items-center sm:gap-4 flex-wrap">
                         <p className="flex items-center gap-2">
                           <MapPin className="w-4 h-4 text-primary" />
@@ -507,15 +480,12 @@ export default function AdminDashboardPage() {
                       </div>
                       <Separator className="my-4" />
                       <div className="space-y-5">
-                        {' '}
-                        {/* Adjusted spacing between individual orders */}
                         {user.orders.map((order) => (
                           <Card
                             key={order._id}
                             className="bg-card border rounded-lg shadow-sm transition-shadow duration-200 hover:shadow-md"
                           >
                             <CardContent className="p-4 space-y-4">
-                              {/* Order Summary */}
                               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b border-border">
                                 <div className="flex flex-col">
                                   <div className="flex items-center gap-2 mb-1">
@@ -544,7 +514,7 @@ export default function AdminDashboardPage() {
                                     {isClient &&
                                       formatDistanceToNow(
                                         new Date(order.orderedAt),
-                                        {addSuffix: true}
+                                        {addSuffix: false}
                                       )}{' '}
                                   </p>
                                   <p className="text-sm mt-1 flex items-center gap-1 text-muted-foreground">
@@ -560,7 +530,6 @@ export default function AdminDashboardPage() {
                                 </p>
                               </div>
 
-                              {/* Products in Order */}
                               <h4 className="text-md font-semibold text-foreground mt-4 mb-2">
                                 Items:
                               </h4>
@@ -589,7 +558,6 @@ export default function AdminDashboardPage() {
 
                               <Separator className="my-4" />
 
-                              {/* Status Update Buttons */}
                               <div className="flex flex-wrap gap-2 pt-2 justify-center sm:justify-start">
                                 {[
                                   'pending',
