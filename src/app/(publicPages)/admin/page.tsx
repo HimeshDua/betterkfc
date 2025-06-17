@@ -210,10 +210,6 @@ export default function AdminDashboardPage() {
         }))
       );
 
-      // console.error(
-      //   'Error updating order status:',
-      //   error
-      // );
       toast.error('Error', {
         description: 'An unexpected error occurred during status update.'
       });
