@@ -66,6 +66,7 @@ export default function AdminDashboardPage() {
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [errorOrders, setErrorOrders] = useState('');
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const [productForm, setProductForm] = useState({
     name: '',
@@ -224,14 +225,6 @@ export default function AdminDashboardPage() {
     );
   }
 
-  if (!user || user.role !== 'admin') {
-    return (
-      <div className="p-6 text-center text-muted-foreground">
-        Access Denied. Redirecting...
-      </div>
-    );
-  }
-
   const totalOrdersCount = users.reduce(
     (acc, user) => acc + user.orders.length,
     0
@@ -246,6 +239,10 @@ export default function AdminDashboardPage() {
       acc +
       user.orders.reduce((orderAcc, order) => orderAcc + order.totalAmount, 0),
     0
+  );
+
+  const filteredUsers = users.filter((user) =>
+    user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -410,8 +407,13 @@ export default function AdminDashboardPage() {
               Manage and update the status of incoming and past orders.
             </CardDescription>
             <div className="mt-4 flex gap-2">
-              <Input placeholder="Search orders..." className="max-w-sm" />
-              <Button variant="outline">Filter</Button>
+              <Input
+                placeholder="Search by customer email..."
+                className="max-w-sm"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {/* <Button variant="outline">Filter</Button> */}
             </div>
           </CardHeader>
           <CardContent className="p-6 flex-grow flex flex-col">
@@ -423,13 +425,13 @@ export default function AdminDashboardPage() {
               <div className="flex-grow flex items-center justify-center text-destructive">
                 <p>{errorOrders}</p>
               </div>
-            ) : !users.length ? (
+            ) : !filteredUsers.length ? (
               <div className="flex-grow flex items-center justify-center text-muted-foreground">
                 <p>No orders found.</p>
               </div>
             ) : (
               <div className="pr-2 space-y-6">
-                {users.map((user) => (
+                {filteredUsers.map((user) => (
                   <Card
                     key={user._id}
                     className="group relative border bg-background shadow-sm rounded-md transition-all duration-300 hover:shadow-md"
