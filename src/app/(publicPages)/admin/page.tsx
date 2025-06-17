@@ -38,7 +38,6 @@ import {
 
 import {
   MapPin,
-  Package,
   Clock,
   Users,
   DollarSign,
@@ -48,17 +47,7 @@ import {
 
 import {useSessions} from '@/contexts/UserContext';
 import {OrderInterface, UserInterface} from '@/types/global-types';
-
-export const categories = [
-  {slug: 'all', name: 'All Products'},
-  {slug: 'promotion', name: 'Promotion'},
-  {slug: 'everyday-value', name: 'Everyday Value'},
-  {slug: 'ala-cc', name: 'Ala-Carte-&-Combos'},
-  {slug: 'signature', name: 'Signature'},
-  {slug: 'sharing', name: 'Sharing'},
-  {slug: 's-n-b', name: 'Snacks-&-Beverages'},
-  {slug: 'mid', name: 'Midnight (Start at 12 am)'}
-];
+import {categories} from '@/data/data';
 
 export default function AdminDashboardPage() {
   const [isClient, setIsClient] = useState(false);
