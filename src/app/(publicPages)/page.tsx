@@ -18,6 +18,7 @@ export default function Home() {
     }
   }, []);
 
+  // Chai pi lo friends
   return (
     <>
       <HeroSlider />
